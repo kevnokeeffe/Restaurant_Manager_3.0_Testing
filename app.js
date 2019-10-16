@@ -23,7 +23,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-
 app.get('/orders',orders.findAll);
 app.get('/orders/:id',orders.findOne);
 app.get('/users/:id',users.findOne);
@@ -31,7 +30,8 @@ app.get('users/:id',users.findID);
 app.delete('/orders/:id/delete', orders.deleteOrder);
 app.delete('/users/:id/delete', users.deleteUser);
 app.post('/users', users.addUser);
-//app.post('/orders', users.addOrder);
+app.post('/orders', orders.addOrder);
+app.post('/orders/:id', orders.orderPayed);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
