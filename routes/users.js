@@ -6,12 +6,12 @@ let message
 let User = require ('../models/users');
 message = "";
 /* GET users listing. */
-
 try {
-  router.get('/',(req, res, next) => {
-    res.send('respond with a resource');
-  });
+    router.get('/',(req, res, next) => {
+        res.send('respond with a resource');
+    });
 } catch(err){ message = "Input is " + err;}
+
 
 try{
   function getByValue(array,id) {
@@ -87,6 +87,8 @@ try{
     res.json(result);
   }
 } catch (err){message = "Input is " + err;}
+
+
 
 finally {
   module.exports = router;
