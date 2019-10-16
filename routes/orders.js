@@ -27,7 +27,7 @@ router.findOne = (req, res) => {
 
     res.setHeader('Content-Type', 'application/json');
 
-    Order.find({ "id" : req.params.id },function(err, orders) {
+    Order.find({ "_id" : req.params.id },function(err, orders) {
         if (err)
             res.json({ message: 'Order NOT Found!', errmsg : err } );
         else
@@ -62,9 +62,11 @@ router.findAll = (req, res) => {
 }
 
 router.orderPayed = (req,res)=>{
-        Order.find({"id" : req.params.id}, function(err,order){
+    res.setHeader('Content-Type', 'application/json');
+        Order.findById({"_id" : req.params.id}, function(err,order){
             if(err)
-                res.send(err);
+                res.send(err),
+                res.json({message: "orderPayed Error"});
             else{
                 order.payed = true;
                 order.save(function(err){
@@ -80,10 +82,10 @@ router.orderPayed = (req,res)=>{
 router.addOrder = (req, res) => {
 
     res.setHeader('Content-Type', 'application/json');
-    const id = Math.floor((Math.random()*1000000)+1);
+    //const id = Math.floor((Math.random()*1000000)+1);
     let order = new Order();
 
-    order.id = id;
+    //order.id = id;
     order.starter = req.body.starter;
     order.main = req.body.main;
     order.desert = req.body.desert;
