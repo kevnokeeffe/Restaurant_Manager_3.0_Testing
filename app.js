@@ -8,6 +8,7 @@ let indexRouter = require('./routes/index');
 let usersRouter = require('./routes/users');
 const orders = require("./routes/orders");
 const users = require("./routes/users");
+const bills = require("./routes/bills");
 
 let app = express();
 
@@ -32,6 +33,7 @@ app.delete('/users/:id/delete', users.deleteUser);
 app.post('/users', users.addUser);
 app.post('/orders', orders.addOrder);
 app.post('/orders/:id', orders.orderPayed);
+app.get('/bills/', bills.billOfOrders);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

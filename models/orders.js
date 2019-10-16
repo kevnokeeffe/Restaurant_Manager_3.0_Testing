@@ -11,7 +11,7 @@ let mongoose = require('mongoose');
 let Schema = mongoose.Schema;
 
 let OrderSchema = new Schema({
-        id: Number,
+        billId: Number,
         starter: String,
         main: String,
         desert: String,
