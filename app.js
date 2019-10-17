@@ -30,11 +30,11 @@ app.get('/users/:id',users.findOne);
 app.get('users/:id',users.findID);
 app.delete('/orders/:id/delete', orders.deleteOrder);
 app.delete('/users/:id/delete', users.deleteUser);
-app.post('/users', users.addUser);
-app.post('/orders', orders.addOrder);
-app.post('/orders/:id', orders.orderPayed);
-app.get('/bills/:billId', bills.billOfOrders);
-app.get('/bills', bills.billOfOrders);
+app.post('/users/add', users.addUser);
+app.post('/orders/add', orders.addOrder);
+app.post('/orders/:id/payed', orders.orderPayed);;
+app.get('/bills/total', bills.billOfOrders);
+app.get('/bills/all', bills.billsAndMoreBills);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

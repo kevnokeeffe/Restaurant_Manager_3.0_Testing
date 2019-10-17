@@ -17,28 +17,46 @@ db.once('open', function () {
 
 function getTotalBill(array) {
     let totalBill = 0;
-    array.forEach(function(obj){ totalBill += obj.price})
+    array.forEach(function(obj){ totalBill += obj.price});
     return totalBill;
-}
+};
 
 function unPayedBill(array) {
-    let payed = false;
-    let id = 1001;
-    array.forEach(function(obj){ if (payed == obj.payed && id == obj.billId){
-        return obj;
-    }})
-}
+    // some how i eed to filter the orders to see only the bills not payed for.
+};
+
+//////////////////////////////////////////////////////////////////
+// const order = new Order;
+// let payed = false;
+// let id = 1001;
+// array.forEach(function(obj){ if (payed == obj.payed && id == obj.billId){
+//     order.obj.billId
+//     //res.json({order});
+//
+// }});
+// return order;
+
+
+router.billsAndMoreBills = (req,res) =>{
+    Order.find(function(err,orders){
+        if(err)
+            res.send(err);
+        else
+            res.json({ order : unPayedBill(orders) });
+});
+};
 
 router.billOfOrders = (req, res) => {
-    //res.setHeader('Content-Type', 'application/json');
+    //some how i need to filter the array so only the elements belonging to a certain bill are displayed
+    //extra condition is that the item has not already been payed for.
     Order.find(function(err,orders){
         if(err)
             res.send(err);
         else
             res.json({ totalBill : getTotalBill(orders) });
 
-    })
-}
+    });
+};
 
 module.exports = router;
 
