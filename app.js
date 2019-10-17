@@ -33,7 +33,9 @@ app.delete('/users/:id/delete', users.deleteUser);
 app.post('/users', users.addUser);
 app.post('/orders', orders.addOrder);
 app.post('/orders/:id', orders.orderPayed);
-app.get('/bills/', bills.billOfOrders);
+app.get('/bills/:billId', bills.billOfOrders);
+app.get('/bills', bills.billOfOrders);
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

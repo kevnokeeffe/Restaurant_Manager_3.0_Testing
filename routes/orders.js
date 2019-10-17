@@ -11,11 +11,11 @@ mongoose.connect('mongodb://localhost:27017/restaurantManager', { useNewUrlParse
 let db = mongoose.connection;
 
 db.on('error', function (err) {
-    console.log('Unable to Connect to [ ' + db.name + ' ]', err);
+    console.log('Unable to Connect to [ ' + db.name + ' ]' + ' on orders route', err);
 });
 
 db.once('open', function () {
-    console.log('Successfully Connected to [ ' + db.name + ' ]');
+    console.log('Successfully Connected to [ ' + db.name + ' ]'+ ' on orders route');
 });
 
     function getByValue(array,id){
