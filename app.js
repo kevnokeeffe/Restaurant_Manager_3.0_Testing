@@ -27,7 +27,7 @@ app.use('/users', usersRouter);
 app.get('/orders/findAll',orders.findAll);
 app.get('/orders/findOne/:id',orders.findOne);
 app.get('/users/findOne/:id',users.findOne);
-app.get('users/findID/:id',users.findID);
+app.get('/users/findID/:id',users.findID);
 app.delete('/orders/:id/delete', orders.deleteOrder);
 app.delete('/users/:id/delete', users.deleteUser);
 app.post('/users/add', users.addUser);

@@ -77,13 +77,16 @@ router.payBillOfOrders = (req,res) => {
 router.unPayBillOfOrders = (req,res) => {
     console.log("HERE")
     Order.updateMany({$and: [{"billId":req.params.billId},{"payed":true}]},{$set: { payed: false }}).then(orders=> {
-        //orders.payed = true;
         res.json({orders: orders, message: 'Bill Set to unpaid!'})
 
     })
         .catch(error => {
             console.log(error)
         });
+
+};
+
+router.totalRead = (req,res) => {
 
 };
 module.exports = router;
