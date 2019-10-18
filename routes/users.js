@@ -42,6 +42,7 @@ router.addUser = (req, res) => {
      user.email = req.body.email;
      user.password = req.body.password;
      user.permission = req.body.permission;
+     user.active = true;
   user.save(function(err) {
     if (err)
       res.json({ message: 'User not Added!', errmsg : err } );
@@ -55,41 +56,29 @@ router.findOne = (req, res) => {
   res.setHeader('Content-Type', 'application/json');
   User.find({ "_id" : req.params.id },'fName lName email').then(id=>{
     res.send(JSON.stringify(id,null,5));
+  }).catch(error => {
+    console.log(error)
   });
 };
 
-// ,function(err, orders) {
-//   if (err)
-//     res.json({ message: 'Order NOT Found!', errmsg : err } );
-//   else
-//     res.send(JSON.stringify(orders,null,5));
-// });
-// try{
-//   router.findOne = (req,res) => {
-//     const user = getByValue(Users, req.params.id);
-//     const removeDetails =
-//         delete user.password
-//     delete user.permission
-//
-//
-//     res.send(JSON.stringify(user, removeDetails ,5));
-//     user.remove(req.params.password);
-//     res.json(user);
-//   }
-// } catch (err){message = "Input is " + err;}
+router.findAll = (req, res) => {
+  res.setHeader('Content-Type', 'application/json');
+  User.find({},'fName lName email').then(id=>{
+    res.send(JSON.stringify(id,null,5));
+  }).catch(error => {
+    console.log(error)
+  });
+};
 
-try {
-  router.deleteUser = (req, res) => {
-    const user = getByValue(Users, req.params.id);
-    const position = Users.indexOf(user);
+router.deleteUser = (req,res) => {
+  User.deleteOne({"_id": req.params._id}).then( promis =>{
+    console.log(promis);
+    res.json({messege:"User deleted",promis:promis})
 
-    if (position !== -1)
-      Users.splice(position, 1),
-          res.json({message: 'User Deleted'});
-    else
-      res.json({message: 'User Doesn\'t Exist!'});
-  }
-}catch (err){message = "Input is " + err;}
+  }).catch(error => {
+    console.log(error)
+  });
+};
 
 try{
   router.findID = (req,res) => {
