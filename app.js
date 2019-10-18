@@ -35,8 +35,10 @@ app.post('/orders/add', orders.addOrder);
 app.post('/orders/payed/:id', orders.orderPayed);
 app.get('/bills/total/:billId', bills.billOfOrders);
 app.get('/bills/all', bills.billsAndMoreBills);
-app.post('orders/unpaid/:id', orders.orderNotPayed);
-app.post('bills/paybill/:billId',bills.payBillOfOrders);
+app.post('/orders/unpaid/:id', orders.orderNotPayed);
+app.put('/bills/payBill/:billId',bills.payBillOfOrders);
+app.get('/bills/unpaidBills/',bills.unPaidBills);
+app.put('/bills/unPayBill/:billId',bills.unPayBillOfOrders);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -21,8 +21,16 @@ function getTotalBill(array) {
     return totalBill;
 };
 
-function unPayedBill(array) {
+function payBill(array){
+    array.forEach(function(obj){ obj.payed = true;});
+}
+
+router.unPaidBills = (req,res) => {
     // some how i eed to filter the orders to see only the bills not payed for.
+    Order.find({"payed":false}).then(orders=> {
+        console.log(orders);
+        res.json({orders: orders});
+    })
 };
 
 //////////////////////////////////////////////////////////////////
@@ -42,7 +50,7 @@ router.billsAndMoreBills = (req,res) =>{
         if(err)
             res.send(err);
         else
-            res.json({ order : unPayedBill(orders) });
+            res.json({ order : unPaidBills(orders) });
 });
 };
 
@@ -56,16 +64,26 @@ router.billOfOrders = (req, res) => {
 };
 
 router.payBillOfOrders = (req,res) => {
-        Order.find({$and: [{"billId":req.params.billId},{"payed":false}]}).then(orders=> {
-            orders.payed = true;
-            orders.save(function(err){
-                if(err)
-                    res.json({ message: 'Orders Not Payed!'});
-                else
-                    res.json({ message: 'Orders Successfully Payed!'});
-            });
+    console.log("HERE")
+        Order.updateMany({$and: [{"billId":req.params.billId},{"payed":false}]},{$set: { payed: true }}).then(orders=> {
+            res.json({orders: orders, message: 'Bill Successfully Payed!'})
         })
+            .catch(error => {
+                console.log(error)
+            });
 
 };
 
+router.unPayBillOfOrders = (req,res) => {
+    console.log("HERE")
+    Order.updateMany({$and: [{"billId":req.params.billId},{"payed":true}]},{$set: { payed: false }}).then(orders=> {
+        //orders.payed = true;
+        res.json({orders: orders, message: 'Bill Set to unpaid!'})
+
+    })
+        .catch(error => {
+            console.log(error)
+        });
+
+};
 module.exports = router;

@@ -97,19 +97,6 @@ router.orderNotPayed = (req,res)=>{
     });
 }
 
-
-
-// router.billOfOrders = (req, res) => {
-//     res.setHeader('Content-Type', 'application/json');
-//     Order.find({"billId" : req.params.billId},function(err, orders) {
-//         if  (err)
-//             res.send(err);
-//         else orders.filter(req.params.billId);
-//         res.send(JSON.stringify(orders,null,5));
-//     });
-//
-// }
-
 router.addOrder = (req, res) => {
 
     res.setHeader('Content-Type', 'application/json');
