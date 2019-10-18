@@ -79,6 +79,26 @@ router.orderPayed = (req,res)=>{
         });
 }
 
+router.orderNotPayed = (req,res)=>{
+    res.setHeader('Content-Type', 'application/json');
+    Order.findById({"_id" : req.params.id}, function(err,order){
+        if(err)
+            res.send(err),
+                res.json({message: "orderNotPayed Error"});
+        else{
+            order.payed = false;
+            order.save(function(err){
+                if(err)
+                    res.json({ message: 'Order Still Payed!'});
+                else
+                    res.json({ message: 'Order Set to Unpaid!'});
+            });
+        }
+    });
+}
+
+
+
 // router.billOfOrders = (req, res) => {
 //     res.setHeader('Content-Type', 'application/json');
 //     Order.find({"billId" : req.params.billId},function(err, orders) {

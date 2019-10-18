@@ -55,4 +55,17 @@ router.billOfOrders = (req, res) => {
     })
 };
 
+router.payBillOfOrders = (req,res) => {
+        Order.find({$and: [{"billId":req.params.billId},{"payed":false}]}).then(orders=> {
+            orders.payed = true;
+            orders.save(function(err){
+                if(err)
+                    res.json({ message: 'Orders Not Payed!'});
+                else
+                    res.json({ message: 'Orders Successfully Payed!'});
+            });
+        })
+
+};
+
 module.exports = router;

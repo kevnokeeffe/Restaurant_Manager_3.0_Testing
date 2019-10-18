@@ -24,17 +24,19 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.get('/orders',orders.findAll);
-app.get('/orders/:id',orders.findOne);
-app.get('/users/:id',users.findOne);
-app.get('users/:id',users.findID);
+app.get('/orders/findAll',orders.findAll);
+app.get('/orders/findOne/:id',orders.findOne);
+app.get('/users/findOne/:id',users.findOne);
+app.get('users/findID/:id',users.findID);
 app.delete('/orders/:id/delete', orders.deleteOrder);
 app.delete('/users/:id/delete', users.deleteUser);
 app.post('/users/add', users.addUser);
 app.post('/orders/add', orders.addOrder);
-app.post('/orders/:id/payed', orders.orderPayed);;
+app.post('/orders/payed/:id', orders.orderPayed);
 app.get('/bills/total/:billId', bills.billOfOrders);
 app.get('/bills/all', bills.billsAndMoreBills);
+app.post('orders/unpaid/:id', orders.orderNotPayed);
+app.post('bills/paybill/:billId',bills.payBillOfOrders);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
