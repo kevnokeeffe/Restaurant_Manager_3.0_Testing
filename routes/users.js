@@ -68,6 +68,7 @@ router.deleteUser = (req,res) => {
   });
 };
 
+//Sets one user to active
 router.setUserToActive = (req,res) => {
   User.updateOne({"_id":req.params.id},{$set:{active:true}}).then(promis=>{
     res.json({messege:"Status changed to inactive",promis:promis})

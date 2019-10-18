@@ -42,7 +42,7 @@ router.paidBills = (req,res) => {
     });
 };
 
-//displays all the orders attached to a certain bill which have not been payed for, gives a total bill.
+//Displays all the orders attached to a certain bill which have not been payed for, gives a total bill.
 router.billOfOrders = (req, res) => {
     Order.find({$and: [{"billId":req.params.billId},{"payed":false}]}).then(orders=> {
         console.log(orders);
@@ -52,7 +52,7 @@ router.billOfOrders = (req, res) => {
     });
 };
 
-//sets all orders of a certain bill to paid.
+//Sets all orders of a certain bill to paid.
 router.payBillOfOrders = (req,res) => {
     console.log("HERE")
         Order.updateMany({$and: [{"billId":req.params.billId},{"payed":false}]},{$set: { payed: true }}).then(orders=> {
@@ -63,7 +63,7 @@ router.payBillOfOrders = (req,res) => {
             });
 };
 
-//sets all orders of a certain bill to unpaid
+//Sets all orders of a certain bill to unpaid
 router.unPayBillOfOrders = (req,res) => {
     console.log("HERE")
     Order.updateMany({$and: [{"billId":req.params.billId},{"payed":true}]},{$set: { payed: false }}).then(orders=> {
@@ -74,7 +74,7 @@ router.unPayBillOfOrders = (req,res) => {
         });
 };
 
-// gives a total read of all orders payed for.
+//Gives a total read of all orders payed for.
 router.totalRead = (req,res) => {
     Order.find({"payed":true}).then(orders=> {
         console.log(orders);
