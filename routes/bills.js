@@ -90,11 +90,11 @@ router.totalRead = (req,res) => {
 router.deleteBill = (req,res) => {
     Order.deleteMany({"billId": req.params.billId}).then( promis =>{
         console.log(promis);
-        res.json({promis:promis, messege:"Bill deleted"})
+        res.json({messege:"Bill deleted",promis:promis})
 
 }).catch(error => {
         console.log(error)
     });
-}
+};
 
 module.exports = router;
