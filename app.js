@@ -26,12 +26,12 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
 //Orders calls
-app.get('/orders/findAll',orders.findAll);
-app.get('/orders/findOne/:id',orders.findOne);
-app.delete('/orders/:id/delete', orders.deleteOrder);
-app.post('/orders/add', orders.addOrder);
-app.post('/orders/payed/:id', orders.orderPayed);
-app.post('/orders/unpaid/:id', orders.orderNotPayed);
+app.get('/order/all',orders.findAll);
+app.get('/order/findOne/:id',orders.findOne);
+app.delete('/order/:id/delete', orders.deleteOrder);
+app.post('/order/add', orders.addOrder);
+app.post('/order/payed/:id', orders.orderPayed);
+app.post('/order/unpaid/:id', orders.orderNotPayed);
 
 //Users calls
 app.get('/users/findOne/:id',users.findOne);
@@ -40,12 +40,13 @@ app.delete('/users/:id/delete', users.deleteUser);
 app.post('/users/add', users.addUser);
 
 //Bills calls
-app.get('/bills/total/:billId', bills.billOfOrders);
-app.put('/bills/payBill/:billId',bills.payBillOfOrders);
-app.get('/bills/unpaidBills/',bills.unPaidBills);
-app.put('/bills/unPayBill/:billId',bills.unPayBillOfOrders);
-app.get('/bills/totalRead',bills.totalRead);
-app.get('/bills/paidBills', bills.paidBills);
+app.get('/bill/:billId/total', bills.billOfOrders);
+app.put('/bill/:billId/payBill',bills.payBillOfOrders);
+app.get('/bill/unpaidBills/',bills.unPaidBills);
+app.put('/bill/:billId/unPayBill',bills.unPayBillOfOrders);
+app.get('/bill/totalRead',bills.totalRead);
+app.get('/bill/paidBills', bills.paidBills);
+app.delete('/bill/:billId/delete',bills.deleteBill);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -26,6 +26,8 @@ router.unPaidBills = (req,res) => {
     Order.find({"payed":false}).then(orders=> {
         console.log(orders);
         res.json({orders: orders});
+    }).catch(error => {
+        console.log(error)
     });
 };
 
@@ -34,6 +36,8 @@ router.paidBills = (req,res) => {
     Order.find({"payed":true}).then(orders => {
         console.log(orders);
         res.json({orders: orders});
+    }).catch(error => {
+        console.log(error)
     });
 };
 
@@ -42,7 +46,9 @@ router.billOfOrders = (req, res) => {
     Order.find({$and: [{"billId":req.params.billId},{"payed":false}]}).then(orders=> {
         console.log(orders);
         res.json({orders: orders, totalBill: getTotalBill(orders)});
-    })
+    }).catch(error => {
+        console.log(error)
+    });
 };
 
 //sets all orders of a certain bill to paid.
@@ -72,10 +78,23 @@ router.totalRead = (req,res) => {
     Order.find({"payed":true}).then(orders=> {
         console.log(orders);
         res.json({orders: orders, totalBill: getTotalBill(orders)});
-    })
+    }).catch(error => {
+        console.log(error)
+    });
 };
 
+//Deletes a bill
+//I wish to add a backup that makes a copy of the deleted bill
+//and sends it to a backup database, which contains historical
+// bills and orders for later reference.
 router.deleteBill = (req,res) => {
+    Order.deleteMany({"billId": req.params.billId}).then( promis =>{
+        console.log(promis);
+        res.json({promis:promis, messege:"Bill deleted"})
 
+}).catch(error => {
+        console.log(error)
+    });
 }
+
 module.exports = router;

@@ -96,7 +96,6 @@ router.orderNotPayed = (req,res)=>{
 router.addOrder = (req, res) => {
 
     res.setHeader('Content-Type', 'application/json');
-    //const id = Math.floor((Math.random()*1000000)+1);
     let order = new Order();
 
     order.billId = req.body.billId;
