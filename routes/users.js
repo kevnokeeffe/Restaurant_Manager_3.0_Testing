@@ -1,4 +1,5 @@
 let Users = require ('../models/users');
+let Backup = require ('../models/backup');
 let express = require('express');
 let router = express.Router();
 let os = require("os");
@@ -18,22 +19,7 @@ db.once('open', function () {
   console.log('Successfully Connected to [ ' + db.name + ' ]'+ ' on users route');
 });
 
-
-// try {
-//     router.get('/',(req, res, next) => {
-//         res.send('respond with a resource');
-//     });
-// } catch(err){ message = "Input is " + err;}
-
-
-try{
-  function getByValue(array,id) {
-    const result = array.filter(function(obj){return obj.id == id;});
-    return result?result[0]:null;
-  }
-}catch(err){message = "Input is " + err;}
-
-
+//This method adds a user
 router.addUser = (req, res) => {
   res.setHeader('Content-Type', 'application/json');
   let user = new User();
@@ -54,13 +40,14 @@ router.addUser = (req, res) => {
 //Finds a user by their id, just returns their name and email, nothing else.
 router.findOne = (req, res) => {
   res.setHeader('Content-Type', 'application/json');
-  User.find({ "_id" : req.params.id },'fName lName email').then(id=>{
+  User.find({ "_id" : req.params.id },'fName lName email active').then(id=>{
     res.send(JSON.stringify(id,null,5));
   }).catch(error => {
     console.log(error)
   });
 };
 
+//This method prints out all the users
 router.findAll = (req, res) => {
   res.setHeader('Content-Type', 'application/json');
   User.find({},'fName lName email').then(id=>{
@@ -70,6 +57,7 @@ router.findAll = (req, res) => {
   });
 };
 
+//Deletes a single user of given id
 router.deleteUser = (req,res) => {
   User.deleteOne({"_id": req.params._id}).then( promis =>{
     console.log(promis);
@@ -80,16 +68,31 @@ router.deleteUser = (req,res) => {
   });
 };
 
-try{
-  router.findID = (req,res) => {
-    const user = getByValue(Users, req.params.fName);
-    res.send(JSON.stringify(user,null,5));
-    res.json(result);
-  }
-} catch (err){message = "Input is " + err;}
+router.setUserToActive = (req,res) => {
+  User.updateOne({"_id":req.params.id},{$set:{active:true}}).then(promis=>{
+    res.json({messege:"Status changed to inactive",promis:promis})
+  }).catch(error => {
+    console.log(error)
+  });
+};
+
+//Sets one user to inactive
+router.setUserToInactive = (req,res) => {
+  User.updateOne({"_id":req.params.id},{$set:{active:false}}).then(promis=>{
+    res.json({messege:"Status changed to inactive",promis:promis})
+  }).catch(error => {
+    console.log(error)
+  });
+};
+
+//Deletes all inactive users
+router.deleteInactiveUsers = (req,res) => {
+ User.deleteMany({ active:{$in:[false]}}).then( promis =>{
+   res.json({messege:"Inactive users deleted",promis:promis})
+ }).catch(error => {
+   console.log(error)
+ });
+};
 
 
-
-finally {
-  module.exports = router;
-}
+module.exports = router;

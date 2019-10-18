@@ -40,6 +40,8 @@ app.get('/user/:id/find',users.findOne);
 app.delete('/user/:id/delete', users.deleteUser);
 app.post('/user/add', users.addUser);
 app.get('/user/all', users.findAll);
+app.put('/user/:id/inactive',users.setUserToInactive);
+app.delete('/user/delete',users.deleteInactiveUsers);
 
 //Bills calls
 app.get('/bill/:billId/total', bills.billOfOrders);
