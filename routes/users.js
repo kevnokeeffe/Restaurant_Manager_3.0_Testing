@@ -2,10 +2,23 @@ let Users = require ('../models/users');
 let express = require('express');
 let router = express.Router();
 let os = require("os");
+let mongoose = require('mongoose');
 let message
 let User = require ('../models/users');
 message = "";
-/* GET users listing. */
+
+mongoose.connect('mongodb://localhost:27017/restaurantManager', { useNewUrlParser: true });
+let db = mongoose.connection;
+
+db.on('error', function (err) {
+  console.log('Unable to Connect to [ ' + db.name + ' ]'+ ' on users route', err);
+});
+
+db.once('open', function () {
+  console.log('Successfully Connected to [ ' + db.name + ' ]'+ ' on users route');
+});
+
+
 try {
     router.get('/',(req, res, next) => {
         res.send('respond with a resource');
