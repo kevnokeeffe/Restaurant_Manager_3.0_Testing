@@ -33,7 +33,7 @@ app.delete('/users/:id/delete', users.deleteUser);
 app.post('/users/add', users.addUser);
 app.post('/orders/add', orders.addOrder);
 app.post('/orders/:id/payed', orders.orderPayed);;
-app.get('/bills/total', bills.billOfOrders);
+app.get('/bills/total/:billId', bills.billOfOrders);
 app.get('/bills/all', bills.billsAndMoreBills);
 
 // catch 404 and forward to error handler

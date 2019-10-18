@@ -49,40 +49,10 @@ router.billsAndMoreBills = (req,res) =>{
 router.billOfOrders = (req, res) => {
     //some how i need to filter the array so only the elements belonging to a certain bill are displayed
     //extra condition is that the item has not already been payed for.
-    Order.find(function(err,orders){
-        if(err)
-            res.send(err);
-        else
-            res.json({ totalBill : getTotalBill(orders) });
-
-    });
+    Order.find({$and: [{"billId":req.params.billId},{"payed":false}]}).then(orders=> {
+        console.log(orders);
+        res.json({orders: orders, totalBill: getTotalBill(orders)});
+    })
 };
 
 module.exports = router;
-
-//orders.forEach(function(obj) {
-// if (id === obj.billId){
-//  res.json({ totalBill : getTotalBill(orders) });
-// }
-// else if(err)
-// res.send(err);
-// })
-//////////////////////////////////////////////////////////////
-
-// Order.filter(orders.billId = billId.req.params.id === '1001');
-//Order.filter(billId => billId.req.params.billId === '1001');
-// orders = new Order();
-// function findById(orders.billId, req.params.billId) {
-//     for (let i = 0; i < orders.length; i++) {
-//         if (orders[i].id === id) {
-//             return source[i];
-//         }
-//     }
-//     throw "Couldn't find object with id: " + id;
-// }
-//.find({"billId" : req.params.billId},function(err, orders) {
-//     if  (err)
-//         res.send(err);
-//     else orders.filter(req.params.billId);
-//     res.send(JSON.stringify(orders,null,5));
-// });
