@@ -23,44 +23,38 @@ db.once('open', function () {
         return result?result[0]:null;
     }
 
+//Finds an order by its id
 router.findOne = (req, res) => {
-
     res.setHeader('Content-Type', 'application/json');
-
     Order.find({ "_id" : req.params.id },function(err, orders) {
         if (err)
             res.json({ message: 'Order NOT Found!', errmsg : err } );
         else
             res.send(JSON.stringify(orders,null,5));
     });
-}
+};
 
-
-
+//Deletes an order
     router.deleteOrder = (req, res) => {
-
         Order.findByIdAndRemove(req.params.id, function(err) {
             if (err)
                 res.json({ message: 'Order NOT DELETED!', errmsg : err } );
             else
                 res.json({ message: 'Order Successfully Deleted!'});
         });
+    };
 
-    }
-
-
+//Gives a list of all orders on the system
 router.findAll = (req, res) => {
-    // Return a JSON representation of our list
     res.setHeader('Content-Type', 'application/json');
-
     Order.find(function(err, orders) {
         if (err)
             res.send(err);
-
         res.send(JSON.stringify(orders,null,5));
     });
 }
 
+//Sets an order to payed
 router.orderPayed = (req,res)=>{
     res.setHeader('Content-Type', 'application/json');
         Order.findById({"_id" : req.params.id}, function(err,order){
@@ -79,6 +73,7 @@ router.orderPayed = (req,res)=>{
         });
 }
 
+//Sets an order to not payed
 router.orderNotPayed = (req,res)=>{
     res.setHeader('Content-Type', 'application/json');
     Order.findById({"_id" : req.params.id}, function(err,order){
@@ -97,6 +92,7 @@ router.orderNotPayed = (req,res)=>{
     });
 }
 
+//Adds an order
 router.addOrder = (req, res) => {
 
     res.setHeader('Content-Type', 'application/json');

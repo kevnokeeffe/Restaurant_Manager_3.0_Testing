@@ -19,50 +19,33 @@ function getTotalBill(array) {
     let totalBill = 0;
     array.forEach(function(obj){ totalBill += obj.price});
     return totalBill;
-};
-
-function payBill(array){
-    array.forEach(function(obj){ obj.payed = true;});
 }
 
+//Gives a list of unpaid bills
 router.unPaidBills = (req,res) => {
-    // some how i eed to filter the orders to see only the bills not payed for.
     Order.find({"payed":false}).then(orders=> {
         console.log(orders);
         res.json({orders: orders});
-    })
+    });
 };
 
-//////////////////////////////////////////////////////////////////
-// const order = new Order;
-// let payed = false;
-// let id = 1001;
-// array.forEach(function(obj){ if (payed == obj.payed && id == obj.billId){
-//     order.obj.billId
-//     //res.json({order});
-//
-// }});
-// return order;
-
-
-router.billsAndMoreBills = (req,res) =>{
-    Order.find(function(err,orders){
-        if(err)
-            res.send(err);
-        else
-            res.json({ order : unPaidBills(orders) });
-});
+//Gives a list of payed bills
+router.paidBills = (req,res) => {
+    Order.find({"payed":true}).then(orders => {
+        console.log(orders);
+        res.json({orders: orders});
+    });
 };
 
+//displays all the orders attached to a certain bill which have not been payed for, gives a total bill.
 router.billOfOrders = (req, res) => {
-    //some how i need to filter the array so only the elements belonging to a certain bill are displayed
-    //extra condition is that the item has not already been payed for.
     Order.find({$and: [{"billId":req.params.billId},{"payed":false}]}).then(orders=> {
         console.log(orders);
         res.json({orders: orders, totalBill: getTotalBill(orders)});
     })
 };
 
+//sets all orders of a certain bill to paid.
 router.payBillOfOrders = (req,res) => {
     console.log("HERE")
         Order.updateMany({$and: [{"billId":req.params.billId},{"payed":false}]},{$set: { payed: true }}).then(orders=> {
@@ -71,22 +54,28 @@ router.payBillOfOrders = (req,res) => {
             .catch(error => {
                 console.log(error)
             });
-
 };
 
+//sets all orders of a certain bill to unpaid
 router.unPayBillOfOrders = (req,res) => {
     console.log("HERE")
     Order.updateMany({$and: [{"billId":req.params.billId},{"payed":true}]},{$set: { payed: false }}).then(orders=> {
         res.json({orders: orders, message: 'Bill Set to unpaid!'})
-
     })
         .catch(error => {
             console.log(error)
         });
-
 };
 
+// gives a total read of all orders payed for.
 router.totalRead = (req,res) => {
-
+    Order.find({"payed":true}).then(orders=> {
+        console.log(orders);
+        res.json({orders: orders, totalBill: getTotalBill(orders)});
+    })
 };
+
+router.deleteBill = (req,res) => {
+
+}
 module.exports = router;

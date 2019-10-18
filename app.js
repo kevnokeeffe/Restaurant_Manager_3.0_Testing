@@ -24,21 +24,28 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+
+//Orders calls
 app.get('/orders/findAll',orders.findAll);
 app.get('/orders/findOne/:id',orders.findOne);
-app.get('/users/findOne/:id',users.findOne);
-app.get('/users/findID/:id',users.findID);
 app.delete('/orders/:id/delete', orders.deleteOrder);
-app.delete('/users/:id/delete', users.deleteUser);
-app.post('/users/add', users.addUser);
 app.post('/orders/add', orders.addOrder);
 app.post('/orders/payed/:id', orders.orderPayed);
-app.get('/bills/total/:billId', bills.billOfOrders);
-app.get('/bills/all', bills.billsAndMoreBills);
 app.post('/orders/unpaid/:id', orders.orderNotPayed);
+
+//Users calls
+app.get('/users/findOne/:id',users.findOne);
+app.get('/users/findID/:id',users.findID);
+app.delete('/users/:id/delete', users.deleteUser);
+app.post('/users/add', users.addUser);
+
+//Bills calls
+app.get('/bills/total/:billId', bills.billOfOrders);
 app.put('/bills/payBill/:billId',bills.payBillOfOrders);
 app.get('/bills/unpaidBills/',bills.unPaidBills);
 app.put('/bills/unPayBill/:billId',bills.unPayBillOfOrders);
+app.get('/bills/totalRead',bills.totalRead);
+app.get('/bills/paidBills', bills.paidBills);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
