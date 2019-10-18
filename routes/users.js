@@ -19,11 +19,11 @@ db.once('open', function () {
 });
 
 
-try {
-    router.get('/',(req, res, next) => {
-        res.send('respond with a resource');
-    });
-} catch(err){ message = "Input is " + err;}
+// try {
+//     router.get('/',(req, res, next) => {
+//         res.send('respond with a resource');
+//     });
+// } catch(err){ message = "Input is " + err;}
 
 
 try{
@@ -33,52 +33,50 @@ try{
   }
 }catch(err){message = "Input is " + err;}
 
-router.addUser=(req,res)=>{
-  const id = Math.floor((Math.random()*1000000)+1);
-  const user =({'id': id, 'fName': req.body.fName,'lName':req.body.lName,'email': req.body.email, 'password':req.body.password,'permission': req.body.permission});
-  const currentSize = Users.length;
-  Users.push(user);
-  if((currentSize +1) == Users.length)
-    res.json({message:'User Added'});
-  else
-    res.json({message:'User Not Added!'});
-}
 
+router.addUser = (req, res) => {
+  res.setHeader('Content-Type', 'application/json');
+  let user = new User();
+     user.fName = req.body.fName;
+     user.lName = req.body.lName;
+     user.email = req.body.email;
+     user.password = req.body.password;
+     user.permission = req.body.permission;
+  user.save(function(err) {
+    if (err)
+      res.json({ message: 'User not Added!', errmsg : err } );
+    else
+      res.json({ message: 'User Successfully Added!', data: user });
+  });
+};
 
-// router.addUser = (req, res) => {
+//Finds a user by their id, just returns their name and email, nothing else.
+router.findOne = (req, res) => {
+  res.setHeader('Content-Type', 'application/json');
+  User.find({ "_id" : req.params.id },'fName lName email').then(id=>{
+    res.send(JSON.stringify(id,null,5));
+  });
+};
+
+// ,function(err, orders) {
+//   if (err)
+//     res.json({ message: 'Order NOT Found!', errmsg : err } );
+//   else
+//     res.send(JSON.stringify(orders,null,5));
+// });
+// try{
+//   router.findOne = (req,res) => {
+//     const user = getByValue(Users, req.params.id);
+//     const removeDetails =
+//         delete user.password
+//     delete user.permission
 //
-//     res.setHeader('Content-Type', 'application/json');
 //
-//     let user = new User();
-//
-//     user.id = id;
-//     user.fName = req.body.fName;
-//     user.lName = req.body.lName;
-//     user.email = req.body.email;
-//     user.password = req.body.password;
-//     user.permission = "average";
-//
-//     user.save(function(err) {
-//         if (err)
-//             res.send(err);
-//         else
-//             res.json({message:'Donation Added'});
-//     });
-// }
-
-try{
-  router.findOne = (req,res) => {
-    const user = getByValue(Users, req.params.id);
-    const removeDetails =
-        delete user.password
-    delete user.permission
-
-
-    res.send(JSON.stringify(user, removeDetails ,5));
-    user.remove(req.params.password);
-    res.json(user);
-  }
-} catch (err){message = "Input is " + err;}
+//     res.send(JSON.stringify(user, removeDetails ,5));
+//     user.remove(req.params.password);
+//     res.json(user);
+//   }
+// } catch (err){message = "Input is " + err;}
 
 try {
   router.deleteUser = (req, res) => {

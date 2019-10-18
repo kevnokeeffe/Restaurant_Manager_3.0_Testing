@@ -9,6 +9,7 @@ let usersRouter = require('./routes/users');
 const orders = require("./routes/orders");
 const users = require("./routes/users");
 const bills = require("./routes/bills");
+const backup = require("./routes/backup");
 
 let app = express();
 
@@ -34,10 +35,10 @@ app.post('/order/payed/:id', orders.orderPayed);
 app.post('/order/unpaid/:id', orders.orderNotPayed);
 
 //Users calls
-app.get('/users/findOne/:id',users.findOne);
-app.get('/users/findID/:id',users.findID);
-app.delete('/users/:id/delete', users.deleteUser);
-app.post('/users/add', users.addUser);
+app.get('/user/:id/find',users.findOne);
+//app.get('/users/findID/:id',users.findID);
+app.delete('/user/:id/delete', users.deleteUser);
+app.post('/user/add', users.addUser);
 
 //Bills calls
 app.get('/bill/:billId/total', bills.billOfOrders);
