@@ -1,0 +1,8 @@
+{
+  "messege": "Inactive users deleted",
+  "promis": {
+    "n": 10,
+    "ok": 1,
+    "deletedCount": 10
+  }
+}

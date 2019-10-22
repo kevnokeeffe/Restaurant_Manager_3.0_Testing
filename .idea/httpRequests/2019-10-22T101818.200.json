@@ -1,0 +1,58 @@
+[
+  {
+    "_id": "5daa306cf3b55b1018269edf",
+    "fName": "Kevin",
+    "lName": "O Keeffe",
+    "email": "kevokeeffe@gmail.com",
+    "password": "123456"
+  },
+  {
+    "_id": "5daa306df3b55b1018269ee0",
+    "fName": "Kevin",
+    "lName": "O Keeffe",
+    "email": "kevokeeffe@gmail.com",
+    "password": "123456"
+  },
+  {
+    "_id": "5daa306df3b55b1018269ee1",
+    "fName": "Kevin",
+    "lName": "O Keeffe",
+    "email": "kevokeeffe@gmail.com",
+    "password": "123456"
+  },
+  {
+    "_id": "5daa306df3b55b1018269ee2",
+    "fName": "Kevin",
+    "lName": "O Keeffe",
+    "email": "kevokeeffe@gmail.com",
+    "password": "123456"
+  },
+  {
+    "_id": "5daa306df3b55b1018269ee3",
+    "fName": "Kevin",
+    "lName": "O Keeffe",
+    "email": "kevokeeffe@gmail.com",
+    "password": "123456"
+  },
+  {
+    "_id": "5daa306df3b55b1018269ee4",
+    "fName": "Kevin",
+    "lName": "O Keeffe",
+    "email": "kevokeeffe@gmail.com",
+    "password": "123456"
+  },
+  {
+    "_id": "5daf6e68d48e99111880098e",
+    "fName": "Kevin",
+    "lName": "O Keeffe",
+    "email": "kevokeeffe@gmail.com",
+    "password": "$2b$10$kHEIU4Wl9hsjhHjBVxbI.uTpQQBCXkYWt126NDjtDqW3FMAk1BPi2"
+  },
+  {
+    "_id": "5daf6fe6fa565d4e247ac26f",
+    "fName": "Kevin",
+    "lName": "O Keeffe",
+    "email": "kevokeeffe@gmail.com",
+    "password": "$2b$10$YoduMCeQNCPw5opZJbkf9.yp6llflSfu6pb2vwBHWAhP8OwDbGIRa"
+  }
+]

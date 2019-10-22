@@ -1,0 +1,13 @@
+{
+  "message": "User Successfully Added!",
+  "data": {
+    "_id": "5daa306df3b55b1018269ee3",
+    "fName": "Kevin",
+    "lName": "O Keeffe",
+    "email": "kevokeeffe@gmail.com",
+    "password": "123456",
+    "permission": "admin",
+    "active": true,
+    "__v": 0
+  }
+}
