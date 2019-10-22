@@ -118,7 +118,7 @@ router.addOrder = (req, res) => {
     });
 };
 
-router.editOrder = (req,res,next)=>{
+router.editOrder = ('/update', (req,res,next)=>{
 const billId = req.body.billId;
 const userId = req.body.userId;
 const UpdateStarter = req.body.starter;
@@ -128,5 +128,5 @@ const UpdateDrink = req.body.drink;
 const UpdatePrice = req.body.price;
 const UpdatePayed = req.body.payed;
 const UpdateMessage = req.body.message;
-};
+});
     module.exports = router;
