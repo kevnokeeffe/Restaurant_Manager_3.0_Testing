@@ -1,93 +1,139 @@
 let Users = require ('../models/users');
+let Backup = require ('../models/backup');
 let express = require('express');
 let router = express.Router();
 let os = require("os");
+let mongoose = require('mongoose');
 let message
 let User = require ('../models/users');
+const bcrypt = require('bcrypt');
 message = "";
-/* GET users listing. */
 
-try {
-  router.get('/',(req, res, next) => {
-    res.send('respond with a resource');
+mongoose.connect('mongodb://localhost:27017/restaurantManager', { useNewUrlParser: true });
+let db = mongoose.connection;
+
+db.on('error', function (err) {
+  console.log('Unable to Connect to [ ' + db.name + ' ]'+ ' on users route', err);
+});
+
+db.once('open', function () {
+  console.log('Successfully Connected to [ ' + db.name + ' ]'+ ' on users route');
+});
+
+//This method adds a user
+router.addUser = ((req, res, next) => {
+  // checks to see if the email already exists
+  User.find({email: req.body.email}) .exec().then(user => {
+    if (user.length >= 1) {
+      //409 means conflict could use 422 which means unprocessable entity
+      return res.status(409).json({message:"Sorry, email already exists!"});
+    } else {
+      //Hash password, adds salt 10 times.
+      bcrypt.hash(req.body.password, 10, (err,hash)=>{
+        if (err) {
+          return res.status(500).json({
+            error:err
+          });
+        } else {
+          const user = new User({
+            _id: mongoose.Schema.Types.ObjectID(),
+            fName : req.body.fName,
+            lName : req.body.lName,
+            email : req.body.email,
+            password : hash,
+            permission : req.body.permission,
+            active : true
+          });
+          user
+              .save()
+              .then(result => {
+                console.log(result);
+                res.status(201).json({
+                  message: "User Created"
+                });
+              }).catch(err => {
+            console.log(err);
+            res.status(500).json({
+              error:err
+            });
+          });
+        }
+      });
+    }
   });
-} catch(err){ message = "Input is " + err;}
+  });
 
-try{
-  function getByValue(array,id) {
-    const result = array.filter(function(obj){return obj.id == id;});
-    return result?result[0]:null;
-  }
-}catch(err){message = "Input is " + err;}
+//Finds a user by their id, just returns their name and email, nothing else.
+router.findOne = (req, res) => {
+  User.find({ "_id" : req.params.id },'fName lName email active').then(id=>{
+    res.send(JSON.stringify(id,null,5));
+  }).catch(err => {
+    console.log(err);
+    res.status(500).json({
+      error:err
+  });
+  });
+};
 
-router.addUser=(req,res)=>{
-  const id = Math.floor((Math.random()*1000000)+1);
-  const user =({'id': id, 'fName': req.body.fName,'lName':req.body.lName,'email': req.body.email, 'password':req.body.password,'permission': req.body.permission});
-  const currentSize = Users.length;
-  Users.push(user);
-  if((currentSize +1) == Users.length)
-    res.json({message:'User Added'});
-  else
-    res.json({message:'User Not Added!'});
-}
+//This method prints out all the users
+router.findAll = (req, res) => {
+  User.find({},'fName lName email password').then(id=>{
+    res.send(JSON.stringify(id,null,5));
+  }).catch(err => {
+    console.log(err);
+    res.status(500).json({
+      error:err
+  });
+  });
+};
+
+//Deletes a single user of given id
+router.deleteUser = (req,res,next) => {
+  User.deleteOne({"_id": req.params._id}).exec().then( promis =>{
+    console.log(promis);
+    res.status(200).json({messege:"User deleted",promis:promis})
+
+  }).catch(err => {
+    console.log(err);
+    res.status(500).json({error:err});
+  });
+};
+
+//Sets one user to active
+router.setUserToActive = (req,res) => {
+  User.updateOne({"_id": req.params.id}, {$set: {active: true}}).then(promis => {
+    res.json({messege: "Status changed to inactive", promis: promis})
+  }).catch(err => {
+    console.log(err);
+    res.status(500).json({
+      error: err
+    });
+  });
+};
+
+//Sets one user to inactive
+router.setUserToInactive = (req,res) => {
+  User.updateOne({"_id":req.params.id},{$set:{active:false}}).then(promis=>{
+    res.json({messege:"Status changed to inactive",promis:promis})
+  }).catch(err => {
+    console.log(err);
+    res.status(500).json({
+      error:err
+  });
+  });
+};
+
+//Deletes all inactive users
+router.deleteInactiveUsers = (req,res) => {
+ User.deleteMany({ active:{$in:[false]}}).then( promis =>{
+   res.json({messege:"Inactive users deleted",promis:promis})
+ }).catch(err => {
+   console.log(err);
+   res.status(500).json({
+     error:err
+ });
+ });
+};
 
 
-// router.addUser = (req, res) => {
-//
-//     res.setHeader('Content-Type', 'application/json');
-//
-//     let user = new User();
-//
-//     user.id = id;
-//     user.fName = req.body.fName;
-//     user.lName = req.body.lName;
-//     user.email = req.body.email;
-//     user.password = req.body.password;
-//     user.permission = "average";
-//
-//     user.save(function(err) {
-//         if (err)
-//             res.send(err);
-//         else
-//             res.json({message:'Donation Added'});
-//     });
-// }
-
-try{
-  router.findOne = (req,res) => {
-    const user = getByValue(Users, req.params.id);
-    const removeDetails =
-        delete user.password
-    delete user.permission
-
-
-    res.send(JSON.stringify(user, removeDetails ,5));
-    user.remove(req.params.password);
-    res.json(user);
-  }
-} catch (err){message = "Input is " + err;}
-
-try {
-  router.deleteUser = (req, res) => {
-    const user = getByValue(Users, req.params.id);
-    const position = Users.indexOf(user);
-
-    if (position !== -1)
-      Users.splice(position, 1),
-          res.json({message: 'User Deleted'});
-    else
-      res.json({message: 'User Doesn\'t Exist!'});
-  }
-}catch (err){message = "Input is " + err;}
-
-try{
-  router.findID = (req,res) => {
-    const user = getByValue(Users, req.params.fName);
-    res.send(JSON.stringify(user,null,5));
-    res.json(result);
-  }
-} catch (err){message = "Input is " + err;}
-
-finally {
-  module.exports = router;
-}
+module.exports = router;
