@@ -6,6 +6,7 @@ let os = require("os");
 let mongoose = require('mongoose');
 let message
 let User = require ('../models/users');
+const bcrypt = require('bcrypt');
 message = "";
 
 mongoose.connect('mongodb://localhost:27017/restaurantManager', { useNewUrlParser: true });
@@ -20,22 +21,47 @@ db.once('open', function () {
 });
 
 //This method adds a user
-router.addUser = (req, res) => {
-  res.setHeader('Content-Type', 'application/json');
-  let user = new User();
-     user.fName = req.body.fName;
-     user.lName = req.body.lName;
-     user.email = req.body.email;
-     user.password = req.body.password;
-     user.permission = req.body.permission;
-     user.active = true;
-  user.save(function(err) {
-    if (err)
-      res.json({ message: 'User not Added!', errmsg : err } );
-    else
-      res.json({ message: 'User Successfully Added!', data: user });
+router.addUser = ((req, res, next) => {
+  // checks to see if the email already exists
+  User.find({email: req.body.email}) .exec().then(user => {
+    if (user.length >= 1) {
+      //409 means conflict could use 422 which means unprocessable entity
+      return res.status(409).json({message:"Sorry, email already exists!"});
+    } else {
+      //Hash password, adds salt 10 times.
+      bcrypt.hash(req.body.password, 10, (err,hash)=>{
+        if (err) {
+          return res.status(500).json({
+            error:err
+          });
+        } else {
+          const user = new User({
+            _id: mongoose.Schema.Types.ObjectID(),
+            fName : req.body.fName,
+            lName : req.body.lName,
+            email : req.body.email,
+            password : hash,
+            permission : req.body.permission,
+            active : true
+          });
+          user
+              .save()
+              .then(result => {
+                console.log(result);
+                res.status(201).json({
+                  message: "User Created"
+                });
+              }).catch(err => {
+            console.log(err);
+            res.status(500).json({
+              error:err
+            });
+          });
+        }
+      });
+    }
   });
-};
+  });
 
 //Finds a user by their id, just returns their name and email, nothing else.
 router.findOne = (req, res) => {
@@ -50,7 +76,7 @@ router.findOne = (req, res) => {
 //This method prints out all the users
 router.findAll = (req, res) => {
   res.setHeader('Content-Type', 'application/json');
-  User.find({},'fName lName email').then(id=>{
+  User.find({},'fName lName email password').then(id=>{
     res.send(JSON.stringify(id,null,5));
   }).catch(error => {
     console.log(error)
@@ -58,13 +84,14 @@ router.findAll = (req, res) => {
 };
 
 //Deletes a single user of given id
-router.deleteUser = (req,res) => {
-  User.deleteOne({"_id": req.params._id}).then( promis =>{
+router.deleteUser = (req,res,next) => {
+  User.deleteOne({"_id": req.params._id}).exec().then( promis =>{
     console.log(promis);
-    res.json({messege:"User deleted",promis:promis})
+    res.status(200).json({messege:"User deleted",promis:promis})
 
-  }).catch(error => {
-    console.log(error)
+  }).catch(err => {
+    console.log(err);
+    res.status(500).json({error:err});
   });
 };
 
