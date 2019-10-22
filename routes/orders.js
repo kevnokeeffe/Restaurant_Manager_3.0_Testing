@@ -100,6 +100,7 @@ router.addOrder = (req, res) => {
     let order = new Order();
 
     order.billId = req.body.billId;
+    order.userId = req.body.userId;
     order.starter = req.body.starter;
     order.main = req.body.main;
     order.desert = req.body.desert;

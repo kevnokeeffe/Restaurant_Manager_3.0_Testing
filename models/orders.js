@@ -3,6 +3,7 @@ let Schema = mongoose.Schema;
 
 let OrderSchema = new Schema({
         billId: Number,
+        userId: String,
         starter: String,
         main: String,
         desert: String,
