@@ -68,8 +68,11 @@ router.findOne = (req, res) => {
   res.setHeader('Content-Type', 'application/json');
   User.find({ "_id" : req.params.id },'fName lName email active').then(id=>{
     res.send(JSON.stringify(id,null,5));
-  }).catch(error => {
-    console.log(error)
+  }).catch(err => {
+    console.log(err);
+    res.status(500).json({
+      error:err
+  });
   });
 };
 
@@ -78,8 +81,11 @@ router.findAll = (req, res) => {
   res.setHeader('Content-Type', 'application/json');
   User.find({},'fName lName email password').then(id=>{
     res.send(JSON.stringify(id,null,5));
-  }).catch(error => {
-    console.log(error)
+  }).catch(err => {
+    console.log(err);
+    res.status(500).json({
+      error:err
+  });
   });
 };
 
@@ -97,10 +103,13 @@ router.deleteUser = (req,res,next) => {
 
 //Sets one user to active
 router.setUserToActive = (req,res) => {
-  User.updateOne({"_id":req.params.id},{$set:{active:true}}).then(promis=>{
-    res.json({messege:"Status changed to inactive",promis:promis})
-  }).catch(error => {
-    console.log(error)
+  User.updateOne({"_id": req.params.id}, {$set: {active: true}}).then(promis => {
+    res.json({messege: "Status changed to inactive", promis: promis})
+  }).catch(err => {
+    console.log(err);
+    res.status(500).json({
+      error: err
+    });
   });
 };
 
@@ -108,8 +117,11 @@ router.setUserToActive = (req,res) => {
 router.setUserToInactive = (req,res) => {
   User.updateOne({"_id":req.params.id},{$set:{active:false}}).then(promis=>{
     res.json({messege:"Status changed to inactive",promis:promis})
-  }).catch(error => {
-    console.log(error)
+  }).catch(err => {
+    console.log(err);
+    res.status(500).json({
+      error:err
+  });
   });
 };
 
@@ -117,8 +129,11 @@ router.setUserToInactive = (req,res) => {
 router.deleteInactiveUsers = (req,res) => {
  User.deleteMany({ active:{$in:[false]}}).then( promis =>{
    res.json({messege:"Inactive users deleted",promis:promis})
- }).catch(error => {
-   console.log(error)
+ }).catch(err => {
+   console.log(err);
+   res.status(500).json({
+     error:err
+ });
  });
 };
 
