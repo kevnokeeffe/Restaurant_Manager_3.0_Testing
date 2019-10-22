@@ -98,7 +98,7 @@ router.addOrder = (req, res) => {
 
     res.setHeader('Content-Type', 'application/json');
     let order = new Order();
-
+    _id: mongoose.Schema.Types.ObjectID();
     order.billId = req.body.billId;
     order.userId = req.body.userId;
     order.starter = req.body.starter;
@@ -107,7 +107,7 @@ router.addOrder = (req, res) => {
     order.drink = req.body.drink;
     order.price = req.body.price;
     order.payed = false;
-    message: String;
+    order.message= String;
 
 
     order.save(function(err) {
@@ -116,5 +116,17 @@ router.addOrder = (req, res) => {
         else
             res.json({ message: 'Order Successfully Added!', data: order });
     });
-}
+};
+
+router.editOrder = (req,res,next)=>{
+const billId = req.body.billId;
+const userId = req.body.userId;
+const UpdateStarter = req.body.starter;
+const UpdateMain = req.body.main;
+const UpdateDesert = req.body.desert;
+const UpdateDrink = req.body.drink;
+const UpdatePrice = req.body.price;
+const UpdatePayed = req.body.payed;
+const UpdateMessage = req.body.message;
+};
     module.exports = router;

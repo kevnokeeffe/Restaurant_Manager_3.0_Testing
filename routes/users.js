@@ -65,7 +65,6 @@ router.addUser = ((req, res, next) => {
 
 //Finds a user by their id, just returns their name and email, nothing else.
 router.findOne = (req, res) => {
-  res.setHeader('Content-Type', 'application/json');
   User.find({ "_id" : req.params.id },'fName lName email active').then(id=>{
     res.send(JSON.stringify(id,null,5));
   }).catch(err => {
@@ -78,7 +77,6 @@ router.findOne = (req, res) => {
 
 //This method prints out all the users
 router.findAll = (req, res) => {
-  res.setHeader('Content-Type', 'application/json');
   User.find({},'fName lName email password').then(id=>{
     res.send(JSON.stringify(id,null,5));
   }).catch(err => {
