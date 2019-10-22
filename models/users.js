@@ -2,13 +2,15 @@ let mongoose = require('mongoose');
 let Schema = mongoose.Schema;
 
 let OrderSchema = new Schema({
+        _id: mongoose.Schema.Types.ObjectId,
+        fName: {type: String},
+        lName: {type: String},
+        email: {type: String, required: true, unique: true},
+        //unique does not validate the field it just optimises the field to be searched and indexed. Gives performance optimization
 
-        fName: String,
-        lName: String,
-        email: String,
-        password: String,
-        permission: String,
-        active: Boolean,
+        password: {type: String, required: true},
+        permission: {type: String},
+        active: {type: Boolean},
     },
 
     { collection: 'users' });

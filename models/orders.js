@@ -9,7 +9,8 @@ let OrderSchema = new Schema({
         desert: String,
         drink: String,
         price: Number,
-        payed: Boolean
+        payed: Boolean,
+        message: String
     },
     { collection: 'orders' });
 

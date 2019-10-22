@@ -107,6 +107,7 @@ router.addOrder = (req, res) => {
     order.drink = req.body.drink;
     order.price = req.body.price;
     order.payed = false;
+    message: String;
 
 
     order.save(function(err) {
