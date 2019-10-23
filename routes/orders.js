@@ -88,29 +88,6 @@ router.orderNotPayed = (req,res)=>{
     });
 };
 
-// router.addOrder = (req, res) => {
-//
-//     res.setHeader('Content-Type', 'application/json');
-//     let order = new Order();
-//     //order._id = mongoose.Schema.Types.ObjectID();
-//     order.billId = req.body.billId;
-//     order.userId = req.body.userId;
-//     order.starter = req.body.starter;
-//     order.main = req.body.main;
-//     order.desert = req.body.desert;
-//     order.drink = req.body.drink;
-//     order.price = req.body.price;
-//     order.payed = false;
-//     order.message= String;
-//
-//
-//     order.save(function(err) {
-//         if (err)
-//             res.json({ message: 'Order NOT Added!', errmsg : err } );
-//         else
-//             res.json({ message: 'Order Successfully Added!', order: order });
-//     });
-// };
 //Adds an order
 router.addOrder = ((req, res,next) => {
 
@@ -143,7 +120,6 @@ router.addOrder = ((req, res,next) => {
         });
     });
 });
-
 
 // Building a method that can update an order.
 router.editOrder = ('/update', (req,res,next)=>{

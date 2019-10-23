@@ -1,3 +1,23 @@
+DELETE http://localhost:3000/user/delete
+Accept: */*
+Content-Type: application/json
+
+{"fName":"kev","lName":"ok","email":"jokeookk@mail.com","password":"qwert543","permission":"admin"}
+
+<> 2019-10-23T125718.200.json
+
+###
+
+PUT http://localhost:3000/user/5db03e2500569524c43906a6/inactive
+Accept: */*
+Content-Type: application/json
+
+{"fName":"kev","lName":"ok","email":"jokeookk@mail.com","password":"qwert543","permission":"admin"}
+
+<> 2019-10-23T125700.200.json
+
+###
+
 DELETE http://localhost:3000/user/5db03e2500569524c43906a6/delete
 Accept: */*
 Content-Type: application/json
@@ -475,26 +495,6 @@ Cache-Control: no-cache
 {"billId": "1001","userId":"5daf6fe6fa565d4e247ac26f", "starter" : "duck wings" , "main" : "chicken goujons" , "desert": "cheesecake" , "drink" : "coke" , "price" : 25.50}
 
 <> 2019-10-23T120517.500.json
-
-###
-
-POST http://localhost:3000/order/add
-Accept: */*
-Cache-Control: no-cache
-
-{"billId": "1001","userId":"5daf6fe6fa565d4e247ac26f", "starter" : "duck wings" , "main" : "chicken goujons" , "desert": "cheesecake" , "drink" : "coke" , "price" : 25.50}
-
-<> 2019-10-23T120458.500.json
-
-###
-
-POST http://localhost:3000/order/add
-Accept: */*
-Cache-Control: no-cache
-
-{"billId": "1001","userId":"5daf6fe6fa565d4e247ac26f", "starter" : "duck wings" , "main" : "chicken goujons" , "desert": "cheesecake" , "drink" : "coke" , "price" : 25.50}
-
-<> 2019-10-23T120456.500.json
 
 ###
 
