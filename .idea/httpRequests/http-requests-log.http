@@ -1,3 +1,63 @@
+GET http://localhost:3000/order/findOne/5da7886998c28214fc262d33
+Accept: */*
+Content-Type: application/json
+
+{"main":"cake"}
+
+<> 2019-10-24T121407.200.json
+
+###
+
+PUT http://localhost:3000/order/update/5da7886998c28214fc262d33
+Accept: */*
+Content-Type: application/json
+
+{"main":"cake"}
+
+<> 2019-10-24T121346.500.json
+
+###
+
+GET http://localhost:3000/order/all
+Accept: */*
+Content-Type: application/json
+
+{"main":"cake"}
+
+<> 2019-10-24T121320.200.json
+
+###
+
+DELETE http://localhost:3000/order/all
+Accept: */*
+Content-Type: application/json
+
+{"main":"cake"}
+
+<> 2019-10-24T121314.404.html
+
+###
+
+DELETE http://localhost:3000/order/5da74bf1f48c500539580fec/delete
+Accept: */*
+Content-Type: application/json
+
+{"main":"cake"}
+
+<> 2019-10-24T121309.200.json
+
+###
+
+GET http://localhost:3000/order/all
+Accept: */*
+Content-Type: application/json
+
+{"main":"cake"}
+
+<> 2019-10-24T121252.200.json
+
+###
+
 PUT http://localhost:3000/order/update/5da74bf1f48c500539580fec
 Accept: */*
 Content-Type: application/json
@@ -391,66 +451,6 @@ Content-Type: application/json
 {"main": "beef"}
 
 <> 2019-10-23T101304.404.html
-
-###
-
-GET http://localhost:3000/order/findOne/5da74bf1f48c500539580fec
-Accept: */*
-Content-Type: application/json
-
-{"main": "beef"}
-
-<> 2019-10-23T100109.200.json
-
-###
-
-PUT http://localhost:3000/order/update/5da74bf1f48c500539580fec
-Accept: */*
-Content-Type: application/json
-
-{"main": "beef"}
-
-<> 2019-10-23T100056.302.txt
-
-###
-
-GET http://localhost:3000/order/findOne/5da74bf1f48c500539580fec
-Accept: */*
-Content-Type: application/json
-
-{"main": "beef"}
-
-<> 2019-10-23T100029.200.json
-
-###
-
-PUT http://localhost:3000/order/update/5da74bf1f48c500539580fec
-Accept: */*
-Content-Type: application/json
-
-{"main": "beef"}
-
-<> 2019-10-23T100002.302.txt
-
-###
-
-GET http://localhost:3000/order/findOne/5da74bf1f48c500539580fec
-Accept: */*
-Content-Type: application/json
-
-{"main": "beef"}
-
-<> 2019-10-23T095910.200.json
-
-###
-
-GET http://localhost:3000/order/5da74bf1f48c500539580fec
-Accept: */*
-Content-Type: application/json
-
-{"main": "beef"}
-
-<> 2019-10-23T095853.404.html
 
 ###
 
