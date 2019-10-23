@@ -1,548 +1,500 @@
-POST http://localhost:3000/user/add
+DELETE http://localhost:3000/user/5db03e2500569524c43906a6/delete
 Accept: */*
-Cache-Control: no-cache
 Content-Type: application/json
 
-{"fName":"Kevin","lName":"O Keeffe","email":"kevnokeeffe@gmail.com","password":"123456","permission":"admin","active":"true"}
+{"fName":"kev","lName":"ok","email":"jokeookk@mail.com","password":"qwert543","permission":"admin"}
 
-<> 2019-10-22T102429.409.json
+<> 2019-10-23T124921.200.json
 
 ###
 
 POST http://localhost:3000/user/add
 Accept: */*
-Cache-Control: no-cache
 Content-Type: application/json
 
-{"fName":"Kevin","lName":"O Keeffe","email":"kevnokeeffe@gmail.com","password":"123456","permission":"admin","active":"true"}
+{"fName":"kev","lName":"ok","email":"jokeookk@mail.com","password":"qwert543","permission":"admin"}
 
-<> 2019-10-22T102426.201.json
+<> 2019-10-23T124853.201.json
 
 ###
 
 POST http://localhost:3000/user/add
 Accept: */*
-Cache-Control: no-cache
 Content-Type: application/json
 
-{"fName":"Kevin","lName":"O Keeffe","email":"kevokeeffe@gmail.com","password":"123456","permission":"admin","active":"true"}
+{"fName":"kev","lName":"ok","email":"jokeok@mail.com","password":"qwert543","permission":"admin"}
 
-<> 2019-10-22T102405.409.json
-
-###
-
-DELETE http://localhost:3000/user/5daf6fe6fa565d4e247ac26f/delete
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"fName":"Kevin","lName":"O Keeffe","email":"kevokeeffe@gmail.com","password":"123456","permission":"admin","active":"true"}
-
-<> 2019-10-22T101843.200.json
-
-###
-
-GET http://localhost:3000/user/all
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{"fName":"Kevin","lName":"O Keeffe","email":"kevokeeffe@gmail.com","password":"123456","permission":"admin","active":"true"}
-
-<> 2019-10-22T101818.200.json
+<> 2019-10-23T124842.409.json
 
 ###
 
 POST http://localhost:3000/user/add
 Accept: */*
-Cache-Control: no-cache
 Content-Type: application/json
 
-{"fName":"Kevin","lName":"O Keeffe","email":"kevokeeffe@gmail.com","password":"123456","permission":"admin","active":"true"}
+{"fName":"kev","lName":"ok","email":"jokeok@mail.com","password":"qwert543","permission":"admin"}
 
-<> 2019-10-22T101441.409.json
+<> 2019-10-23T124750.201.json
 
 ###
 
 POST http://localhost:3000/user/add
 Accept: */*
-Cache-Control: no-cache
 Content-Type: application/json
 
-{"fName":"Kevin","lName":"O Keeffe","email":"kevokeeffe@gmail.com","password":"123456","permission":"admin","active":"true"}
+{"fName":"kev","lName":"ok","email":"jokeok@mail.com","password":"qwert543","permission":"admin"}
 
-<> 2019-10-22T101440.409.json
+<> 2019-10-23T124726.500.json
 
 ###
 
-POST http://localhost:3000/user/add
+POST http://localhost:3000/order/add
 Accept: */*
-Cache-Control: no-cache
 Content-Type: application/json
 
-{"fName":"Kevin","lName":"O Keeffe","email":"kevokeeffe@gmail.com","password":"123456","permission":"admin","active":"true"}
+{"billId": "1002","userId":"5daf6fe6fa565d4e247ac26f", "starter" : "duck wings" , "main" : "chicken goujons" , "desert": "cheesecake" , "drink" : "coke" , "price" : 25.50}
 
-<> 2019-10-22T100854.201.json
+<> 2019-10-23T124412.201.json
 
 ###
 
-GET http://localhost:3000/user/all
+POST http://localhost:3000/order/add
 Accept: */*
-Cache-Control: no-cache
 Content-Type: application/json
 
-{"fName":"Kevin","lName":"O Keeffe","email":"kevokeeffe@gmail.com","password":"123456","permission":"admin","active":"true"}
+{"billId": "1002","userId":"5daf6fe6fa565d4e247ac26f", "starter" : "duck wings" , "main" : "chicken goujons" , "desert": "cheesecake" , "drink" : "coke" , "price" : 25.50}
 
-<> 2019-10-22T100337.200.json
+<> 2019-10-23T124328.201.json
 
 ###
 
-GET http://localhost:3000/user/all
+POST http://localhost:3000/order/add
 Accept: */*
-Cache-Control: no-cache
 Content-Type: application/json
 
-{"fName":"Kevin","lName":"O Keeffe","email":"kevokeeffe@gmail.com","password":"123456","permission":"admin","active":"true"}
+{"billId": "1002","userId":"5daf6fe6fa565d4e247ac26f", "starter" : "duck wings" , "main" : "chicken goujons" , "desert": "cheesecake" , "drink" : "coke" , "price" : 25.50}
 
-<> 2019-10-22T100244.200.json
+<> 2019-10-23T124300.500.json
 
 ###
 
-POST http://localhost:3000/user/add
+POST http://localhost:3000/order/add
 Accept: */*
-Cache-Control: no-cache
 Content-Type: application/json
 
-{"fName":"Kevin","lName":"O Keeffe","email":"kevokeeffe@gmail.com","password":"123456","permission":"admin","active":"true"}
+{"billId": "1002","userId":"5daf6fe6fa565d4e247ac26f", "starter" : "duck wings" , "main" : "chicken goujons" , "desert": "cheesecake" , "drink" : "coke" , "price" : 25.50}
 
-<> 2019-10-22T100232.201.json
+<> 2019-10-23T124251.500.json
 
 ###
 
-POST http://localhost:3000/user/all
+POST http://localhost:3000/order/add
 Accept: */*
-Cache-Control: no-cache
 Content-Type: application/json
 
-{"fName":"Kevin","lName":"O Keeffe","email":"kevokeeffe@gmail.com","password":"123456","permission":"admin","active":"true"}
+{"billId": "1002","userId":"5daf6fe6fa565d4e247ac26f", "starter" : "duck wings" , "main" : "chicken goujons" , "desert": "cheesecake" , "drink" : "coke" , "price" : 25.50}
 
-<> 2019-10-22T100220.404.html
+<> 2019-10-23T124200.500.json
 
 ###
 
-POST http://localhost:3000/user/all
+POST http://localhost:3000/order/add
 Accept: */*
-Cache-Control: no-cache
 Content-Type: application/json
 
-{"fName":"Kevin","lName":"O Keeffe","email":"kevokeeffe@gmail.com","password":"123456","permission":"admin","active":"true"}
+{"billId": "1002","userId":"5daf6fe6fa565d4e247ac26f", "starter" : "duck wings" , "main" : "chicken goujons" , "desert": "cheesecake" , "drink" : "coke" , "price" : 25.50}
+
+<> 2019-10-23T124013.500.json
 
 ###
 
-GET http://localhost:3000/user/all
+POST http://localhost:3000/order/add
 Accept: */*
-Cache-Control: no-cache
 Content-Type: application/json
 
-{"fName":"Kevin","lName":"O Keeffe","email":"kevokeeffe@gmail.com","password":"123456","permission":"admin","active":"true"}
+{"billId": "1002","userId":"5daf6fe6fa565d4e247ac26f", "starter" : "duck wings" , "main" : "chicken goujons" , "desert": "cheesecake" , "drink" : "coke" , "price" : 25.50}
 
-<> 2019-10-18T103741.200.json
+<> 2019-10-23T123924.200.json
 
 ###
 
-DELETE http://localhost:3000/user/all
+POST http://localhost:3000/order/add
 Accept: */*
 Cache-Control: no-cache
-Content-Type: application/json
 
-{"fName":"Kevin","lName":"O Keeffe","email":"kevokeeffe@gmail.com","password":"123456","permission":"admin","active":"true"}
+{"billId": "1002","userId":"5daf6fe6fa565d4e247ac26f", "starter" : "duck wings" , "main" : "chicken goujons" , "desert": "cheesecake" , "drink" : "coke" , "price" : 25.50}
 
-<> 2019-10-18T103736.404.html
+<> 2019-10-23T123836.200.json
 
 ###
 
-DELETE http://localhost:3000/user/delete
+POST http://localhost:3000/order/add
 Accept: */*
 Cache-Control: no-cache
-Content-Type: application/json
 
-{"fName":"Kevin","lName":"O Keeffe","email":"kevokeeffe@gmail.com","password":"123456","permission":"admin","active":"true"}
+{"billId": "1002","userId":"5daf6fe6fa565d4e247ac26f", "starter" : "duck wings" , "main" : "chicken goujons" , "desert": "cheesecake" , "drink" : "coke" , "price" : 25.50}
 
-<> 2019-10-18T103720.200.json
+<> 2019-10-23T123822.200.json
 
 ###
 
-PUT http://localhost:3000/user/5daa306ef3b55b1018269ee5/inactive
+POST http://localhost:3000/order/add
 Accept: */*
 Cache-Control: no-cache
-Content-Type: application/json
 
-{"fName":"Kevin","lName":"O Keeffe","email":"kevokeeffe@gmail.com","password":"123456","permission":"admin","active":"true"}
+{"billId": "1002","userId":"5daf6fe6fa565d4e247ac26f", "starter" : "duck wings" , "main" : "chicken goujons" , "desert": "cheesecake" , "drink" : "coke" , "price" : 25.50}
 
-<> 2019-10-18T103705.200.json
+<> 2019-10-23T123751.200.json
 
 ###
 
-PUT http://localhost:3000/user/5daa306ef3b55b1018269ee5/inactive
+GET http://localhost:3000/order/all
 Accept: */*
 Cache-Control: no-cache
-Content-Type: application/json
 
-{"fName":"Kevin","lName":"O Keeffe","email":"kevokeeffe@gmail.com","password":"123456","permission":"admin","active":"true"}
+{"billId": "1002","userId":"5daf6fe6fa565d4e247ac26f", "starter" : "duck wings" , "main" : "chicken goujons" , "desert": "cheesecake" , "drink" : "coke" , "price" : 25.50}
 
-<> 2019-10-18T103703.200.json
+<> 2019-10-23T123254.200.json
 
 ###
 
-POST http://localhost:3000/user/add
+GET http://localhost:3000/order/findOne/5db03a29059da319c84af117
 Accept: */*
 Cache-Control: no-cache
-Content-Type: application/json
 
-{"fName":"Kevin","lName":"O Keeffe","email":"kevokeeffe@gmail.com","password":"123456","permission":"admin","active":"true"}
+{"billId": "1002","userId":"5daf6fe6fa565d4e247ac26f", "starter" : "duck wings" , "main" : "chicken goujons" , "desert": "cheesecake" , "drink" : "coke" , "price" : 25.50}
 
-<> 2019-10-18T103646-1.200.json
+<> 2019-10-23T123241.200.json
 
 ###
 
-POST http://localhost:3000/user/add
+POST http://localhost:3000/order/findOne/5db03a29059da319c84af117
 Accept: */*
 Cache-Control: no-cache
-Content-Type: application/json
 
-{"fName":"Kevin","lName":"O Keeffe","email":"kevokeeffe@gmail.com","password":"123456","permission":"admin","active":"true"}
+{"billId": "1002","userId":"5daf6fe6fa565d4e247ac26f", "starter" : "duck wings" , "main" : "chicken goujons" , "desert": "cheesecake" , "drink" : "coke" , "price" : 25.50}
 
-<> 2019-10-18T103646.200.json
+<> 2019-10-23T123236.404.html
 
 ###
 
-POST http://localhost:3000/user/add
+POST http://localhost:3000/order/add
 Accept: */*
 Cache-Control: no-cache
-Content-Type: application/json
 
-{"fName":"Kevin","lName":"O Keeffe","email":"kevokeeffe@gmail.com","password":"123456","permission":"admin","active":"true"}
+{"billId": "1002","userId":"5daf6fe6fa565d4e247ac26f", "starter" : "duck wings" , "main" : "chicken goujons" , "desert": "cheesecake" , "drink" : "coke" , "price" : 25.50}
 
-<> 2019-10-18T103645-3.200.json
+<> 2019-10-23T123153.200.json
 
 ###
 
-POST http://localhost:3000/user/add
+POST http://localhost:3000/order/add
 Accept: */*
 Cache-Control: no-cache
-Content-Type: application/json
 
-{"fName":"Kevin","lName":"O Keeffe","email":"kevokeeffe@gmail.com","password":"123456","permission":"admin","active":"true"}
+{"billId": "1002","userId":"5daf6fe6fa565d4e247ac26f", "starter" : "duck wings" , "main" : "chicken goujons" , "desert": "cheesecake" , "drink" : "coke" , "price" : 25.50}
 
-<> 2019-10-18T103645-2.200.json
+<> 2019-10-23T123133.200.json
 
 ###
 
-POST http://localhost:3000/user/add
+POST http://localhost:3000/order/add
 Accept: */*
 Cache-Control: no-cache
-Content-Type: application/json
 
-{"fName":"Kevin","lName":"O Keeffe","email":"kevokeeffe@gmail.com","password":"123456","permission":"admin","active":"true"}
+{"billId": "1002","userId":"5daf6fe6fa565d4e247ac26f", "starter" : "duck wings" , "main" : "chicken goujons" , "desert": "cheesecake" , "drink" : "coke" , "price" : 25.50}
 
-<> 2019-10-18T103645-1.200.json
+<> 2019-10-23T123131.200.json
 
 ###
 
-POST http://localhost:3000/user/add
+POST http://localhost:3000/order/add
 Accept: */*
 Cache-Control: no-cache
-Content-Type: application/json
 
-{"fName":"Kevin","lName":"O Keeffe","email":"kevokeeffe@gmail.com","password":"123456","permission":"admin","active":"true"}
+{"billId": "1002","userId":"5daf6fe6fa565d4e247ac26f", "starter" : "duck wings" , "main" : "chicken goujons" , "desert": "cheesecake" , "drink" : "coke" , "price" : 25.50}
 
-<> 2019-10-18T103645.200.json
+<> 2019-10-23T123130.200.json
 
 ###
 
-POST http://localhost:3000/user/add
+POST http://localhost:3000/order/add
 Accept: */*
 Cache-Control: no-cache
-Content-Type: application/json
 
-{"fName":"Kevin","lName":"O Keeffe","email":"kevokeeffe@gmail.com","password":"123456","permission":"admin","active":"true"}
+{"billId": "1002","userId":"5daf6fe6fa565d4e247ac26f", "starter" : "duck wings" , "main" : "chicken goujons" , "desert": "cheesecake" , "drink" : "coke" , "price" : 25.50}
 
-<> 2019-10-18T103644.200.json
+<> 2019-10-23T123129.200.json
 
 ###
 
-DELETE http://localhost:3000/user/delete
+POST http://localhost:3000/order/add
 Accept: */*
 Cache-Control: no-cache
-Content-Type: application/json
 
-{"fName":"Kevin","lName":"O Keeffe","email":"kevokeeffe@gmail.com","password":"123456","permission":"admin","active":"true"}
+{"billId": "1002","userId":"5daf6fe6fa565d4e247ac26f", "starter" : "duck wings" , "main" : "chicken goujons" , "desert": "cheesecake" , "drink" : "coke" , "price" : 25.50}
 
-<> 2019-10-18T103124.200.json
+<> 2019-10-23T123126.200.json
 
 ###
 
-PUT http://localhost:3000/user/5daa2f0fe2cf8e1ca0e97348/inactive
+POST http://localhost:3000/order/add
 Accept: */*
 Cache-Control: no-cache
-Content-Type: application/json
 
-{"fName":"Kevin","lName":"O Keeffe","email":"kevokeeffe@gmail.com","password":"123456","permission":"admin","active":"true"}
+{"billId": "1002","userId":"5daf6fe6fa565d4e247ac26f", "starter" : "duck wings" , "main" : "chicken goujons" , "desert": "cheesecake" , "drink" : "coke" , "price" : 25.50}
 
-<> 2019-10-18T103113.200.json
+<> 2019-10-23T123040.200.json
 
 ###
 
-POST http://localhost:3000/user/5daa2f0fe2cf8e1ca0e97348/inactive
+POST http://localhost:3000/order/add
 Accept: */*
 Cache-Control: no-cache
-Content-Type: application/json
 
-{"fName":"Kevin","lName":"O Keeffe","email":"kevokeeffe@gmail.com","password":"123456","permission":"admin","active":"true"}
+{"billId": "1002","userId":"5daf6fe6fa565d4e247ac26f", "starter" : "duck wings" , "main" : "chicken goujons" , "desert": "cheesecake" , "drink" : "coke" , "price" : 25.50}
 
-<> 2019-10-18T103110.404.html
+<> 2019-10-23T123032.200.json
 
 ###
 
-POST http://localhost:3000/user/add
+POST http://localhost:3000/order/add
 Accept: */*
 Cache-Control: no-cache
-Content-Type: application/json
 
-{"fName":"Kevin","lName":"O Keeffe","email":"kevokeeffe@gmail.com","password":"123456","permission":"admin","active":"true"}
+{"billId": "1002","userId":"5daf6fe6fa565d4e247ac26f", "starter" : "duck wings" , "main" : "chicken goujons" , "desert": "cheesecake" , "drink" : "coke" , "price" : 25.50}
 
-<> 2019-10-18T103055.200.json
+<> 2019-10-23T123009.200.json
 
 ###
 
-POST http://localhost:3000/user/add
+POST http://localhost:3000/order/add
 Accept: */*
 Cache-Control: no-cache
-Content-Type: application/json
 
-{"fName":"Kevin","lName":"O Keeffe","email":"kevokeeffe@gmail.com","password":"123456","permission":"admin","active":"true"}
+{"billId": "1002","userId":"5daf6fe6fa565d4e247ac26f", "starter" : "duck wings" , "main" : "chicken goujons" , "desert": "cheesecake" , "drink" : "coke" , "price" : 25.50}
 
-<> 2019-10-18T103054-1.200.json
+<> 2019-10-23T122457.201.json
 
 ###
 
-POST http://localhost:3000/user/add
+GET http://localhost:3000/order/all
 Accept: */*
 Cache-Control: no-cache
-Content-Type: application/json
 
-{"fName":"Kevin","lName":"O Keeffe","email":"kevokeeffe@gmail.com","password":"123456","permission":"admin","active":"true"}
+{"billId": "1002","userId":"5daf6fe6fa565d4e247ac26f", "starter" : "duck wings" , "main" : "chicken goujons" , "desert": "cheesecake" , "drink" : "coke" , "price" : 25.50}
 
-<> 2019-10-18T103054.200.json
+<> 2019-10-23T122238.200.json
 
 ###
 
-POST http://localhost:3000/user/add
+POST http://localhost:3000/order/add
 Accept: */*
 Cache-Control: no-cache
-Content-Type: application/json
 
-{"fName":"Kevin","lName":"O Keeffe","email":"kevokeeffe@gmail.com","password":"123456","permission":"admin","active":"true"}
+{"billId": "1002","userId":"5daf6fe6fa565d4e247ac26f", "starter" : "duck wings" , "main" : "chicken goujons" , "desert": "cheesecake" , "drink" : "coke" , "price" : 25.50}
 
-<> 2019-10-18T103053.200.json
+<> 2019-10-23T122157.201.json
 
 ###
 
-DELETE http://localhost:3000/user/delete
+POST http://localhost:3000/order/add
 Accept: */*
 Cache-Control: no-cache
-Content-Type: application/json
 
-{"fName":"Kevin","lName":"O Keeffe","email":"kevokeeffe@gmail.com","password":"123456","permission":"admin","active":"true"}
+{"_id": new ObjectID(),"billId": "1002","userId":"5daf6fe6fa565d4e247ac26f", "starter" : "duck wings" , "main" : "chicken goujons" , "desert": "cheesecake" , "drink" : "coke" , "price" : 25.50}
 
-<> 2019-10-18T102548.200.json
+<> 2019-10-23T122133.500.json
 
 ###
 
-PUT http://localhost:3000/user/5daa2db93961ef132c289191/inactive
+POST http://localhost:3000/order/add
 Accept: */*
 Cache-Control: no-cache
-Content-Type: application/json
 
-{"fName":"Kevin","lName":"O Keeffe","email":"kevokeeffe@gmail.com","password":"123456","permission":"admin","active":"true"}
+{"_id": new ObjectID(),"billId": "1002","userId":"5daf6fe6fa565d4e247ac26f", "starter" : "duck wings" , "main" : "chicken goujons" , "desert": "cheesecake" , "drink" : "coke" , "price" : 25.50}
 
-<> 2019-10-18T102532.200.json
+<> 2019-10-23T122130.500.json
 
 ###
 
-POST http://localhost:3000/user/5daa2db93961ef132c289191/inactive
+POST http://localhost:3000/order/add
 Accept: */*
 Cache-Control: no-cache
-Content-Type: application/json
 
-{"fName":"Kevin","lName":"O Keeffe","email":"kevokeeffe@gmail.com","password":"123456","permission":"admin","active":"true"}
+{"_id": new ObjectID(),"billId": "1002","userId":"5daf6fe6fa565d4e247ac26f", "starter" : "duck wings" , "main" : "chicken goujons" , "desert": "cheesecake" , "drink" : "coke" , "price" : 25.50}
 
-<> 2019-10-18T102528.404.html
+<> 2019-10-23T122119.500.json
 
 ###
 
-POST http://localhost:3000/user/add
+POST http://localhost:3000/order/add
 Accept: */*
 Cache-Control: no-cache
-Content-Type: application/json
 
-{"fName":"Kevin","lName":"O Keeffe","email":"kevokeeffe@gmail.com","password":"123456","permission":"admin","active":"true"}
+{"billId": "1002","userId":"5daf6fe6fa565d4e247ac26f", "starter" : "duck wings" , "main" : "chicken goujons" , "desert": "cheesecake" , "drink" : "coke" , "price" : 25.50}
 
-<> 2019-10-18T102513.200.json
+<> 2019-10-23T121927.500.json
 
 ###
 
-POST http://localhost:3000/user/add
+POST http://localhost:3000/order/add
 Accept: */*
 Cache-Control: no-cache
-Content-Type: application/json
 
-{"fName":"Kevin","lName":"O Keeffe","email":"kevokeeffe@gmail.com","password":"123456","permission":"admin","active":"true"}
+{"billId": "1002","userId":"5daf6fe6fa565d4e247ac26f", "starter" : "duck wings" , "main" : "chicken goujons" , "desert": "cheesecake" , "drink" : "coke" , "price" : 25.50}
 
-<> 2019-10-18T102512-2.200.json
+<> 2019-10-23T121851.500.json
 
 ###
 
-POST http://localhost:3000/user/add
+POST http://localhost:3000/order/add
 Accept: */*
 Cache-Control: no-cache
-Content-Type: application/json
 
-{"fName":"Kevin","lName":"O Keeffe","email":"kevokeeffe@gmail.com","password":"123456","permission":"admin","active":"true"}
+{"billId": "1002","userId":"5daf6fe6fa565d4e247ac26f", "starter" : "duck wings" , "main" : "chicken goujons" , "desert": "cheesecake" , "drink" : "coke" , "price" : 25.50}
 
-<> 2019-10-18T102512-1.200.json
+<> 2019-10-23T121345.500.json
 
 ###
 
-POST http://localhost:3000/user/add
+POST http://localhost:3000/order/add
 Accept: */*
 Cache-Control: no-cache
-Content-Type: application/json
 
-{"fName":"Kevin","lName":"O Keeffe","email":"kevokeeffe@gmail.com","password":"123456","permission":"admin","active":"true"}
+{"_id","billId": "1001","userId":"5daf6fe6fa565d4e247ac26f", "starter" : "duck wings" , "main" : "chicken goujons" , "desert": "cheesecake" , "drink" : "coke" , "price" : 25.50}
 
-<> 2019-10-18T102512.200.json
+<> 2019-10-23T121304.500.json
 
 ###
 
-POST http://localhost:3000/user/add
+POST http://localhost:3000/order/add
 Accept: */*
 Cache-Control: no-cache
-Content-Type: application/json
 
-{"fName":"Kevin","lName":"O Keeffe","email":"kevokeeffe@gmail.com","password":"123456","permission":"admin","active":"true"}
+{"_id","billId": "1001","userId":"5daf6fe6fa565d4e247ac26f", "starter" : "duck wings" , "main" : "chicken goujons" , "desert": "cheesecake" , "drink" : "coke" , "price" : 25.50}
 
-<> 2019-10-18T102510.200.json
+<> 2019-10-23T121302.500.json
 
 ###
 
-GET http://localhost:3000/user/all
+POST http://localhost:3000/order/add
 Accept: */*
 Cache-Control: no-cache
-Content-Type: application/json
 
-{"fName":"Kevin","lName":"O Keeffe","email":"kevokeeffe@gmail.com","password":"123456","permission":"admin","active":"true"}
+{"billId": "1001","userId":"5daf6fe6fa565d4e247ac26f", "starter" : "duck wings" , "main" : "chicken goujons" , "desert": "cheesecake" , "drink" : "coke" , "price" : 25.50}
 
-<> 2019-10-18T102203.200.json
+<> 2019-10-23T121202.500.json
 
 ###
 
-DELETE http://localhost:3000/user/all
+DELETE http://localhost:3000/order/add
 Accept: */*
 Cache-Control: no-cache
-Content-Type: application/json
 
-{"fName":"Kevin","lName":"O Keeffe","email":"kevokeeffe@gmail.com","password":"123456","permission":"admin","active":"true"}
+{"billId": "1001","userId":"5daf6fe6fa565d4e247ac26f", "starter" : "duck wings" , "main" : "chicken goujons" , "desert": "cheesecake" , "drink" : "coke" , "price" : 25.50}
 
-<> 2019-10-18T102158.404.html
+<> 2019-10-23T121157.404.html
 
 ###
 
-DELETE http://localhost:3000/user/delete
+DELETE http://localhost:3000/order/5da79537aa39eb108c846a9d/delete
 Accept: */*
 Cache-Control: no-cache
-Content-Type: application/json
 
-{"fName":"Kevin","lName":"O Keeffe","email":"kevokeeffe@gmail.com","password":"123456","permission":"admin","active":"true"}
+{"billId": "1001","userId":"5daf6fe6fa565d4e247ac26f", "starter" : "duck wings" , "main" : "chicken goujons" , "desert": "cheesecake" , "drink" : "coke" , "price" : 25.50}
 
-<> 2019-10-18T102137.200.json
+<> 2019-10-23T121145.200.json
 
 ###
 
-GET http://localhost:3000/user/5daa2b0cbd58603898638eb8/find
+GET http://localhost:3000/order/findOne/5da79537aa39eb108c846a9d
 Accept: */*
 Cache-Control: no-cache
-Content-Type: application/json
 
-{"fName":"Kevin","lName":"O Keeffe","email":"kevokeeffe@gmail.com","password":"123456","permission":"admin","active":"true"}
+{"billId": "1001","userId":"5daf6fe6fa565d4e247ac26f", "starter" : "duck wings" , "main" : "chicken goujons" , "desert": "cheesecake" , "drink" : "coke" , "price" : 25.50}
 
-<> 2019-10-18T101856.200.json
+<> 2019-10-23T121124.200.json
 
 ###
 
-PUT http://localhost:3000/user/5daa2b0cbd58603898638eb8/find
+GET http://localhost:3000/order/all
 Accept: */*
 Cache-Control: no-cache
-Content-Type: application/json
 
-{"fName":"Kevin","lName":"O Keeffe","email":"kevokeeffe@gmail.com","password":"123456","permission":"admin","active":"true"}
+{"billId": "1001","userId":"5daf6fe6fa565d4e247ac26f", "starter" : "duck wings" , "main" : "chicken goujons" , "desert": "cheesecake" , "drink" : "coke" , "price" : 25.50}
 
-<> 2019-10-18T101851.404.html
+<> 2019-10-23T121058.200.json
 
 ###
 
-PUT http://localhost:3000/user/5daa2b0cbd58603898638eb8/inactive
+POST http://localhost:3000/order/add
 Accept: */*
 Cache-Control: no-cache
-Content-Type: application/json
 
-{"fName":"Kevin","lName":"O Keeffe","email":"kevokeeffe@gmail.com","password":"123456","permission":"admin","active":"true"}
+{"billId": "1001","userId":"5daf6fe6fa565d4e247ac26f", "starter" : "duck wings" , "main" : "chicken goujons" , "desert": "cheesecake" , "drink" : "coke" , "price" : 25.50}
 
-<> 2019-10-18T101844.200.json
+<> 2019-10-23T120947.500.json
 
 ###
 
-GET http://localhost:3000/user/5daa2b0cbd58603898638eb8/inactive
+POST http://localhost:3000/order/add
 Accept: */*
 Cache-Control: no-cache
-Content-Type: application/json
 
-{"fName":"Kevin","lName":"O Keeffe","email":"kevokeeffe@gmail.com","password":"123456","permission":"admin","active":"true"}
+{"billId": "1001","userId":"5daf6fe6fa565d4e247ac26f", "starter" : "duck wings" , "main" : "chicken goujons" , "desert": "cheesecake" , "drink" : "coke" , "price" : 25.50}
 
-<> 2019-10-18T101840.404.html
+<> 2019-10-23T120927.500.json
 
 ###
 
-GET http://localhost:3000/user/5daa2b0cbd58603898638eb8/find
+POST http://localhost:3000/order/add
 Accept: */*
 Cache-Control: no-cache
-Content-Type: application/json
 
-{"fName":"Kevin","lName":"O Keeffe","email":"kevokeeffe@gmail.com","password":"123456","permission":"admin","active":"true"}
+{"billId": "1001","userId":"5daf6fe6fa565d4e247ac26f", "starter" : "duck wings" , "main" : "chicken goujons" , "desert": "cheesecake" , "drink" : "coke" , "price" : 25.50}
 
-<> 2019-10-18T101834.200.json
+<> 2019-10-23T120623.500.json
 
 ###
 
-GET http://localhost:3000/user/5daa2b0cbd58603898638eb8/find
+POST http://localhost:3000/order/add
 Accept: */*
 Cache-Control: no-cache
-Content-Type: application/json
 
-{"fName":"Kevin","lName":"O Keeffe","email":"kevokeeffe@gmail.com","password":"123456","permission":"admin","active":"true"}
+{"billId": "1001","userId":"5daf6fe6fa565d4e247ac26f", "starter" : "duck wings" , "main" : "chicken goujons" , "desert": "cheesecake" , "drink" : "coke" , "price" : 25.50}
 
-<> 2019-10-18T101801.200.json
+<> 2019-10-23T120616.500.json
 
 ###
 
-PUT http://localhost:3000/user/5daa2b0cbd58603898638eb8/inactive
+POST http://localhost:3000/order/add
 Accept: */*
 Cache-Control: no-cache
-Content-Type: application/json
 
-{"fName":"Kevin","lName":"O Keeffe","email":"kevokeeffe@gmail.com","password":"123456","permission":"admin","active":"true"}
+{"billId": "1001","userId":"5daf6fe6fa565d4e247ac26f", "starter" : "duck wings" , "main" : "chicken goujons" , "desert": "cheesecake" , "drink" : "coke" , "price" : 25.50}
 
-<> 2019-10-18T101737.200.json
+<> 2019-10-23T120517.500.json
+
+###
+
+POST http://localhost:3000/order/add
+Accept: */*
+Cache-Control: no-cache
+
+{"billId": "1001","userId":"5daf6fe6fa565d4e247ac26f", "starter" : "duck wings" , "main" : "chicken goujons" , "desert": "cheesecake" , "drink" : "coke" , "price" : 25.50}
+
+<> 2019-10-23T120458.500.json
+
+###
+
+POST http://localhost:3000/order/add
+Accept: */*
+Cache-Control: no-cache
+
+{"billId": "1001","userId":"5daf6fe6fa565d4e247ac26f", "starter" : "duck wings" , "main" : "chicken goujons" , "desert": "cheesecake" , "drink" : "coke" , "price" : 25.50}
+
+<> 2019-10-23T120456.500.json
 
 ###
 

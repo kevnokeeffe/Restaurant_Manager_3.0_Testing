@@ -2,7 +2,7 @@ let mongoose = require('mongoose');
 let Schema = mongoose.Schema;
 
 let OrderSchema = new Schema({
-        _id: mongoose.Schema.Types.ObjectId,
+        //_id: mongoose.Schema.Types.ObjectId,
         fName: {type: String},
         lName: {type: String},
         email: {type: String, required: true, unique: true, match:/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/},

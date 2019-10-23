@@ -19,11 +19,6 @@ db.once('open', function () {
     console.log('Successfully Connected to [ ' + db.name + ' ]'+ ' on orders route');
 });
 
-    function getByValue(array,id){
-        const result = array.filter(function(obj){return obj.id == id;});
-        return result?result[0]:null;
-    }
-
 //Finds an order by its id
 router.findOne = (req, res) => {
     res.setHeader('Content-Type', 'application/json');
@@ -53,7 +48,7 @@ router.findAll = (req, res) => {
             res.send(err);
         res.send(JSON.stringify(orders,null,5));
     });
-}
+};
 
 //Sets an order to payed
 router.orderPayed = (req,res)=>{
@@ -72,7 +67,7 @@ router.orderPayed = (req,res)=>{
                 });
             }
         });
-}
+};
 
 //Sets an order to not payed
 router.orderNotPayed = (req,res)=>{
@@ -91,33 +86,66 @@ router.orderNotPayed = (req,res)=>{
             });
         }
     });
-}
-
-//Adds an order
-router.addOrder = (req, res) => {
-
-    res.setHeader('Content-Type', 'application/json');
-    let order = new Order();
-    _id: mongoose.Schema.Types.ObjectID();
-    order.billId = req.body.billId;
-    order.userId = req.body.userId;
-    order.starter = req.body.starter;
-    order.main = req.body.main;
-    order.desert = req.body.desert;
-    order.drink = req.body.drink;
-    order.price = req.body.price;
-    order.payed = false;
-    order.message= String;
-
-
-    order.save(function(err) {
-        if (err)
-            res.json({ message: 'Order NOT Added!', errmsg : err } );
-        else
-            res.json({ message: 'Order Successfully Added!', data: order });
-    });
 };
 
+// router.addOrder = (req, res) => {
+//
+//     res.setHeader('Content-Type', 'application/json');
+//     let order = new Order();
+//     //order._id = mongoose.Schema.Types.ObjectID();
+//     order.billId = req.body.billId;
+//     order.userId = req.body.userId;
+//     order.starter = req.body.starter;
+//     order.main = req.body.main;
+//     order.desert = req.body.desert;
+//     order.drink = req.body.drink;
+//     order.price = req.body.price;
+//     order.payed = false;
+//     order.message= String;
+//
+//
+//     order.save(function(err) {
+//         if (err)
+//             res.json({ message: 'Order NOT Added!', errmsg : err } );
+//         else
+//             res.json({ message: 'Order Successfully Added!', order: order });
+//     });
+// };
+//Adds an order
+router.addOrder = ((req, res,next) => {
+
+    res.setHeader('Content-Type', 'application/json');
+    const order = new Order({
+        //_id: mongoose.Schema.Types.ObjectID(),
+        billId: req.body.billId,
+        userId: req.body.userId,
+        starter: req.body.starter,
+        main: req.body.main,
+        desert: req.body.desert,
+        drink: req.body.drink,
+        price: req.body.price,
+        payed: false,
+        message: req.body.message
+    });
+    order
+        .save()
+        .then(result => {
+            console.log(result);
+            res.status(201).json({
+                message: "Order Created",
+                data: order
+            });
+        }).catch(err => {
+        console.log(err);
+        res.status(500).json({
+            message: "Order not created!",
+            error: err
+        });
+    });
+});
+
+
+// Building a method that can update an order.
 router.editOrder = ('/update', (req,res,next)=>{
 const billId = req.body.billId;
 const userId = req.body.userId;

@@ -1,10 +1,10 @@
-let Users = require ('../models/users');
+let Order = require ('../models/orders');
 let Backup = require ('../models/backup');
 let express = require('express');
 let router = express.Router();
 let os = require("os");
 let mongoose = require('mongoose');
-let message
+let message;
 let User = require ('../models/users');
 const bcrypt = require('bcrypt');
 message = "";
@@ -36,7 +36,7 @@ router.addUser = ((req, res, next) => {
           });
         } else {
           const user = new User({
-            _id: mongoose.Schema.Types.ObjectID(),
+            //_id: mongoose.Schema.Types.ObjectID(),
             fName : req.body.fName,
             lName : req.body.lName,
             email : req.body.email,
@@ -49,7 +49,8 @@ router.addUser = ((req, res, next) => {
               .then(result => {
                 console.log(result);
                 res.status(201).json({
-                  message: "User Created"
+                  message: "User Created",
+                  data : user
                 });
               }).catch(err => {
             console.log(err);
@@ -63,7 +64,7 @@ router.addUser = ((req, res, next) => {
   });
   });
 
-//Finds a user by their id, just returns their name and email, nothing else.
+//Finds a user by their id, just returns their name and email.
 router.findOne = (req, res) => {
   User.find({ "_id" : req.params.id },'fName lName email active').then(id=>{
     res.send(JSON.stringify(id,null,5));
@@ -135,5 +136,13 @@ router.deleteInactiveUsers = (req,res) => {
  });
 };
 
+//Lists all orders of usersId
+router.usersOrders = (req,res,next) => {
+  User.find({ "_id" : req.params.id },'_id').then(id=> {
+    Order.find({"userId":req.params.userId}).equals(id).then(result=>{
+      res.status(200).send(JSON.stringify(result,null,5));
+    });
+  });
+};
 
 module.exports = router;

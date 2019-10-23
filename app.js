@@ -36,7 +36,7 @@ app.put('/order/unpaid/:id', orders.orderNotPayed);
 
 //Users calls
 app.get('/user/:id/find',users.findOne);
-//app.get('/users/findID/:id',users.findID);
+app.get('/user/:id/orders',users.usersOrders);
 app.delete('/user/:id/delete', users.deleteUser);
 app.post('/user/add', users.addUser);
 app.get('/user/all', users.findAll);
