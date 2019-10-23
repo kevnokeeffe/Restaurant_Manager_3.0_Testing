@@ -103,7 +103,7 @@ router.deleteUser = (req,res,next) => {
 //Sets one user to active
 router.setUserToActive = (req,res) => {
   User.updateOne({"_id": req.params.id}, {$set: {active: true}}).then(promis => {
-    res.json({messege: "Status changed to inactive", promis: promis})
+    res.json({messege: "Status changed to active", promis: promis})
   }).catch(err => {
     console.log(err);
     res.status(500).json({
@@ -115,7 +115,7 @@ router.setUserToActive = (req,res) => {
 //Sets one user to inactive
 router.setUserToInactive = (req,res) => {
   User.updateOne({"_id":req.params.id},{$set:{active:false}}).then(promis=>{
-    res.json({messege:"Status changed to inactive",promis:promis})
+    res.json({messege: "Status changed to inactive",promis:promis})
   }).catch(err => {
     console.log(err);
     res.status(500).json({
@@ -127,7 +127,7 @@ router.setUserToInactive = (req,res) => {
 //Deletes all inactive users
 router.deleteInactiveUsers = (req,res) => {
  User.deleteMany({ active:{$in:[false]}}).then( promis =>{
-   res.json({messege:"Inactive users deleted",promis:promis})
+   res.json({messege: "Inactive users deleted",promis:promis})
  }).catch(err => {
    console.log(err);
    res.status(500).json({
@@ -139,10 +139,28 @@ router.deleteInactiveUsers = (req,res) => {
 //Lists all orders of usersId
 router.usersOrders = (req,res,next) => {
   User.find({ "_id" : req.params.id },'_id').then(id=> {
-    Order.find({"userId":req.params.userId}).equals(id).then(result=>{
+    const result = new id;
+    Order.find({"userId" :req.params.userId}).equals(id).then(result=>{
       res.status(200).send(JSON.stringify(result,null,5));
+    }).catch(err => {
+      console.log(err);
+      res.status(500).json({
+        error: err,
+        data: id
+      });
+    });
+  }).catch(err => {
+    console.log(err);
+    res.status(500).json({
+      error:err
     });
   });
 };
+
+router.addUsersOrders = ( (req,res,next) => {
+
+
+
+});
 
 module.exports = router;

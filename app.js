@@ -33,14 +33,17 @@ app.delete('/order/:id/delete', orders.deleteOrder);
 app.post('/order/add', orders.addOrder);
 app.put('/order/payed/:id', orders.orderPayed);
 app.put('/order/unpaid/:id', orders.orderNotPayed);
+app.put('/order/update/:id', orders.updateOrder);
 
 //Users calls
 app.get('/user/:id/find',users.findOne);
-app.get('/user/:id/orders',users.usersOrders);
+//app.get('/user/:id/orders',users.usersOrders);
 app.delete('/user/:id/delete', users.deleteUser);
 app.post('/user/add', users.addUser);
 app.get('/user/all', users.findAll);
 app.put('/user/:id/inactive',users.setUserToInactive);
+app.put('/user/:id/active', users.setUserToActive);
+app.put('/user/:id/addOrder',users.addUsersOrders);
 app.delete('/user/delete',users.deleteInactiveUsers);
 
 //Bills calls

@@ -1,10 +1,11 @@
 let Order = require ('../models/orders');
 let Backup = require ('../models/backup');
+let User = require ('../models/backup');
 let express = require('express');
 let router = express.Router();
 let mongoose = require('mongoose');
 //let uriUtil = require('mongodb-uri');
-let message
+let message;
 
 mongoose.connect('mongodb://localhost:27017/restaurantManager', { useNewUrlParser: true });
 
@@ -91,7 +92,7 @@ router.orderNotPayed = (req,res)=>{
 //Adds an order
 router.addOrder = ((req, res,next) => {
 
-    res.setHeader('Content-Type', 'application/json');
+    //res.setHeader('Content-Type', 'application/json');
     const order = new Order({
         //_id: mongoose.Schema.Types.ObjectID(),
         billId: req.body.billId,
@@ -119,18 +120,46 @@ router.addOrder = ((req, res,next) => {
             error: err
         });
     });
+    // insert code here
+    // const backup = order.find
+    // Users.findOneAndUpdate(_id: req.user._id}, {$push: {orders: order}});
 });
 
+router.updateOrder2 = ( req, res, next) => {
+    Order.findOneAndUpdate({"_id": req.body._id}, {$set:{'list.$.fName': 'Something'}})};
+
 // Building a method that can update an order.
-router.editOrder = ('/update', (req,res,next)=>{
-const billId = req.body.billId;
-const userId = req.body.userId;
-const UpdateStarter = req.body.starter;
-const UpdateMain = req.body.main;
-const UpdateDesert = req.body.desert;
-const UpdateDrink = req.body.drink;
-const UpdatePrice = req.body.price;
-const UpdatePayed = req.body.payed;
-const UpdateMessage = req.body.message;
-});
+router.updateOrder = (req,res,next) => {
+    const ordId = req.body._id;
+    const UpdateBillId = req.body.billId;
+    const UpdateUserId = req.body.userId;
+    const UpdateStarter = req.body.starter;
+    const UpdateMain = req.body.main;
+    const UpdateDesert = req.body.desert;
+    const UpdateDrink = req.body.drink;
+    const UpdatePrice = req.body.price;
+    const UpdatePayed = req.body.payed;
+    const UpdateMessage = req.body.message;
+
+    const order = new Order(
+        UpdateBillId,
+        UpdateUserId,
+        UpdateStarter,
+        UpdateMain,
+        UpdateDesert,
+        UpdateDrink,
+        UpdatePrice,
+        UpdatePayed,
+        UpdateMessage
+
+    );
+    order
+        .save(order)
+        .then(result => {
+            console.log('Updated Order!');
+            res.redirect('/routes/orders')
+        })
+        .catch(err => console.log(err));
+};
+
     module.exports = router;

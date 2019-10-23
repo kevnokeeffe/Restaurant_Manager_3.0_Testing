@@ -1,7 +1,7 @@
 let mongoose = require('mongoose');
 let Schema = mongoose.Schema;
 
-let OrderSchema = new Schema({
+let UsersSchema = new Schema({
         //_id: mongoose.Schema.Types.ObjectId,
         fName: {type: String},
         lName: {type: String},
@@ -11,8 +11,9 @@ let OrderSchema = new Schema({
         password: {type: String, required: true},
         permission: {type: String},
         active: {type: Boolean},
+        orders: {type: Array, default:[]}
     },
 
     { collection: 'users' });
 
-module.exports = mongoose.model('User', OrderSchema);
+module.exports = mongoose.model('User', UsersSchema);
