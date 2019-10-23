@@ -130,9 +130,29 @@ router.addOrder = ((req, res,next) => {
 //     Order.findOneAndUpdate({"_id": req.params.id}, {$set:{'main': 'Something'}})};
 
 // Building a method that can update an order.
-router.updateOrder = ((req,res,next) => {
+router.updateOrder = (req,res,next) => {
 
-});
+    res.setHeader('Content-Type', 'application/json');
+Order.findOneAndUpdate({'_id': req.params.id},{$set: {
+                billId: req.body.billId,
+                userId: req.body.userId,
+                starter: req.body.starter,
+                main: req.body.main,
+                desert: req.body.desert,
+                drink: req.body.drink,
+                price: req.body.price,
+                payed: req.body.payed,
+                message: req.body.message
+            }}).then (order => {res.json({order: order, message: 'Update Successfully'})})
+
+    .catch(err => {
+        console.log(err);
+        res.status(500).json({
+            message: "Order not updated!",
+            error: err
+        });
+    });
+};
 //     const ordId = req.body._id;
 //     const UpdateBillId = req.body.billId;
 //     const UpdateUserId = req.body.userId;
