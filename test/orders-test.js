@@ -102,12 +102,92 @@ describe('Orders', () => {
         });
     });
 
-    describe("ADD /order", () => {
-
+    describe("POST /order", () => {
+        it("should return confirmation message and update datastore", () => {
+            const order = {
+                billId: 1432,
+                userId: "5db208ff6b6aaf09d8a9b361",
+                starter: "Cake",
+                main: "food",
+                desert: "cheesecake",
+                drink: "water",
+                price: 23.99,
+                payed: false,
+                message: "String"
+            };
+            return request(server)
+                .post("/order/add")
+                .send(order)
+                .expect(201)
+                .then(res => {
+                    expect(res.body.message).equals("Order Created");
+                    validID = res.body.data._id;
+                });
+        });
+        after(() => {
+            return request(server)
+                .get(`/order/findOne/${validID}`)
+                .expect(200)
+                .then(res => {
+                    expect(res.body[0]).to.have.property("billId", 1432);
+                    expect(res.body[0]).to.have.property("userId", "5db208ff6b6aaf09d8a9b361");
+                    expect(res.body[0]).to.have.property("price", 23.99);
+                });
+        });
     });
 
     describe("DELETE /order", () => {
+        it("should delete an order", done => {
 
+            try {
+                request(server)
+                    .delete(`/order/${validID}/delete`)
+                    .expect(200)
+                    .expect("Content-Type", /json/)
+                    .then(res => {
+                        expect(res.body).to.be.a("array");
+                        expect(res.body).to.include({
+                            message: "Order Successfully Deleted!"
+                        });
+
+                        expect(res.body.data).to.include({
+                            id: validID
+                        });
+                        console.log("DELETE")
+                    });
+
+            } catch (err) {
+                console.log("fail")
+            }
+            done();
+        });
+
+        // after((done) => {
+        //     request(server)
+        //         .get(`/order/findOne/${validID}`)
+        //         .set("Accept", "application/json")
+        //         .expect("Content-Type", /json/)
+        //         .expect(200)
+        //         .end((err, res) => {
+        //             expect(res.body).to.include({
+        //                 message: "Order Not Deleted!"
+        //
+        //             })
+        //             done(err);
+        //             console.log("DELETE AFTER")
+        //         });
+        // });
+
+        describe("when the id is invalid", () => {
+            it("should return the NOT found message", done => {
+                request(server)
+                    .delete("/order/findOne/111111111")
+                    .expect(404)
+                    .expect({ message: "Order Not Deleted!" })
+                console.log("Fake delete worked")
+                done();
+            });
+        });
     });
 
     describe("GET /order", () => {
@@ -142,6 +222,34 @@ describe('Orders', () => {
 
     describe("UPDATE /order", () => {
 
+    });
+
+    describe("PUT /order/payed/:id", () => {
+        describe("when the id is valid", () => {
+            it("should return a message and the order set to payed: true", () => {
+                return request(server)
+                    .put(`/order/payed/${validID}`)
+                    .expect(200)
+                    .then(resp => {
+                        expect(resp.body).to.include({
+                            message: "Order Successfully Payed!"
+                        });
+                    });
+            });
+        });
+
+        describe("when the id is invalid", () => {
+            it("should return a message and the order set to payed: false", () => {
+                return request(server)
+                    .put(`/order/unpaid/${validID}`)
+                    .expect(200)
+                    .then(resp => {
+                        expect(resp.body).to.include({
+                            message: "Order Set to Unpaid!"
+                        });
+                    });
+            });
+        });
     });
 
 });

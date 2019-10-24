@@ -35,7 +35,10 @@ router.findOne = (req, res) => {
     router.deleteOrder = (req, res) => {
         Order.findByIdAndRemove(req.params.id, function(err) {
             if (err)
-                res.json({ message: 'Order NOT DELETED!', errmsg : err } );
+                res.status(500).json({
+                    message: "Order Not Deleted!",
+                    error: err
+                });
             else
                 res.json({ message: 'Order Successfully Deleted!'});
         });
