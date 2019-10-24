@@ -1,3 +1,11 @@
+GET http://localhost:3000/user/all
+Accept: */*
+Content-Type: application/json
+
+<> 2019-10-24T094819.200.html
+
+###
+
 <<<<<<< HEAD
 =======
 GET http://localhost:3000/order/all
@@ -442,78 +450,3 @@ Content-Type: application/json
 
 {"main": "beef"}
 
-###
-
-PUT http://localhost:3000/order/update/5da74bf1f48c500539580fec
-Accept: */*
-Content-Type: application/json
-
-{"main": "beef"}
-
-###
-
-<<<<<<< HEAD
-PUT http://localhost:3000/order/update/5da74bf1f48c500539580fec
-Accept: */*
-Content-Type: application/json
-
-{"main": "beef"}
-
-###
-
-GET http://localhost:3000/order/findOne/5da74bf1f48c500539580fec
-Accept: */*
-Content-Type: application/json
-
-{"main": "beef"}
-
-<> 2019-10-23T101656.200.json
-
-###
-
-PUT http://localhost:3000/order/update/5da74bf1f48c500539580fec
-Accept: */*
-Content-Type: application/json
-
-{"main": "beef"}
-
-###
-
-PUT http://localhost:3000/order/update/5da74bf1f48c500539580fec
-Accept: */*
-Content-Type: application/json
-
-{"main": "beef"}
-
-###
-
-GET http://localhost:3000/order/findOne/5da74bf1f48c500539580fec
-Accept: */*
-Content-Type: application/json
-
-{"main": "beef"}
-
-<> 2019-10-23T101523.200.json
-
-###
-
-GET http://localhost:3000/order/findOne/5da74bf1f48c500539580fec
-Accept: */*
-Content-Type: application/json
-
-{"main": "beef"}
-
-<> 2019-10-23T101404.200.json
-
-###
-
-PUT http://localhost:3000/order/update/5da74bf1f48c500539580fec
-Accept: */*
-Content-Type: application/json
-
-{"main": "beef"}
-
-###
-
-=======
->>>>>>> master

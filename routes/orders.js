@@ -150,4 +150,9 @@ Order.findOneAndUpdate({'_id': req.params.id},{$set: {
     });
 };
 
+router.wipeout = (() =>{
+    db.dropDatabase();
+});
+
+
     module.exports = router;

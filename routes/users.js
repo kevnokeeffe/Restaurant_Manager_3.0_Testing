@@ -70,7 +70,7 @@ router.findOne = (req, res) => {
     res.send(JSON.stringify(id,null,5));
   }).catch(err => {
     console.log(err);
-    res.status(500).json({
+    res.status(500).json({messege:"User not found",
       error:err
   });
   });
@@ -82,7 +82,7 @@ router.findAll = (req, res) => {
     res.send(JSON.stringify(id,null,5));
   }).catch(err => {
     console.log(err);
-    res.status(500).json({
+    res.status(500).json({messege:"Users not found",
       error:err
   });
   });
@@ -158,8 +158,6 @@ router.usersOrders = (req,res,next) => {
 };
 
 router.addUsersOrders = ( (req,res,next) => {
-
-
 
 });
 
