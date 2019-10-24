@@ -1,8 +1,32 @@
-GET http://localhost:3000/user/all
+<<<<<<< HEAD
+=======
+GET http://localhost:3000/order/all
 Accept: */*
 Content-Type: application/json
 
-<> 2019-10-24T074617.200.html
+<> 2019-10-24T090117.200.json
+
+###
+
+GET http://localhost:3000/order/all
+Accept: */*
+Content-Type: application/json
+
+###
+
+GET http://localhost:3000/order/all
+Accept: */*
+Content-Type: application/json
+
+<> 2019-10-24T085236.200.json
+
+###
+
+GET http://localhost:3000/orders/all
+Accept: */*
+Content-Type: application/json
+
+<> 2019-10-24T085230.404.html
 
 ###
 
@@ -10,6 +34,48 @@ GET http://localhost:3000/user/all
 Accept: */*
 Content-Type: application/json
 
+<> 2019-10-24T083633.200.html
+
+###
+
+GET http://localhost:3000/user/all
+Accept: */*
+Content-Type: application/json
+
+<> 2019-10-24T083537.200.html
+
+###
+
+>>>>>>> master
+GET http://localhost:3000/user/all
+Accept: */*
+Content-Type: application/json
+
+<<<<<<< HEAD
+<> 2019-10-24T074617.200.html
+=======
+<> 2019-10-24T083525.200.html
+>>>>>>> master
+
+###
+
+GET http://localhost:3000/user/all
+Accept: */*
+Content-Type: application/json
+
+<<<<<<< HEAD
+=======
+<> 2019-10-24T083515.200.html
+
+###
+
+GET http://localhost:3000/order/all
+Accept: */*
+Content-Type: application/json
+
+<> 2019-10-24T082027.200.json
+
+>>>>>>> master
 ###
 
 GET http://localhost:3000/order/findOne/5da7886998c28214fc262d33
@@ -386,6 +452,7 @@ Content-Type: application/json
 
 ###
 
+<<<<<<< HEAD
 PUT http://localhost:3000/order/update/5da74bf1f48c500539580fec
 Accept: */*
 Content-Type: application/json
@@ -448,3 +515,5 @@ Content-Type: application/json
 
 ###
 
+=======
+>>>>>>> master

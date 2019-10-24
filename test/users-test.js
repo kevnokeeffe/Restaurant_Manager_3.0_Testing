@@ -18,7 +18,7 @@ describe("User", () => {
                 permission: "admin",
                 active: true
             });
-            await user.post();
+            await user.save();
         } catch (error) {
             console.log(error)
         }
