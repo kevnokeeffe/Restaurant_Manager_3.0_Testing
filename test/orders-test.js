@@ -37,7 +37,7 @@ describe('Orders', () => {
 
     after(async () => {
         try {
-            await db.dropDatabase();
+            //await db.dropDatabase();
             await mongod.stop()
             await  server.close()
         } catch (error) {
@@ -145,3 +145,4 @@ describe('Orders', () => {
     });
 
 });
+
