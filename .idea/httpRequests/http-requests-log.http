@@ -1,3 +1,17 @@
+GET http://localhost:3000/user/all
+Accept: */*
+Content-Type: application/json
+
+<> 2019-10-24T074617.200.html
+
+###
+
+GET http://localhost:3000/user/all
+Accept: */*
+Content-Type: application/json
+
+###
+
 GET http://localhost:3000/order/findOne/5da7886998c28214fc262d33
 Accept: */*
 Content-Type: application/json
@@ -431,26 +445,6 @@ Accept: */*
 Content-Type: application/json
 
 {"main": "beef"}
-
-###
-
-GET http://localhost:3000/order/findOne/5da74bf1f48c500539580fec
-Accept: */*
-Content-Type: application/json
-
-{"main": "beef"}
-
-<> 2019-10-23T101319.200.json
-
-###
-
-GET http://localhost:3000/order/update/5da74bf1f48c500539580fec
-Accept: */*
-Content-Type: application/json
-
-{"main": "beef"}
-
-<> 2019-10-23T101304.404.html
 
 ###
 

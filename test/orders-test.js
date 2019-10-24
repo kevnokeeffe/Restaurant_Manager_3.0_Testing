@@ -1,13 +1,12 @@
 const expect = require('chai').expect;
 const server = require("../bin/www");
-const order = require("../models/orders");
+const Order = require("../models/orders");
 const request = require("supertest");
 const _ = require("lodash");
 
-
 describe('Orders', () => {
 
-    describe("GET /order", () => {
+    describe("GET_ALL /order/all", () => {
         it("should return all the orders", done => {
             try {
                 request(server)
@@ -53,7 +52,7 @@ describe('Orders', () => {
 
     });
 
-    describe("GET_ALL /order", () => {
+    describe("GET_ONE /order/:id", () => {
 
     });
 
@@ -62,3 +61,5 @@ describe('Orders', () => {
     });
 
 });
+
+
