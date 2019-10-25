@@ -4,9 +4,9 @@ let User = require ('../models/backup');
 let express = require('express');
 let router = express.Router();
 let mongoose = require('mongoose');
-//let uriUtil = require('mongodb-uri');
+let uriUtil = require('mongodb-uri');
 let message;
-const mongodbUri = "mongodb+srv://dbKevin:KEV1984me@kevinscluster-cvmeg.mongodb.net/restaurantManager";
+const mongodbUri = "mongodb+srv://dbKevin:KEV1984me@kevinscluster-cvmeg.mongodb.net/restaurantManager?retryWrites=true&w=majority";
 mongoose.connect(mongodbUri,{ useNewUrlParser: true });
 //mongoose.connect('mongodb://localhost:27017/restaurantManager', { useNewUrlParser: true });
 
@@ -34,6 +34,7 @@ router.findOne = (req, res) => {
 
 //Deletes an order
     router.deleteOrder = (req, res) => {
+        res.setHeader('Content-Type', 'application/json');
         Order.findByIdAndRemove(req.params.id, function(err) {
             if (err)
                 res.status(500).json({
@@ -96,7 +97,7 @@ router.orderNotPayed = (req,res)=>{
 //Adds an order
 router.addOrder = ((req, res,next) => {
 
-    //res.setHeader('Content-Type', 'application/json');
+    res.setHeader('Content-Type', 'application/json');
     const order = new Order({
         //_id: mongoose.Schema.Types.ObjectID(),
         billId: req.body.billId,

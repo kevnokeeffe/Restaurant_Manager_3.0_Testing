@@ -24,6 +24,7 @@ function getTotalBill(array) {
 
 //Gives a list of unpaid bills
 router.unPaidBills = (req,res) => {
+    res.setHeader('Content-Type', 'application/json');
     Order.find({"payed":false}).then(orders=> {
         console.log(orders);
         res.json({orders: orders});
@@ -34,6 +35,7 @@ router.unPaidBills = (req,res) => {
 
 //Gives a list of payed bills
 router.paidBills = (req,res) => {
+    res.setHeader('Content-Type', 'application/json');
     Order.find({"payed":true}).then(orders => {
         console.log(orders);
         res.json({orders: orders});
@@ -44,6 +46,7 @@ router.paidBills = (req,res) => {
 
 //Displays all the orders attached to a certain bill which have not been payed for, gives a total bill.
 router.billOfOrders = (req, res) => {
+    res.setHeader('Content-Type', 'application/json');
     Order.find({$and: [{"billId":req.params.billId},{"payed":false}]}).then(orders=> {
         console.log(orders);
         res.json({orders: orders, totalBill: getTotalBill(orders)});
@@ -54,6 +57,7 @@ router.billOfOrders = (req, res) => {
 
 //Sets all orders of a certain bill to paid.
 router.payBillOfOrders = (req,res) => {
+    res.setHeader('Content-Type', 'application/json');
     console.log("HERE")
         Order.updateMany({$and: [{"billId":req.params.billId},{"payed":false}]},{$set: { payed: true }}).then(orders=> {
             res.json({orders: orders, message: 'Bill Successfully Payed!'})
@@ -65,6 +69,7 @@ router.payBillOfOrders = (req,res) => {
 
 //Sets all orders of a certain bill to unpaid
 router.unPayBillOfOrders = (req,res) => {
+    res.setHeader('Content-Type', 'application/json');
     console.log("HERE")
     Order.updateMany({$and: [{"billId":req.params.billId},{"payed":true}]},{$set: { payed: false }}).then(orders=> {
         res.json({orders: orders, message: 'Bill Set to unpaid!'})
@@ -76,6 +81,7 @@ router.unPayBillOfOrders = (req,res) => {
 
 //Gives a total read of all orders payed for.
 router.totalRead = (req,res) => {
+    res.setHeader('Content-Type', 'application/json');
     Order.find({"payed":true}).then(orders=> {
         console.log(orders);
         res.json({orders: orders, totalBill: getTotalBill(orders)});
@@ -89,6 +95,7 @@ router.totalRead = (req,res) => {
 //and sends it to a backup database, which contains historical
 // bills and orders for later reference.
 router.deleteBill = (req,res) => {
+    res.setHeader('Content-Type', 'application/json');
     Order.deleteMany({"billId": req.params.billId}).then( promis =>{
         console.log(promis);
         res.json({messege:"Bill deleted",promis:promis})

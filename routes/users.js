@@ -22,6 +22,7 @@ db.once('open', function () {
 
 //This method adds a user
 router.addUser = ((req, res, next) => {
+  res.setHeader('Content-Type', 'application/json');
   // checks to see if the email already exists
   User.find({email: req.body.email}) .exec().then(user => {
     if (user.length >= 1) {
@@ -66,6 +67,7 @@ router.addUser = ((req, res, next) => {
 
 //Finds a user by their id, just returns their name and email.
 router.findOne = (req, res) => {
+  res.setHeader('Content-Type', 'application/json');
   User.find({ "_id" : req.params.id },'fName lName email active').then(id=>{
     res.send(JSON.stringify(id,null,5));
   }).catch(err => {
@@ -78,6 +80,7 @@ router.findOne = (req, res) => {
 
 //This method prints out all the users
 router.findAll = (req, res) => {
+  res.setHeader('Content-Type', 'application/json');
   User.find({},'fName lName email password').then(id=>{
     res.send(JSON.stringify(id,null,5));
   }).catch(err => {
@@ -90,6 +93,7 @@ router.findAll = (req, res) => {
 
 //Deletes a single user of given id
 router.deleteUser = (req,res,next) => {
+  res.setHeader('Content-Type', 'application/json');
   User.deleteOne({"_id": req.params._id}).exec().then( promis =>{
     console.log(promis);
     res.status(200).json({messege:"User deleted",promis:promis})
@@ -102,6 +106,7 @@ router.deleteUser = (req,res,next) => {
 
 //Sets one user to active
 router.setUserToActive = (req,res) => {
+  res.setHeader('Content-Type', 'application/json');
   User.updateOne({"_id": req.params.id}, {$set: {active: true}}).then(promis => {
     res.json({messege: "Status changed to active", promis: promis})
   }).catch(err => {
@@ -114,6 +119,7 @@ router.setUserToActive = (req,res) => {
 
 //Sets one user to inactive
 router.setUserToInactive = (req,res) => {
+  res.setHeader('Content-Type', 'application/json');
   User.updateOne({"_id":req.params.id},{$set:{active:false}}).then(promis=>{
     res.json({messege: "Status changed to inactive",promis:promis})
   }).catch(err => {
@@ -126,6 +132,7 @@ router.setUserToInactive = (req,res) => {
 
 //Deletes all inactive users
 router.deleteInactiveUsers = (req,res) => {
+  res.setHeader('Content-Type', 'application/json');
  User.deleteMany({ active:{$in:[false]}}).then( promis =>{
    res.json({messege: "Inactive users deleted",promis:promis})
  }).catch(err => {
@@ -138,6 +145,7 @@ router.deleteInactiveUsers = (req,res) => {
 
 //Lists all orders of usersId
 router.usersOrders = (req,res,next) => {
+  res.setHeader('Content-Type', 'application/json');
   User.find({ "_id" : req.params.id },'_id').then(id=> {
     const result = new id;
     Order.find({"userId" :req.params.userId}).equals(id).then(result=>{
