@@ -39,9 +39,9 @@ router.findOne = (req, res) => {
 //Deletes an order
 router.deleteOrder = (req,res,next) => {
     res.setHeader('Content-Type', 'application/json');
-    User.deleteOne({"_id": req.params.id}).exec().then( promis =>{
+    Order.deleteOne({"_id": req.params.id}).exec().then( promis =>{
         console.log(promis);
-        res.status(200).json({messege:"User deleted",promis:promis})
+        res.status(200).json({messege:"Order deleted",promis:promis})
 
     }).catch(err => {
         console.log(err);
