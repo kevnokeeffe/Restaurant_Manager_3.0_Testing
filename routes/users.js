@@ -175,9 +175,7 @@ router.usersOrders = (req,res,next) => {
 };
 
 router.addUsersOrders = ( (req,res,next) => {
-
-
-
+  //future method
 });
 
 module.exports = router;

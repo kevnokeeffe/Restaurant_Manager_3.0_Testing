@@ -37,18 +37,17 @@ router.findOne = (req, res) => {
 };
 
 //Deletes an order
-    router.deleteOrder = (req, res) => {
-        res.setHeader('Content-Type', 'application/json');
-        Order.findByIdAndRemove(req.params.id, function(err) {
-            if (err)
-                res.status(500).json({
-                    message: "Order Not Deleted!",
-                    error: err
-                });
-            else
-                res.json({ message: 'Order Successfully Deleted!'});
-        });
-    };
+router.deleteOrder = (req,res,next) => {
+    res.setHeader('Content-Type', 'application/json');
+    User.deleteOne({"_id": req.params.id}).exec().then( promis =>{
+        console.log(promis);
+        res.status(200).json({messege:"User deleted",promis:promis})
+
+    }).catch(err => {
+        console.log(err);
+        res.status(500).json({error:err});
+    });
+};
 
 //Gives a list of all orders on the system
 router.findAll = (req, res) => {
@@ -129,7 +128,7 @@ router.addOrder = ((req, res,next) => {
             error: err
         });
     });
-    // insert code here
+    // Future update
     // const backup = order.find
     // Users.findOneAndUpdate(_id: req.user._id}, {$push: {orders: order}});
 });
