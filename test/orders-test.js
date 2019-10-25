@@ -56,10 +56,10 @@ describe('Orders', () => {
                 drink: "coke",
                 price: 25.99,
                 payed: false,
-                message: "i like sweet things"
+                message: "1217adce66bfa9e9e445c423643420af"
             });
             await order.save();
-            const order1 = await Order.findOne({ userId: "5db1fd86f7b46c3ac05d7632" });
+            const order1 = await Order.findOne({ message: "1217adce66bfa9e9e445c423643420af" });
             validID = order1._id;
 
         }catch(err){console.log(err)}
