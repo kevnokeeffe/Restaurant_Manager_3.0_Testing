@@ -6,8 +6,9 @@ let router = express.Router();
 let mongoose = require('mongoose');
 //let uriUtil = require('mongodb-uri');
 let message;
-
-mongoose.connect('mongodb://localhost:27017/restaurantManager', { useNewUrlParser: true });
+const mongodbUri = "mongodb+srv://dbKevin:KEV1984me@kevinscluster-cvmeg.mongodb.net/restaurantManager";
+mongoose.connect(mongodbUri,{ useNewUrlParser: true });
+//mongoose.connect('mongodb://localhost:27017/restaurantManager', { useNewUrlParser: true });
 
 //message = "";
 let db = mongoose.connection;

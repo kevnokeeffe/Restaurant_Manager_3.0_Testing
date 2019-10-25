@@ -1,5 +1,21 @@
 GET http://localhost:3000/order/all
 Accept: */*
+Cache-Control: no-cache
+
+<> 2019-10-25T041256.200.json
+
+###
+
+GET http://localhost:3000/user/all
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-10-25T041228.200.html
+
+###
+
+GET http://localhost:3000/order/all
+Accept: */*
 Content-Type: application/json
 
 <> 2019-10-24T090117.200.json
@@ -407,22 +423,6 @@ Accept: */*
 Cache-Control: no-cache
 
 <> 2019-10-23T112330.200.html
-
-###
-
-PUT http://localhost:3000/order/update/5da74bf1f48c500539580fec
-Accept: */*
-Content-Type: application/json
-
-{"main": "beef"}
-
-###
-
-PUT http://localhost:3000/order/update/5da74bf1f48c500539580fec
-Accept: */*
-Content-Type: application/json
-
-{"main": "beef"}
 
 ###
 
