@@ -4,10 +4,19 @@ let express = require('express');
 let router = express.Router();
 let mongoose = require('mongoose');
 
+//Local connection
 //mongoose.connect('mongodb://localhost:27017/restaurantManager', { useNewUrlParser: true });
-const mongodbUri = "mongodb+srv://dbKevin:KEV1984me@kevinscluster-cvmeg.mongodb.net/restaurantManager";
+
+//mLab Connection
+const mongodbUri = "mongodb://dbKevin:akakok1984@ds241097.mlab.com:41097/heroku_q1g0hzrw";
+
+//mongodb Atlas connection
+//const mongodbUri = "mongodb+srv://dbKevin:KEV1984me@kevinscluster-cvmeg.mongodb.net/restaurantManager";
+
 mongoose.connect(mongodbUri,{ useNewUrlParser: true });
+
 let db = mongoose.connection;
+
 db.on('error', function (err) {
     console.log('Unable to Connect to [ ' + db.name + ' ]'+ ' on bills route', err);
 });

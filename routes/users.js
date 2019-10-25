@@ -1,17 +1,25 @@
 let Order = require ('../models/orders');
-let Backup = require ('../models/backup');
 let express = require('express');
 let router = express.Router();
-let os = require("os");
 let mongoose = require('mongoose');
 let message;
 let User = require ('../models/users');
 const bcrypt = require('bcrypt');
 message = "";
+
+//Local connection
 //mongoose.connect('mongodb://localhost:27017/restaurantManager', { useNewUrlParser: true });
-const mongodbUri = "mongodb+srv://dbKevin:KEV1984me@kevinscluster-cvmeg.mongodb.net/restaurantManager";
+
+//mLab Connection
+const mongodbUri = "mongodb://dbKevin:akakok1984@ds241097.mlab.com:41097/heroku_q1g0hzrw";
+
+//mongodb Atlas connection
+//const mongodbUri = "mongodb+srv://dbKevin:KEV1984me@kevinscluster-cvmeg.mongodb.net/restaurantManager";
+
 mongoose.connect(mongodbUri,{ useNewUrlParser: true });
+
 let db = mongoose.connection;
+
 db.on('error', function (err) {
   console.log('Unable to Connect to [ ' + db.name + ' ]'+ ' on users route', err);
 });
@@ -81,7 +89,7 @@ router.findOne = (req, res) => {
 //This method prints out all the users
 router.findAll = (req, res) => {
   res.setHeader('Content-Type', 'application/json');
-  User.find({},'fName lName email password').then(id=>{
+  User.find({},'fName lName email password active').then(id=>{
     res.send(JSON.stringify(id,null,5));
   }).catch(err => {
     console.log(err);
@@ -94,7 +102,7 @@ router.findAll = (req, res) => {
 //Deletes a single user of given id
 router.deleteUser = (req,res,next) => {
   res.setHeader('Content-Type', 'application/json');
-  User.deleteOne({"_id": req.params._id}).exec().then( promis =>{
+  User.deleteOne({"_id": req.params.id}).exec().then( promis =>{
     console.log(promis);
     res.status(200).json({messege:"User deleted",promis:promis})
 
@@ -103,6 +111,7 @@ router.deleteUser = (req,res,next) => {
     res.status(500).json({error:err});
   });
 };
+
 
 //Sets one user to active
 router.setUserToActive = (req,res) => {

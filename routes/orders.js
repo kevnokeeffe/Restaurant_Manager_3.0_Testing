@@ -1,16 +1,20 @@
 let Order = require ('../models/orders');
-let Backup = require ('../models/backup');
-let User = require ('../models/backup');
 let express = require('express');
 let router = express.Router();
 let mongoose = require('mongoose');
-let uriUtil = require('mongodb-uri');
-let message;
-const mongodbUri = "mongodb+srv://dbKevin:KEV1984me@kevinscluster-cvmeg.mongodb.net/restaurantManager?retryWrites=true&w=majority";
-mongoose.connect(mongodbUri,{ useNewUrlParser: true });
+
+
+//Local connection
 //mongoose.connect('mongodb://localhost:27017/restaurantManager', { useNewUrlParser: true });
 
-//message = "";
+//mLab Connection
+const mongodbUri = "mongodb://dbKevin:akakok1984@ds241097.mlab.com:41097/heroku_q1g0hzrw";
+
+//mongodb Atlas connection
+//const mongodbUri = "mongodb+srv://dbKevin:KEV1984me@kevinscluster-cvmeg.mongodb.net/restaurantManager";
+
+mongoose.connect(mongodbUri,{ useNewUrlParser: true });
+
 let db = mongoose.connection;
 
 db.on('error', function (err) {
