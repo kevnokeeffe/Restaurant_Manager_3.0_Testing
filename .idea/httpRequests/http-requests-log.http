@@ -1,3 +1,81 @@
+GET http://localhost:3000/bill/1223/get
+Accept: */*
+Content-Type: application/json
+
+{                      "fName": "Kevin",           "lName": "O Keeffe",           "email": "kevaokeeffe@gmail.com",           "password": "123456",           "permission" : "admin",           "active" : true      }
+
+<> 2019-10-29T100900.200.json
+
+###
+
+GET http://localhost:3000/bill/8768768767867/get
+Accept: */*
+Content-Type: application/json
+
+{                      "fName": "Kevin",           "lName": "O Keeffe",           "email": "kevaokeeffe@gmail.com",           "password": "123456",           "permission" : "admin",           "active" : true      }
+
+<> 2019-10-29T100849.500.json
+
+###
+
+GET http://localhost:3000/bill/8768768767867/get
+Accept: */*
+Content-Type: application/json
+
+{                      "fName": "Kevin",           "lName": "O Keeffe",           "email": "kevaokeeffe@gmail.com",           "password": "123456",           "permission" : "admin",           "active" : true      }
+
+<> 2019-10-29T100839.200.json
+
+###
+
+GET http://localhost:3000/bill/8768768767867/get
+Accept: */*
+Content-Type: application/json
+
+{                      "fName": "Kevin",           "lName": "O Keeffe",           "email": "kevaokeeffe@gmail.com",           "password": "123456",           "permission" : "admin",           "active" : true      }
+
+<> 2019-10-29T100336.200.json
+
+###
+
+GET http://localhost:3000/bill/1223/get
+Accept: */*
+Content-Type: application/json
+
+{                      "fName": "Kevin",           "lName": "O Keeffe",           "email": "kevaokeeffe@gmail.com",           "password": "123456",           "permission" : "admin",           "active" : true      }
+
+<> 2019-10-29T100221.200.json
+
+###
+
+GET http://localhost:3000/bill/2222/get
+Accept: */*
+Content-Type: application/json
+
+{                      "fName": "Kevin",           "lName": "O Keeffe",           "email": "kevaokeeffe@gmail.com",           "password": "123456",           "permission" : "admin",           "active" : true      }
+
+<> 2019-10-29T100145.200.json
+
+###
+
+GET http://localhost:3000/bill/2222/get
+Accept: */*
+Content-Type: application/json
+
+{                      "fName": "Kevin",           "lName": "O Keeffe",           "email": "kevaokeeffe@gmail.com",           "password": "123456",           "permission" : "admin",           "active" : true      }
+
+<> 2019-10-29T100136.200.json
+
+###
+
+GET http://localhost:3000/bill/2222/get
+Accept: */*
+Content-Type: application/json
+
+{                      "fName": "Kevin",           "lName": "O Keeffe",           "email": "kevaokeeffe@gmail.com",           "password": "123456",           "permission" : "admin",           "active" : true      }
+
+###
+
 GET http://localhost:3000/bill/2222/get
 Accept: */*
 Content-Type: application/json
@@ -345,70 +423,6 @@ Accept: */*
 Cache-Control: no-cache
 
 <> 2019-10-25T084545.200.json
-
-###
-
-GET http://localhost:3000/order/all
-Accept: */*
-Cache-Control: no-cache
-
-<> 2019-10-25T084536.200.json
-
-###
-
-DELETE http://localhost:3000/bill/1432/delete
-Accept: */*
-Cache-Control: no-cache
-
-<> 2019-10-25T084526.200.json
-
-###
-
-GET http://localhost:3000/bill/1432/delete
-Accept: */*
-Cache-Control: no-cache
-
-<> 2019-10-25T084522.404.html
-
-###
-
-GET http://localhost:3000/order/all
-Accept: */*
-Cache-Control: no-cache
-
-<> 2019-10-25T084504.200.json
-
-###
-
-GET http://localhost:3000/bill/all
-Accept: */*
-Cache-Control: no-cache
-
-<> 2019-10-25T084450.404.html
-
-###
-
-DELETE http://localhost:3000/bill/1223/delete
-Accept: */*
-Cache-Control: no-cache
-
-<> 2019-10-25T084441.200.json
-
-###
-
-GET http://localhost:3000/order/all
-Accept: */*
-Cache-Control: no-cache
-
-<> 2019-10-25T084337.200.json
-
-###
-
-DELETE http://localhost:3000/user/5db306d58336bd313c31c086/delete
-Accept: */*
-Cache-Control: no-cache
-
-<> 2019-10-25T084325.200.json
 
 ###
 

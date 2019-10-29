@@ -1,5 +1,5 @@
 const expect = require('chai').expect;
-const Order=require("../models/orders");
+const Order = require("../models/orders");
 const request = require("supertest");
 const _ = require("lodash");
 const MongoMemoryServer = require("mongodb-memory-server").MongoMemoryServer;
@@ -54,11 +54,11 @@ describe('Bill', () => {
                 drink: "coke",
                 price: 25.99,
                 payed: false,
-                message: "1217adce66bfa9e9e445c423643420af"
+                message: "5db1fd86f7b46c3ac05d7632"
             });
             await order.save();
-            const order1 = await Order.findOne({message: "1217adce66bfa9e9e445c423643420af"});
-            validID = order1._id;
+            const order1 = await Order.findOne({message: "5db1fd86f7b46c3ac05d7632"});
+            validID = order1.billId;
 
         } catch (err) {
             console.log(err)
@@ -67,7 +67,19 @@ describe('Bill', () => {
 
 
     describe("GET /bill", () => {
-
+        describe("when the id is valid", () => {
+            it("should return the matching order", done => {
+                request(server)
+                    .get(`/bill/${validID}/get`)
+                    .set("Accept", "application/json")
+                    .expect("Content-Type", /json/)
+                    .expect(200)
+                    .end((err, res) => {
+                        expect(res.body.message).equals("Bill found");
+                        done(err);
+                    });
+            });
+        });
     });
 
     describe("DELETE /bill", () => {

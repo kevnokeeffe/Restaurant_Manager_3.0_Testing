@@ -35,10 +35,17 @@ function getTotalBill(array) {
 router.getBill = (req,res) => {
     res.setHeader('Content-Type', 'application/json');
     Order.find({"billId":req.params.billId}).then(orders=> {
-        console.log(orders);
+        //console.log(orders);
+        if(orders.length >=1){
         res.status(200).json({message:"Bill found",orders: orders});
+        }else {
+            res.status(500).json({
+                message: "Bill not found",
+                error: err
+        });
+        };
     }).catch(err => {
-        console.log(err);
+        //console.log(err);
         res.status(500).json({
             message: "Bill not found",
             error: err
