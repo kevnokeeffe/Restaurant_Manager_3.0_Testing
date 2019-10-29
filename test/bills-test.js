@@ -8,6 +8,7 @@ const mongoose = require("mongoose");
 let server;
 let mongod;
 let db, validID;
+
 describe('Bill', () => {
     before(async () => {
         try {
@@ -43,7 +44,8 @@ describe('Bill', () => {
         }
     });
 
-    beforeEach(async () => {
+describe("Before Each",()=>{
+    before(async () => {
         try {
             const order = new Order({
                 billId: 1223,
@@ -59,18 +61,19 @@ describe('Bill', () => {
             await order.save();
             const order1 = await Order.findOne({message: "5db1fd86f7b46c3ac05d7632"});
             validID = order1.billId;
-
+            console.log(order1);
         } catch (err) {
             console.log(err)
         }
     });
+});
 
 
     describe("GET /bill", () => {
         describe("when the id is valid", () => {
             it("should return the matching bill", done => {
                 request(server)
-                    .get(`/bill/${validID}/get`)
+                    .get(`/bill/1223/get`)
                     .set("Accept", "application/json")
                     .expect("Content-Type", /json/)
                     .expect(200)
