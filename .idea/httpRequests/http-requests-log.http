@@ -1,3 +1,107 @@
+GET http://localhost:3000/user/5db1fd86f7b46c3ac05d7632/order
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-10-27T010552.404.html
+
+###
+
+GET http://localhost:3000/user/5db1fd86f7b46c3ac05d7632/order
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-10-27T124450.404.html
+
+###
+
+GET http://localhost:3000/user/5db1fd86f7b46c3ac05d7632/order
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-10-27T124433.500.json
+
+###
+
+GET http://localhost:3000/user/5db1fd86f7b46c3ac05d7632/order
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-10-27T124432.500.json
+
+###
+
+GET http://localhost:3000/user/5db1fd86f7b46c3ac05d7632/order
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-10-27T124430.500.json
+
+###
+
+GET http://localhost:3000/user/5db1fd86f7b46c3ac05d7632/order
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-10-27T124429.500.json
+
+###
+
+GET http://localhost:3000/user/5db1fd86f7b46c3ac05d7632/order
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-10-27T124351.500.json
+
+###
+
+GET http://localhost:3000/user/5db1fd86f7b46c3ac05d7632/order
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-10-27T124350.500.json
+
+###
+
+GET http://localhost:3000/user/5db1fd86f7b46c3ac05d7632/order
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-10-27T124349.500.json
+
+###
+
+GET http://localhost:3000/user/5db1fd86f7b46c3ac05d7632/order
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-10-27T124314.500.json
+
+###
+
+GET http://localhost:3000/user/5db1fd86f7b46c3ac05d7632/order
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-10-27T124215.200.json
+
+###
+
+GET http://localhost:3000/user/5db1fd86f7b46c3ac05d7632/order
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-10-27T124152.200.json
+
+###
+
+GET http://localhost:3000/order/all
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-10-27T124125.200.json
+
+###
+
 GET http://localhost:3000/order/all
 Accept: */*
 Cache-Control: no-cache
@@ -291,110 +395,6 @@ Accept: */*
 Cache-Control: no-cache
 
 <> 2019-10-25T084251-1.200.json
-
-###
-
-DELETE http://localhost:3000/user/5db306d58336bd313c31c086/delete
-Accept: */*
-Cache-Control: no-cache
-
-<> 2019-10-25T084251.200.json
-
-###
-
-DELETE http://localhost:3000/user/5db306d58336bd313c31c086/delete
-Accept: */*
-Cache-Control: no-cache
-
-<> 2019-10-25T084250-3.200.json
-
-###
-
-DELETE http://localhost:3000/user/5db306d58336bd313c31c086/delete
-Accept: */*
-Cache-Control: no-cache
-
-<> 2019-10-25T084250-2.200.json
-
-###
-
-DELETE http://localhost:3000/user/5db306d58336bd313c31c086/delete
-Accept: */*
-Cache-Control: no-cache
-
-<> 2019-10-25T084250-1.200.json
-
-###
-
-DELETE http://localhost:3000/user/5db306d58336bd313c31c086/delete
-Accept: */*
-Cache-Control: no-cache
-
-<> 2019-10-25T084250.200.json
-
-###
-
-DELETE http://localhost:3000/user/5db306d58336bd313c31c086/delete
-Accept: */*
-Cache-Control: no-cache
-
-<> 2019-10-25T084247-2.200.json
-
-###
-
-DELETE http://localhost:3000/user/5db306d58336bd313c31c086/delete
-Accept: */*
-Cache-Control: no-cache
-
-<> 2019-10-25T084247-1.200.json
-
-###
-
-DELETE http://localhost:3000/user/5db306d58336bd313c31c086/delete
-Accept: */*
-Cache-Control: no-cache
-
-<> 2019-10-25T084247.200.json
-
-###
-
-DELETE http://localhost:3000/user/5db306d58336bd313c31c086/delete
-Accept: */*
-Cache-Control: no-cache
-
-<> 2019-10-25T084246-3.200.json
-
-###
-
-DELETE http://localhost:3000/user/5db306d58336bd313c31c086/delete
-Accept: */*
-Cache-Control: no-cache
-
-<> 2019-10-25T084246-2.200.json
-
-###
-
-DELETE http://localhost:3000/user/5db306d58336bd313c31c086/delete
-Accept: */*
-Cache-Control: no-cache
-
-<> 2019-10-25T084246-1.200.json
-
-###
-
-DELETE http://localhost:3000/user/5db306d58336bd313c31c086/delete
-Accept: */*
-Cache-Control: no-cache
-
-<> 2019-10-25T084246.200.json
-
-###
-
-DELETE http://localhost:3000/user/5db306d58336bd313c31c086/delete
-Accept: */*
-Cache-Control: no-cache
-
-<> 2019-10-25T084245-1.200.json
 
 ###
 

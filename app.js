@@ -6,6 +6,7 @@ let logger = require('morgan');
 
 let indexRouter = require('./routes/index');
 let usersRouter = require('./routes/users');
+const authRoutes = require('./routes/auth')
 const orders = require("./routes/orders");
 const users = require("./routes/users");
 const bills = require("./routes/bills");
@@ -25,6 +26,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use(authRoutes);
 
 //Orders calls
 app.get('/order/all',orders.findAll);
@@ -38,7 +40,7 @@ app.put('/order/update/:id', orders.updateOrder);
 
 //Users calls
 app.get('/user/:id/find',users.findOne);
-//app.get('/user/:id/orders',users.usersOrders);
+//app.get('/user/userId/order',users.userOrders);
 app.delete('/user/:id/delete', users.deleteUser);
 app.post('/user/add', users.addUser);
 app.get('/user/all', users.findAll);

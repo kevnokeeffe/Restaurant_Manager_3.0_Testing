@@ -86,6 +86,16 @@ router.findOne = (req, res) => {
   });
 };
 
+router.userOrders = (req,res) => {
+  res.setHeader('Content-Type', 'application/json');
+  Order.find({"userId":res.body.userId}).then(orders=> {
+    console.log(orders);
+    res.status(200).send(JSON.stringify(result, null, 5));;
+  }).catch(error => {
+    console.log(error)
+  });
+};
+
 //This method prints out all the users
 router.findAll = (req, res) => {
   res.setHeader('Content-Type', 'application/json');
@@ -153,26 +163,18 @@ router.deleteInactiveUsers = (req,res) => {
 };
 
 //Lists all orders of usersId
-router.usersOrders = (req,res,next) => {
-  res.setHeader('Content-Type', 'application/json');
-  User.find({ "_id" : req.params.id },'_id').then(id=> {
-    const result = new id;
-    Order.find({"userId" :req.params.userId}).equals(id).then(result=>{
-      res.status(200).send(JSON.stringify(result,null,5));
-    }).catch(err => {
-      console.log(err);
-      res.status(500).json({
-        error: err,
-        data: id
-      });
-    });
-  }).catch(err => {
-    console.log(err);
-    res.status(500).json({
-      error:err
-    });
-  });
-};
+// router.usersOrders = (req,res,next) => {
+//   res.setHeader('Content-Type', 'application/json');
+//   Order.find({"userId": req.body.userId}).then(result => {
+//     res.status(200).send(JSON.stringify(result, null, 5));
+//   }).catch(err => {
+//     console.log(err);
+//     res.status(500).json({
+//       error: err,
+//       data: id
+//     });
+//   });
+// };
 
 router.addUsersOrders = ( (req,res,next) => {
   //future method
