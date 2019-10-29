@@ -1,3 +1,33 @@
+GET http://localhost:3000/user/5db46ceca82b20212cd7e04b/find
+Accept: */*
+Content-Type: application/json
+
+{                      "fName": "Kevin",           "lName": "O Keeffe",           "email": "kevaokeeffe@gmail.com",           "password": "123456",           "permission" : "admin",           "active" : true      }
+
+<> 2019-10-29T085813.200.json
+
+###
+
+GET http://localhost:3000/user/all
+Accept: */*
+Content-Type: application/json
+
+{                      "fName": "Kevin",           "lName": "O Keeffe",           "email": "kevaokeeffe@gmail.com",           "password": "123456",           "permission" : "admin",           "active" : true      }
+
+<> 2019-10-29T085750.200.json
+
+###
+
+POST http://localhost:3000/user/add
+Accept: */*
+Content-Type: application/json
+
+{                      "fName": "Kevin",           "lName": "O Keeffe",           "email": "kevaokeeffe@gmail.com",           "password": "123456",           "permission" : "admin",           "active" : true      }
+
+<> 2019-10-29T084217.201.json
+
+###
+
 GET http://localhost:3000/user/5db1fd86f7b46c3ac05d7632/order
 Accept: */*
 Cache-Control: no-cache
@@ -371,30 +401,6 @@ Accept: */*
 Cache-Control: no-cache
 
 <> 2019-10-25T084252.200.json
-
-###
-
-DELETE http://localhost:3000/user/5db306d58336bd313c31c086/delete
-Accept: */*
-Cache-Control: no-cache
-
-<> 2019-10-25T084251-3.200.json
-
-###
-
-DELETE http://localhost:3000/user/5db306d58336bd313c31c086/delete
-Accept: */*
-Cache-Control: no-cache
-
-<> 2019-10-25T084251-2.200.json
-
-###
-
-DELETE http://localhost:3000/user/5db306d58336bd313c31c086/delete
-Accept: */*
-Cache-Control: no-cache
-
-<> 2019-10-25T084251-1.200.json
 
 ###
 

@@ -3,9 +3,10 @@ let express = require('express');
 let path = require('path');
 let cookieParser = require('cookie-parser');
 let logger = require('morgan');
-
-let indexRouter = require('./routes/index');
-let usersRouter = require('./routes/users');
+const userController = require('./controllers/user-control');
+const errorController = require('./controllers/error');
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
 const authRoutes = require('./routes/auth')
 const orders = require("./routes/orders");
 const users = require("./routes/users");
@@ -42,7 +43,8 @@ app.put('/order/update/:id', orders.updateOrder);
 app.get('/user/:id/find',users.findOne);
 //app.get('/user/userId/order',users.userOrders);
 app.delete('/user/:id/delete', users.deleteUser);
-app.post('/user/add', users.addUser);
+app.post('/user/add',userController.addUser);
+//app.post('/user/add', users.addUser);
 app.get('/user/all', users.findAll);
 app.put('/user/:id/inactive',users.setUserToInactive);
 app.put('/user/:id/active', users.setUserToActive);
@@ -72,5 +74,5 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
+app.use(errorController.get404);
 module.exports = app;
