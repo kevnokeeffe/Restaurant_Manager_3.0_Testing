@@ -52,6 +52,7 @@ app.put('/user/:id/addOrder',users.addUsersOrders);
 app.delete('/user/delete',users.deleteInactiveUsers);
 
 //Bills calls
+app.get('/bill/:billId/get',bills.getBill);
 app.get('/bill/:billId/total', bills.billOfOrders);
 app.put('/bill/:billId/payBill',bills.payBillOfOrders);
 app.get('/bill/unpaidBills/',bills.unPaidBills);

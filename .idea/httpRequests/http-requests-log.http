@@ -1,3 +1,43 @@
+GET http://localhost:3000/bill/2222/get
+Accept: */*
+Content-Type: application/json
+
+{                      "fName": "Kevin",           "lName": "O Keeffe",           "email": "kevaokeeffe@gmail.com",           "password": "123456",           "permission" : "admin",           "active" : true      }
+
+<> 2019-10-29T094740.200.json
+
+###
+
+GET http://localhost:3000/bill/1223/get
+Accept: */*
+Content-Type: application/json
+
+{                      "fName": "Kevin",           "lName": "O Keeffe",           "email": "kevaokeeffe@gmail.com",           "password": "123456",           "permission" : "admin",           "active" : true      }
+
+<> 2019-10-29T094710.200.json
+
+###
+
+GET http://localhost:3000/order/all
+Accept: */*
+Content-Type: application/json
+
+{                      "fName": "Kevin",           "lName": "O Keeffe",           "email": "kevaokeeffe@gmail.com",           "password": "123456",           "permission" : "admin",           "active" : true      }
+
+<> 2019-10-29T094648.200.json
+
+###
+
+GET http://localhost:3000/bill/2222/find
+Accept: */*
+Content-Type: application/json
+
+{                      "fName": "Kevin",           "lName": "O Keeffe",           "email": "kevaokeeffe@gmail.com",           "password": "123456",           "permission" : "admin",           "active" : true      }
+
+<> 2019-10-29T094539.404.html
+
+###
+
 GET http://localhost:3000/user/5db46ceca82b20212cd7e04b/find
 Accept: */*
 Content-Type: application/json
@@ -369,38 +409,6 @@ Accept: */*
 Cache-Control: no-cache
 
 <> 2019-10-25T084325.200.json
-
-###
-
-DELETE http://localhost:3000/user/5db306d58336bd313c31c086/delete
-Accept: */*
-Cache-Control: no-cache
-
-<> 2019-10-25T084252-3.200.json
-
-###
-
-DELETE http://localhost:3000/user/5db306d58336bd313c31c086/delete
-Accept: */*
-Cache-Control: no-cache
-
-<> 2019-10-25T084252-2.200.json
-
-###
-
-DELETE http://localhost:3000/user/5db306d58336bd313c31c086/delete
-Accept: */*
-Cache-Control: no-cache
-
-<> 2019-10-25T084252-1.200.json
-
-###
-
-DELETE http://localhost:3000/user/5db306d58336bd313c31c086/delete
-Accept: */*
-Cache-Control: no-cache
-
-<> 2019-10-25T084252.200.json
 
 ###
 

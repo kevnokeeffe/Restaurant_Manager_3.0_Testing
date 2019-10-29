@@ -5,6 +5,7 @@ const _ = require("lodash");
 const UserTest = require("../controllers/user-control");
 const User = require ("../models/users");
 const MongoMemoryServer = require("mongodb-memory-server").MongoMemoryServer;
+const mongoose = require("mongoose");
 let server;
 let mongod;
 let db, validID;
@@ -96,8 +97,8 @@ describe("ADD /user", () => {
         //             expect(res.body[0]).to.have.property("email", "kevinok2@gmail.com");
         //         });
         // });
-    });
-});
+     });
+ });
 
 describe("DELETE /user", () => {
 
