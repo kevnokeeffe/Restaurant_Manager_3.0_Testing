@@ -40,14 +40,14 @@ router.getBill = (req,res) => {
         res.status(200).json({message:"Bill found",orders: orders});
         }else {
             res.status(500).json({
-                message: "Bill not found",
+                message: "Bill not found!",
                 error: err
         });
-        };
+        }
     }).catch(err => {
         //console.log(err);
         res.status(500).json({
-            message: "Bill not found",
+            message: "Bill not found!",
             error: err
         });
     });

@@ -68,7 +68,7 @@ describe('Bill', () => {
 
     describe("GET /bill", () => {
         describe("when the id is valid", () => {
-            it("should return the matching order", done => {
+            it("should return the matching bill", done => {
                 request(server)
                     .get(`/bill/${validID}/get`)
                     .set("Accept", "application/json")
@@ -80,6 +80,20 @@ describe('Bill', () => {
                     });
             });
         });
+
+    describe("when the id is invalid", () => {
+        it("should return the NOT found message", done => {
+            request(server)
+                .get("/bill/9999/get")
+                .set("Accept", "application/json")
+                .expect("Content-Type", /json/)
+                .expect(500)
+                .end((err, res) => {
+                    expect(res.body.message).equals("Bill not found!");
+                    done(err);
+                });
+        });
+    });
     });
 
     describe("DELETE /bill", () => {
