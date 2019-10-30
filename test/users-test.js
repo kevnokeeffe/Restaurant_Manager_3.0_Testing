@@ -85,7 +85,9 @@ describe("ADD /user", () => {
                 .then(res => {
                     expect(res.body.message).equals("User Created");
                     validID = res.body.data._id;
+
                 });
+            done();
         });
         // after(() => {
         //     return request(server)

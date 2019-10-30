@@ -44,8 +44,8 @@ describe('Bill', () => {
         }
     });
 
-describe("Before Each",()=>{
-    before(async () => {
+
+    beforeEach(async () => {
         try {
             const order = new Order({
                 billId: 1223,
@@ -56,24 +56,24 @@ describe("Before Each",()=>{
                 drink: "coke",
                 price: 25.99,
                 payed: false,
-                message: "5db1fd86f7b46c3ac05d7632"
+                message: "5db1fd86f7b46c3ac05d7632a"
             });
             await order.save();
-            const order1 = await Order.findOne({message: "5db1fd86f7b46c3ac05d7632"});
+            const order1 = await Order.findOne({message: "5db1fd86f7b46c3ac05d7632a"});
             validID = order1.billId;
             console.log(order1);
         } catch (err) {
             console.log(err)
         }
     });
-});
+
 
 
     describe("GET /bill", () => {
         describe("when the id is valid", () => {
             it("should return the matching bill", done => {
                 request(server)
-                    .get(`/bill/1223/get`)
+                    .get(`/bill/${validID}/get`)
                     .set("Accept", "application/json")
                     .expect("Content-Type", /json/)
                     .expect(200)
@@ -100,7 +100,35 @@ describe("Before Each",()=>{
     });
 
     describe("DELETE /bill", () => {
+        it("should delete an order", done => {
 
+            try {
+                request(server)
+                    .delete(`/bill/${validID}/delete`)
+                    .expect(200)
+                    .expect("Content-Type", /json/)
+                    .then(res => {
+                        expect(res.body).to.be.a("array");
+                        expect(res.body).to.include({
+                            message: "Bill Successfully Deleted!"
+                        });
+
+                        expect(res.body.data).to.include({
+                            id: validID
+                        });
+                        console.log("DELETE")
+                    });
+
+            } catch (err) {
+                console.log("fail")
+            }
+            done();
+        });
+        after(() => {
+                return request(server)
+                    .get(`/user/${validID}/find`)
+                    .expect(500)
+            });
     });
 
     describe("GET_TOTAL /bill", () => {
