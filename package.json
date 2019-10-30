@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "test": "mocha --timeout 40000 --exit",
+    "test": "cross-env NODE_ENV=test mocha --timeout 40000 --exit",
     "start": "node ./bin/www"
   },
   "dependencies": {
@@ -22,6 +22,7 @@
   },
   "devDependencies": {
     "chai": "^4.2.0",
+    "cross-env": "^6.0.3",
     "mocha": "^6.2.2",
     "mongodb-memory-server": "^6.0.1",
     "supertest": "^4.0.2"
