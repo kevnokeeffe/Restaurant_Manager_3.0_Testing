@@ -61,7 +61,7 @@ describe('Bill', () => {
             await order.save();
             const order1 = await Order.findOne({message: "5db1fd86f7b46c3ac05d7632a"});
             validID = order1.billId;
-            console.log(order1);
+            //console.log(order1);
         } catch (err) {
             console.log(err)
         }
@@ -90,7 +90,7 @@ describe('Bill', () => {
                 .get("/bill/9999/get")
                 .set("Accept", "application/json")
                 .expect("Content-Type", /json/)
-                .expect(500)
+                .expect(404)
                 .end((err, res) => {
                     expect(res.body.message).equals("Bill not found!");
                     done(err);
@@ -126,7 +126,7 @@ describe('Bill', () => {
         });
         after(() => {
                 return request(server)
-                    .get(`/bill/${validID}/find`)
+                    .get(`/bill/${validID}/get`)
                     .expect(404)
             });
     });
@@ -147,13 +147,50 @@ describe('Bill', () => {
         });
         after(() => {
             return request(server)
-                .get(`/bill/${validID}/find`)
-                .expect(404)
+                .get(`/bill/${validID}/get`)
+                .expect(200)
         });
 
     });
 
+
     describe("UPDATE /bill", () => {
 
     });
+
+    describe("PAY BILL OF ORDERS /bill",()=>{
+        //
+        // const order = new Order({
+        //     billId: 1223,
+        //     userId: "5db1fd86f7b46c3ac05d7632",
+        //     starter: "cake",
+        //     main: "ice-cream",
+        //     desert: "cheesecake",
+        //     drink: "coke",
+        //     price: 25.99,
+        //     payed: false,
+        //     message: "5db1fd86f7b46c3ac05d7632a"
+        // });
+        // order.save();
+        // const order2 = Order.findOne({message: "5db1fd86f7b46c3ac05d7632a"});
+        // const validID2 = order2.billId;
+        describe("when the id is valid", ()=>{
+           it('should return a message and paid true', ()=>{
+             return request(server)
+                 .put(`/bill/${validID}/payBill`)
+                 .expect(200)
+                 .then(resp =>{
+                     expect(resp.body).to.include({
+                         message: "Bill Successfully Payed!"
+                     });
+                     expect(resp.body.data).to.have.property("payed",true);
+                 });
+           });
+        });
+    });
+
+    describe("UNPAY BILL OF ORDERS /bill", ()=>{
+
+    });
+
 });

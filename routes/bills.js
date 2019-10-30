@@ -46,7 +46,7 @@ router.getBill = (req,res) => {
         }
     }).catch(err => {
         //console.log(err);
-        res.status(500).json({
+        res.status(404).json({
             message: "Bill not found!",
             error: err
         });
@@ -58,7 +58,7 @@ router.unPaidBills = (req,res) => {
     res.setHeader('Content-Type', 'application/json');
     Order.find({"payed":false}).then(orders=> {
         console.log(orders);
-        res.json({orders: orders});
+        res.status(200).json({orders: orders});
     }).catch(error => {
         console.log(error)
     });
@@ -91,10 +91,14 @@ router.payBillOfOrders = (req,res) => {
     res.setHeader('Content-Type', 'application/json');
     console.log("HERE")
         Order.updateMany({$and: [{"billId":req.params.billId},{"payed":false}]},{$set: { payed: true }}).then(orders=> {
-            res.json({orders: orders, message: 'Bill Successfully Payed!'})
+            res.status(200).json({orders: orders, message: 'Bill Successfully Payed!'})
         })
-            .catch(error => {
-                console.log(error)
+            .catch(err => {
+                //console.log(err);
+                res.status(404).json({
+                    message: "Failed",
+                    error: err
+                });
             });
 };
 
