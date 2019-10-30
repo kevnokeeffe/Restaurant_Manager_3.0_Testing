@@ -33,6 +33,9 @@ router.findOne = (req, res) => {
             res.json({ message: 'Order NOT Found!', errmsg : err } );
         else
             res.send(JSON.stringify(orders,null,5));
+    }).catch(err => {
+        console.log(err);
+        res.status(500).json({error:err});
     });
 };
 
@@ -56,6 +59,9 @@ router.findAll = (req, res) => {
         if (err)
             res.send(err);
         res.send(JSON.stringify(orders,null,5));
+    }).catch(err => {
+        console.log(err);
+        res.status(500).json({error:err});
     });
 };
 
@@ -75,6 +81,9 @@ router.orderPayed = (req,res)=>{
                        res.json({ message: 'Order Successfully Payed!'});
                 });
             }
+        }).catch(err => {
+            console.log(err);
+            res.status(500).json({error:err});
         });
 };
 
@@ -94,6 +103,9 @@ router.orderNotPayed = (req,res)=>{
                     res.json({ message: 'Order Set to Unpaid!'});
             });
         }
+    }).catch(err => {
+        console.log(err);
+        res.status(500).json({error:err});
     });
 };
 

@@ -89,16 +89,17 @@ describe("ADD /user", () => {
                 });
             done();
         });
-        // after(() => {
-        //     return request(server)
-        //         .get(`/user/${validID}/find`)
-        //         .expect(200)
-        //         .then(res => {
-        //             expect(res.body[0]).to.have.property("fName", "req.body.fName");
-        //             expect(res.body[0]).to.have.property("lName", "req.body.lName");
-        //             expect(res.body[0]).to.have.property("email", "kevinok2@gmail.com");
-        //         });
-        // });
+        after(() => {
+            return request(server)
+                .get(`/user/${validID}/find`)
+                .expect(200)
+                .then(res => {
+                    expect(res.body[0]).to.have.property("fName", "req.body.fName");
+                    expect(res.body[0]).to.have.property("lName", "req.body.lName");
+                    expect(res.body[0]).to.have.property("email", "kevinok2@gmail.com");
+                    expect(res.body[0]).to.have.property("active", true);
+                });
+        });
      });
  });
 

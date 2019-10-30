@@ -126,8 +126,8 @@ describe('Bill', () => {
         });
         after(() => {
                 return request(server)
-                    .get(`/user/${validID}/find`)
-                    .expect(500)
+                    .get(`/bill/${validID}/find`)
+                    .expect(404)
             });
     });
 
