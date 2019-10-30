@@ -4,9 +4,11 @@
   "private": true,
   "scripts": {
     "test": "cross-env NODE_ENV=test mocha --timeout 40000 --exit",
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "compile": "babel ./ --out-dir dist/ --ignore ./node_modules,./test --copy-files"
   },
   "dependencies": {
+    "@babel/runtime": "^7.6.3",
     "bcrypt": "^3.0.6",
     "chai-subset": "^1.6.0",
     "cookie-parser": "~1.4.4",
@@ -21,6 +23,12 @@
     "morgan": "~1.9.1"
   },
   "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.3.4",
+    "@babel/node": "^7.6.3",
+    "@babel/plugin-transform-runtime": "^7.6.2",
+    "@babel/preset-env": "^7.3.4",
+    "@babel/register": "^7.0.0",
     "chai": "^4.2.0",
     "cross-env": "^6.0.3",
     "mocha": "^6.2.2",

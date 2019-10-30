@@ -1,3 +1,7 @@
 file:
     - test/orders-test.js
+    - test/bills-test.js
+    - test/dummy-test.js
+    - test/users-test.js
+require: '@babel/register'
 timeout: 6000

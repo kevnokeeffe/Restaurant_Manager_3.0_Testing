@@ -1,4 +1,4 @@
-let Order = require ('../models/orders');
+import Order from '../models/orders';
 let express = require('express');
 let router = express.Router();
 let mongoose = require('mongoose');

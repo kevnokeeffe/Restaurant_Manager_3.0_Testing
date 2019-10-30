@@ -1,9 +1,12 @@
-const expect = require('chai').expect;
-const Order = require("../models/orders");
-const request = require("supertest");
-const _ = require("lodash");
+//const expect = require('chai').expect;
+import { expect } from 'chai'
+//import chaiSubset from 'chai-subset';
+import Order from "../models/orders";
+import request from "supertest";
+//const _ = require("lodash");
 const MongoMemoryServer = require("mongodb-memory-server").MongoMemoryServer;
 const mongoose = require("mongoose");
+
 
 
 
@@ -174,7 +177,7 @@ describe('Bill', () => {
 
     });
 
-    describe("PAY BILL OF ORDERS /bill", () => {
+    describe("PAY and UNPAY BILL OF ORDERS /bill", () => {
         describe("when the id is valid", () => {
             it('should return a message and paid true', () => {
                 return request(server)
@@ -184,6 +187,7 @@ describe('Bill', () => {
                         expect(resp.body).to.include({
                             message: "Bill Successfully Payed!"
                         });
+
                         //expect(resp.body.data).to.have.deep.property('[0].payed', 'true');
                     });
             });
@@ -193,9 +197,9 @@ describe('Bill', () => {
                     .expect(404)
             });
         });
-    });
 
-    describe("UNPAY BILL OF ORDERS /bill", () => {
+
+
         describe("when the id is valid", () => {
             it('should return a message and paid false', () => {
                 return request(server)
