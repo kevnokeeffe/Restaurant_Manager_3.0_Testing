@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "bcrypt": "^3.0.6",
+    "chai-subset": "^1.6.0",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "ejs": "~2.6.1",

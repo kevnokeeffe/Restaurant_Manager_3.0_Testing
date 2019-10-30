@@ -162,22 +162,15 @@ describe('Orders', () => {
             }
             done();
         });
+        after((done) => {
+            request(server)
+                .get(`/order/findOne/${validID}`)
+                .set("Accept", "application/json")
+                .expect("Content-Type", /json/)
+                .expect(200)
+            done();
 
-        // after((done) => {
-        //     request(server)
-        //         .get(`/order/findOne/${validID}`)
-        //         .set("Accept", "application/json")
-        //         .expect("Content-Type", /json/)
-        //         .expect(200)
-        //         .end((err, res) => {
-        //             expect(res.body).to.include({
-        //                 message: "Order Not Deleted!"
-        //
-        //             })
-        //             done(err);
-        //             console.log("DELETE AFTER")
-        //         });
-        // });
+        });
 
         describe("when the id is invalid", () => {
             it("should return the NOT found message", done => {
@@ -235,6 +228,8 @@ describe('Orders', () => {
                         expect(resp.body).to.include({
                             message: "Order Successfully Payed!"
                         });
+
+
                     });
             });
         });

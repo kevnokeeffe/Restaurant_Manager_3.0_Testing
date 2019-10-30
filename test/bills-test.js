@@ -5,9 +5,11 @@ const _ = require("lodash");
 const MongoMemoryServer = require("mongodb-memory-server").MongoMemoryServer;
 const mongoose = require("mongoose");
 
+
+
 let server;
 let mongod;
-let db, validID;
+let db, validID, validID2;
 
 describe('Bill', () => {
     before(async () => {
@@ -56,11 +58,26 @@ describe('Bill', () => {
                 drink: "coke",
                 price: 25.99,
                 payed: false,
-                message: "5db1fd86f7b46c3ac05d7632a"
+                message: "5db1fd86f7c"
             });
             await order.save();
-            const order1 = await Order.findOne({message: "5db1fd86f7b46c3ac05d7632a"});
+            const order1 = await Order.findOne({message: "5db1fd86f7c"});
             validID = order1.billId;
+
+            const orders = new Order({
+                billId: 1224,
+                userId: "5db1fd86f7b46c3ac05d7632",
+                starter: "cake",
+                main: "ice-cream",
+                desert: "cheesecake",
+                drink: "coke",
+                price: 25.99,
+                payed: false,
+                message: "5db1fd86f7b46c3ac05d7632a"
+            });
+            await orders.save();
+            const orders2 = await Order.findOne({message: "5db1fd86f7b46c3ac05d7632a"});
+            validID2 = orders2._id;
             //console.log(order1);
         } catch (err) {
             console.log(err)
@@ -83,19 +100,19 @@ describe('Bill', () => {
             });
         });
 
-    describe("when the id is invalid", () => {
-        it("should return the NOT found message", done => {
-            request(server)
-                .get("/bill/9999/get")
-                .set("Accept", "application/json")
-                .expect("Content-Type", /json/)
-                .expect(404)
-                .end((err, res) => {
-                    expect(res.body.message).equals("Bill not found!");
-                    done(err);
-                });
+        describe("when the id is invalid", () => {
+            it("should return the NOT found message", done => {
+                request(server)
+                    .get("/bill/9999/get")
+                    .set("Accept", "application/json")
+                    .expect("Content-Type", /json/)
+                    .expect(404)
+                    .end((err, res) => {
+                        expect(res.body.message).equals("Bill not found!");
+                        done(err);
+                    });
+            });
         });
-    });
     });
 
     describe("DELETE /bill", () => {
@@ -124,10 +141,10 @@ describe('Bill', () => {
             done();
         });
         after(() => {
-                return request(server)
-                    .get(`/bill/${validID}/get`)
-                    .expect(404)
-            });
+            return request(server)
+                .get(`/bill/${validID}/get`)
+                .expect(404)
+        });
     });
 
     describe("GET_TOTAL /bill", () => {
@@ -157,37 +174,17 @@ describe('Bill', () => {
 
     });
 
-    describe("PAY BILL OF ORDERS /bill",()=>{
-        describe("when the id is valid", ()=>{
-           it('should return a message and paid true', ()=>{
-             return request(server)
-                 .put(`/bill/${validID}/payBill`)
-                 .expect(200)
-                 .then(resp =>{
-                     expect(resp.body).to.include({
-                         message: "Bill Successfully Payed!"
-                     });
-                     //expect(resp.body.data).to.have.property("payed", true);
-                 });
-           });
-           after(() => {
+    describe("PAY BILL OF ORDERS /bill", () => {
+        describe("when the id is valid", () => {
+            it('should return a message and paid true', () => {
                 return request(server)
-                    .get(`/bill/${validID}/find`)
-                    .expect(404)
-            });
-        });
-    });
-
-    describe("UNPAY BILL OF ORDERS /bill",()=>{
-        describe("when the id is valid", ()=>{
-            it('should return a message and paid false', ()=>{
-                return request(server)
-                    .put(`/bill/${validID}/unPayBill`)
+                    .put(`/bill/${validID}/payBill`)
                     .expect(200)
-                    .then(resp =>{
+                    .then(resp => {
                         expect(resp.body).to.include({
-                            message: "Bill Set to unpaid!"
+                            message: "Bill Successfully Payed!"
                         });
+                        //expect(resp.body.data).to.have.deep.property('[0].payed', 'true');
                     });
             });
             after(() => {
@@ -198,8 +195,25 @@ describe('Bill', () => {
         });
     });
 
-    describe("UNPAY BILL OF ORDERS /bill", ()=>{
+    describe("UNPAY BILL OF ORDERS /bill", () => {
+        describe("when the id is valid", () => {
+            it('should return a message and paid false', () => {
+                return request(server)
+                    .put(`/bill/${validID}/unPayBill`)
+                    .expect(200)
+                    .then(resp => {
+                        expect(resp.body).to.include({
+                            message: "Bill Set to unpaid!"
+                        });
 
+                    });
+            });
+            after(() => {
+                return request(server)
+                    .get(`/bill/${validID}/find`)
+                    .expect(404)
+            });
+        });
     });
 
 });

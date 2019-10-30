@@ -35,7 +35,7 @@ router.findOne = (req, res) => {
             res.send(JSON.stringify(orders,null,5));
     }).catch(err => {
         console.log(err);
-        res.status(500).json({error:err});
+        res.status(500).json({message: 'Order NOT Found!',error:err});
     });
 };
 
@@ -48,7 +48,7 @@ router.deleteOrder = (req,res,next) => {
 
     }).catch(err => {
         console.log(err);
-        res.status(500).json({error:err});
+        res.status(500).json({messege:"Order not deleted",error:err});
     });
 };
 
