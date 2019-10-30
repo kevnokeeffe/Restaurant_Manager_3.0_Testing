@@ -59,8 +59,12 @@ router.unPaidBills = (req,res) => {
     Order.find({"payed":false}).then(orders=> {
         console.log(orders);
         res.status(200).json({orders: orders});
-    }).catch(error => {
-        console.log(error)
+    }).catch(err => {
+        //console.log(err);
+        res.status(404).json({
+            message: "Failed",
+            error: err
+        });
     });
 };
 
@@ -70,8 +74,12 @@ router.paidBills = (req,res) => {
     Order.find({"payed":true}).then(orders => {
         console.log(orders);
         res.json({orders: orders});
-    }).catch(error => {
-        console.log(error)
+    }).catch(err => {
+        //console.log(err);
+        res.status(404).json({
+            message: "Failed",
+            error: err
+        });
     });
 };
 
@@ -81,8 +89,12 @@ router.billOfOrders = (req, res) => {
     Order.find({$and: [{"billId":req.params.billId},{"payed":false}]}).then(orders=> {
         console.log(orders);
         res.json({orders: orders, totalBill: getTotalBill(orders)});
-    }).catch(error => {
-        console.log(error)
+    }).catch(err => {
+        //console.log(err);
+        res.status(404).json({
+            message: "Failed",
+            error: err
+        });
     });
 };
 
@@ -109,8 +121,12 @@ router.unPayBillOfOrders = (req,res) => {
     Order.updateMany({$and: [{"billId":req.params.billId},{"payed":true}]},{$set: { payed: false }}).then(orders=> {
         res.json({orders: orders, message: 'Bill Set to unpaid!'})
     })
-        .catch(error => {
-            console.log(error)
+        .catch(err => {
+            //console.log(err);
+            res.status(404).json({
+                message: "Failed",
+                error: err
+            });
         });
 };
 
@@ -120,8 +136,12 @@ router.totalRead = (req,res) => {
     Order.find({"payed":true}).then(orders=> {
         console.log(orders);
         res.json({orders: orders, totalBill: getTotalBill(orders)});
-    }).catch(error => {
-        console.log(error)
+    }).catch(err => {
+        //console.log(err);
+        res.status(404).json({
+            message: "Failed",
+            error: err
+        });
     });
 };
 
@@ -135,8 +155,12 @@ router.deleteBill = (req,res) => {
         console.log(promis);
         res.json({messege:"Bill deleted",promis:promis})
 
-}).catch(error => {
-        console.log(error)
+}).catch(err => {
+        //console.log(err);
+        res.status(404).json({
+            message: "Failed",
+            error: err
+        });
     });
 };
 

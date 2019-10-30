@@ -1,3 +1,19 @@
+PUT http://localhost:3000/bill/1223/payBill
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-10-30T031732.200.json
+
+###
+
+GET http://localhost:3000/bill/1223/get
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-10-30T031636.200.json
+
+###
+
 GET http://localhost:3000/order/all
 Accept: */*
 Cache-Control: no-cache
@@ -411,22 +427,6 @@ Accept: */*
 Cache-Control: no-cache
 
 <> 2019-10-25T090000.200.json
-
-###
-
-GET http://localhost:3000/user/all
-Accept: */*
-Cache-Control: no-cache
-
-<> 2019-10-25T085722.200.json
-
-###
-
-GET http://localhost:3000/order/all
-Accept: */*
-Cache-Control: no-cache
-
-<> 2019-10-25T085642.200.json
 
 ###
 

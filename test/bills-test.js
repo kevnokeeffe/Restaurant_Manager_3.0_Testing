@@ -68,7 +68,6 @@ describe('Bill', () => {
     });
 
 
-
     describe("GET /bill", () => {
         describe("when the id is valid", () => {
             it("should return the matching bill", done => {
@@ -159,21 +158,6 @@ describe('Bill', () => {
     });
 
     describe("PAY BILL OF ORDERS /bill",()=>{
-        //
-        // const order = new Order({
-        //     billId: 1223,
-        //     userId: "5db1fd86f7b46c3ac05d7632",
-        //     starter: "cake",
-        //     main: "ice-cream",
-        //     desert: "cheesecake",
-        //     drink: "coke",
-        //     price: 25.99,
-        //     payed: false,
-        //     message: "5db1fd86f7b46c3ac05d7632a"
-        // });
-        // order.save();
-        // const order2 = Order.findOne({message: "5db1fd86f7b46c3ac05d7632a"});
-        // const validID2 = order2.billId;
         describe("when the id is valid", ()=>{
            it('should return a message and paid true', ()=>{
              return request(server)
@@ -183,9 +167,34 @@ describe('Bill', () => {
                      expect(resp.body).to.include({
                          message: "Bill Successfully Payed!"
                      });
-                     expect(resp.body.data).to.have.property("payed",true);
+                     //expect(resp.body.data).to.have.property("payed", true);
                  });
            });
+           after(() => {
+                return request(server)
+                    .get(`/bill/${validID}/find`)
+                    .expect(404)
+            });
+        });
+    });
+
+    describe("UNPAY BILL OF ORDERS /bill",()=>{
+        describe("when the id is valid", ()=>{
+            it('should return a message and paid false', ()=>{
+                return request(server)
+                    .put(`/bill/${validID}/unPayBill`)
+                    .expect(200)
+                    .then(resp =>{
+                        expect(resp.body).to.include({
+                            message: "Bill Set to unpaid!"
+                        });
+                    });
+            });
+            after(() => {
+                return request(server)
+                    .get(`/bill/${validID}/find`)
+                    .expect(404)
+            });
         });
     });
 
