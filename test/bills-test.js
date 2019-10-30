@@ -132,6 +132,24 @@ describe('Bill', () => {
     });
 
     describe("GET_TOTAL /bill", () => {
+        it('should get the total price for a bill', done => {
+
+            request(server)
+                .get(`/bill/${validID}/total`)
+                .expect(200)
+                .expect("Content-Type", /json/)
+                .then(res => {
+                    expect(res.body).to.include({
+                        price: 25.99
+                    });
+                });
+            done();
+        });
+        after(() => {
+            return request(server)
+                .get(`/bill/${validID}/find`)
+                .expect(404)
+        });
 
     });
 

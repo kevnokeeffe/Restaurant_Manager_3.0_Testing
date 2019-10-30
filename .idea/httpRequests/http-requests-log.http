@@ -1,3 +1,57 @@
+GET http://localhost:3000/order/all
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-10-30T014719.200.json
+
+###
+
+GET http://localhost:3000/orders/all
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-10-30T014715.404.html
+
+###
+
+GET http://localhost:3000/bill/1223/get
+Accept: */*
+Cache-Control: no-cache
+
+###
+
+GET http://localhost:3000/bill/1223/get
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-10-30T013547.500.json
+
+###
+
+DELETE http://localhost:3000/bill/1223/delete
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-10-30T013532.200.json
+
+###
+
+GET http://localhost:3000/bill/1223/delete
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-10-30T013528.404.html
+
+###
+
+GET http://localhost:3000/bill/1223/total
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-10-30T013450.200.json
+
+###
+
 GET http://localhost:3000/bill/1223/get
 Accept: */*
 Content-Type: application/json
@@ -373,62 +427,6 @@ Accept: */*
 Cache-Control: no-cache
 
 <> 2019-10-25T085642.200.json
-
-###
-
-GET http://localhost:3000/order/alll
-Accept: */*
-Cache-Control: no-cache
-
-<> 2019-10-25T085636.404.html
-
-###
-
-GET http://localhost:3000/user/all
-Accept: */*
-Cache-Control: no-cache
-
-<> 2019-10-25T085629.200.json
-
-###
-
-GET http://localhost:3000/user/all
-Accept: */*
-Cache-Control: no-cache
-
-<> 2019-10-25T085050.200.json
-
-###
-
-DELETE http://localhost:3000/user/delete
-Accept: */*
-Cache-Control: no-cache
-
-<> 2019-10-25T085036.200.json
-
-###
-
-PUT http://localhost:3000/user/5db311312d2a4c3730295aaa/inactive
-Accept: */*
-Cache-Control: no-cache
-
-<> 2019-10-25T085006.200.json
-
-###
-
-PUT http://localhost:3000/user/5db30938c4c99e33b4ea131b/inactive
-Accept: */*
-Cache-Control: no-cache
-
-<> 2019-10-25T084959.200.json
-
-###
-
-GET http://localhost:3000/user/all
-Accept: */*
-Cache-Control: no-cache
-
-<> 2019-10-25T084937.200.json
 
 ###
 
