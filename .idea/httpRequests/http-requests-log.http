@@ -1,3 +1,13 @@
+GET http://localhost:3000/order/all
+Accept: */*
+Content-Type: application/json
+
+{"billId": "1002","userId":"5daf6fe6fa565d4e247ac26f", "starter" : "duck wings" , "main" : "chicken goujons" , "desert": "cheesecake" , "drink" : "coke" , "price" : 25.50}
+
+<> 2019-10-30T102723.200.json
+
+###
+
 PUT http://localhost:3000/bill/1223/payBill
 Accept: */*
 Cache-Control: no-cache
@@ -419,14 +429,6 @@ Accept: */*
 Cache-Control: no-cache
 
 <> 2019-10-25T090734.200.json
-
-###
-
-DELETE http://localhost:3000/user/5db3539728859b231c84df80/delete
-Accept: */*
-Cache-Control: no-cache
-
-<> 2019-10-25T090000.200.json
 
 ###
 

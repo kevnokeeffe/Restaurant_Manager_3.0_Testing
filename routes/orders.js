@@ -30,7 +30,7 @@ router.findOne = (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     Order.find({ "_id" : req.params.id },function(err, orders) {
         if (err)
-            res.json({ message: 'Order NOT Found!', errmsg : err } );
+            res.status(500).json({ message: 'Order NOT Found!', errmsg : err } );
         else
             res.send(JSON.stringify(orders,null,5));
     }).catch(err => {
@@ -44,11 +44,11 @@ router.deleteOrder = (req,res,next) => {
     res.setHeader('Content-Type', 'application/json');
     Order.deleteOne({"_id": req.params.id}).exec().then( promis =>{
         console.log(promis);
-        res.status(200).json({messege:"Order deleted",promis:promis})
+        res.status(200).json({message:"Order deleted",promis:promis})
 
     }).catch(err => {
         console.log(err);
-        res.status(500).json({messege:"Order not deleted",error:err});
+        res.status(500).json({message:"Order not deleted",error:err});
     });
 };
 

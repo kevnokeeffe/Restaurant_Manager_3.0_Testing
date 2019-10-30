@@ -37,7 +37,7 @@ describe('Orders', () => {
 
     after(async () => {
         try {
-            //await db.dropDatabase();
+            await db.dropDatabase();
             await mongod.stop()
             await  server.close()
         } catch (error) {
@@ -70,7 +70,7 @@ describe('Orders', () => {
             try {
                 request(server)
                     .get("/order/all")
-                    .set("Accept", "application/json")
+                    //.set("Accept", "application/json")
                     .expect("Content-Type", /json/)
                     .expect(200)
                     .end((err, res) => {
@@ -93,103 +93,132 @@ describe('Orders', () => {
                             done(err)
                         }
                     });
-            }catch(err){
-                    console.log(err);
-                    res.status(500).json({
-                        message: "Get Order did not work!",
-                        error: err
-                    });
+            }catch (error) {
+                console.log(error);
             }
         });
     });
 
     describe("POST /order", () => {
         it("should return confirmation message and update datastore", () => {
-            const order = {
-                billId: 1432,
-                userId: "5db208ff6b6aaf09d8a9b361",
-                starter: "Cake",
-                main: "food",
-                desert: "cheesecake",
-                drink: "water",
-                price: 23.99,
-                payed: false,
-                message: "String"
-            };
-            return request(server)
-                .post("/order/add")
-                .send(order)
-                .expect(201)
-                .then(res => {
-                    expect(res.body.message).equals("Order Created");
-                    validID = res.body.data._id;
-                });
+            try {
+                const order = {
+                    billId: 1432,
+                    userId: "5db208ff6b6aaf09d8a9b361",
+                    starter: "Cake",
+                    main: "food",
+                    desert: "cheesecake",
+                    drink: "water",
+                    price: 23.99,
+                    payed: false,
+                    message: "String"
+                };
+                return request(server)
+                    .post("/order/add")
+                    .send(order)
+                    .expect(201)
+                    .then(res => {
+                        try {
+                            expect(res.body.message).equals("Order Created");
+                            validID = res.body.data._id;
+                        }catch(err){console.log("fail")}
+                    });
+            }catch (error) {
+                console.log(error);
+            }
         });
         after(() => {
-            return request(server)
-                .get(`/order/findOne/${validID}`)
-                .expect(200)
-                .then(res => {
-                    expect(res.body[0]).to.have.property("billId", 1432);
-                    expect(res.body[0]).to.have.property("userId", "5db208ff6b6aaf09d8a9b361");
-                    expect(res.body[0]).to.have.property("price", 23.99);
-                });
-        });
-    });
-
-    describe("DELETE /order", () => {
-        it("should delete an order", done => {
-
             try {
-                request(server)
-                    .delete(`/order/${validID}/delete`)
+                return request(server)
+                    .get(`/order/findOne/${validID}`)
                     .expect(200)
-                    .expect("Content-Type", /json/)
-                    .then(res => {
-                        expect(res.body).to.be.a("array");
-                        expect(res.body).to.include({
-                            message: "Order Successfully Deleted!"
-                        });
-
-                        expect(res.body.data).to.include({
-                            id: validID
-                        });
-                        console.log("DELETE")
+                    .then(res => { try {
+                        expect(res.body[0]).to.have.property("billId", 1432);
+                        expect(res.body[0]).to.have.property("userId", "5db208ff6b6aaf09d8a9b361");
+                        expect(res.body[0]).to.have.property("price", 23.99);
+                    }catch(err){console.log("fail")}
                     });
 
-            } catch (err) {
-                console.log("fail")
+            }catch (error) {
+                console.log(error);
             }
-            done();
-        });
-        after((done) => {
-            request(server)
-                .get(`/order/findOne/${validID}`)
-                .set("Accept", "application/json")
-                .expect("Content-Type", /json/)
-                .expect(200)
-            done();
-
         });
 
-        describe("when the id is invalid", () => {
-            it("should return the NOT found message", done => {
-                request(server)
-                    .delete("/order/findOne/111111111")
-                    .expect(404)
-                    .expect({ message: "Order Not Deleted!" })
-                console.log("Fake delete worked")
-                done();
-            });
-        });
     });
+
+    describe("DELETE /order/:id/delete", () => {
+        try {
+            describe("When the id is valid", () => {
+                try {
+                    it("should delete an order", done => {
+
+                        try {
+                            request(server)
+                                .delete(`/order/${validID}/delete`)
+                                .expect(200)
+                                .expect("Content-Type", /json/)
+                                .then(res => {
+                                    expect(res.body).to.include({
+                                        message: "Order deleted"
+                                    });
+                                    expect(res.body.data).to.include({
+                                        id: validID,
+                                        price: 25.99
+                                    });
+                                    console.log("DELETE")
+                                    done();
+                                });
+
+                        } catch (err) {
+                            console.log("delete fail")
+                        }
+                        done();
+                    });
+
+                    after((done) => {
+                        try {
+                            request(server)
+                                .get(`/order/findOne/${validID}`)
+                                //.set("Accept", "application/json")
+                                .expect("Content-Type", /json/)
+                                .expect(200)
+                            done();
+                            console.log("after delete worked")
+                        } catch (err) {
+                            console.log("after delete fail")
+                        }
+
+                    });
+                } catch (err) {
+                    console.log("should delete an order fail")
+                }
+
+            });
+
+
+            describe("when the id is invalid", () => {
+                it("should return the NOT found message", done => {
+                    request(server)
+                        .delete("/order/findOne/111111111")
+                        .expect(500)
+                        .expect({message: "Order Not Deleted!"})
+                    console.log("Fake delete worked")
+                    done();
+                });
+            });
+        }catch (err) {
+            console.log("delete block fail")
+        }
+    });
+
 
     describe("GET /order", () => {
             describe("when the id is valid", () => {
                 it("should return the matching order", done => {
+                    try{
                     request(server)
                         .get(`/order/findOne/${validID}`)
-                        .set("Accept", "application/json")
+                        //.set("Accept", "application/json")
                         .expect("Content-Type", /json/)
                         .expect(200)
                         .end((err, res) => {
@@ -197,19 +226,26 @@ describe('Orders', () => {
                             expect(res.body[0]).to.have.property("desert", "cheesecake");
                             done(err);
                         });
+                    }catch (err) {
+                        console.log("get order fail")
+                    }
                 });
             });
         describe("when the id is invalid", () => {
             it("should return the NOT found message", done => {
+                try{
                 request(server)
                     .get("/order/findOne/9999")
-                    .set("Accept", "application/json")
+                    //.set("Accept", "application/json")
                     .expect("Content-Type", /json/)
-                    .expect(200)
+                    .expect(500)
                     .end((err, res) => {
                         expect(res.body.message).equals("Order NOT Found!");
                         done(err);
                     });
+                }catch (err) {
+                    console.log("id invalid fail")
+                }
             });
         });
     });
@@ -221,29 +257,40 @@ describe('Orders', () => {
     describe("PUT /order/payed/:id", () => {
         describe("when the id is valid", () => {
             it("should return a message and the order set to payed: true", () => {
+                try{
                 return request(server)
                     .put(`/order/payed/${validID}`)
+                    .set("Accept", "application/json")
+                    .expect("Content-Type", /json/)
                     .expect(200)
                     .then(resp => {
                         expect(resp.body).to.include({
                             message: "Order Successfully Payed!"
                         });
 
-
                     });
+                }catch (err) {
+                    console.log("valid id fail")
+                }
             });
         });
 
         describe("when the id is invalid", () => {
             it("should return a message and the order set to payed: false", () => {
+                try{
                 return request(server)
                     .put(`/order/unpaid/${validID}`)
+                    .set("Accept", "application/json")
+                    .expect("Content-Type", /json/)
                     .expect(200)
                     .then(resp => {
                         expect(resp.body).to.include({
                             message: "Order Set to Unpaid!"
                         });
                     });
+                }catch (err) {
+                    console.log("invalid id fail")
+                }
             });
         });
     });
