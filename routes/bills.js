@@ -153,7 +153,7 @@ router.deleteBill = (req,res) => {
     res.setHeader('Content-Type', 'application/json');
     Order.deleteMany({"billId": req.params.billId}).then( promis =>{
         console.log(promis);
-        res.json({messege:"Bill deleted",promis:promis})
+        res.json({message:"Bill Deleted!",promis:promis})
 
 }).catch(err => {
         //console.log(err);

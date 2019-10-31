@@ -145,13 +145,8 @@ describe('Bill', () => {
                     .expect("Content-Type", /json/)
                     .then(res => {
                         try {
-                            expect(res.body).to.be.a("array");
                             expect(res.body).to.include({
-                                message: "Bill Successfully Deleted!"
-                            });
-
-                            expect(res.body.data).to.include({
-                                id: validID
+                                message: "Bill Deleted!"
                             });
                             console.log("DELETE")
                          }catch (error) {
@@ -184,8 +179,9 @@ describe('Bill', () => {
                 .expect("Content-Type", /json/)
                 .then(res => {
                     try{
-                    expect(res.body.data).to.include({
-                        price: 25.99
+                        console.log({message:"what:",validID})
+                    expect(res.body).to.include({
+                        totalBill: 25.99
                     });
                     }catch (error) {
                         console.log(error);

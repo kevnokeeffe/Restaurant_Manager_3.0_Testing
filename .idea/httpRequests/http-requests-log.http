@@ -1,3 +1,113 @@
+GET http://localhost:3000/order/findOne/5dbaf05dcf750200d89fcbco
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-10-31T043924.500.json
+
+###
+
+GET http://localhost:3000/order/findOne/5dbaf05dcf750200d89fcbco
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-10-31T043840.500.json
+
+###
+
+GET http://localhost:3000/bill/1223/get
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-10-31T035544.200.json
+
+###
+
+GET http://localhost:3000/order/1223/get
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-10-31T035535.404.html
+
+###
+
+GET http://localhost:3000/order/all
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-10-31T035459.200.json
+
+###
+
+GET http://localhost:3000/bill/1224/get
+Accept: */*
+Content-Type: application/json
+
+{"billId": "1002","userId":"5daf6fe6fa565d4e247ac26f", "starter" : "duck wings" , "main" : "chicken goujons" , "desert": "cheesecake" , "drink" : "coke" , "price" : 25.50}
+
+<> 2019-10-31T031832.200.json
+
+###
+
+GET http://localhost:3000/bill/unpaidBills
+Accept: */*
+Content-Type: application/json
+
+{"billId": "1002","userId":"5daf6fe6fa565d4e247ac26f", "starter" : "duck wings" , "main" : "chicken goujons" , "desert": "cheesecake" , "drink" : "coke" , "price" : 25.50}
+
+<> 2019-10-31T031815.200.json
+
+###
+
+GET http://localhost:3000/bill/1003/get
+Accept: */*
+Content-Type: application/json
+
+{"billId": "1002","userId":"5daf6fe6fa565d4e247ac26f", "starter" : "duck wings" , "main" : "chicken goujons" , "desert": "cheesecake" , "drink" : "coke" , "price" : 25.50}
+
+<> 2019-10-31T031728.404.json
+
+###
+
+GET http://localhost:3000/bill/1002/get
+Accept: */*
+Content-Type: application/json
+
+{"billId": "1002","userId":"5daf6fe6fa565d4e247ac26f", "starter" : "duck wings" , "main" : "chicken goujons" , "desert": "cheesecake" , "drink" : "coke" , "price" : 25.50}
+
+<> 2019-10-31T031722.404.json
+
+###
+
+GET http://localhost:3000/bill/1001/get
+Accept: */*
+Content-Type: application/json
+
+{"billId": "1002","userId":"5daf6fe6fa565d4e247ac26f", "starter" : "duck wings" , "main" : "chicken goujons" , "desert": "cheesecake" , "drink" : "coke" , "price" : 25.50}
+
+<> 2019-10-31T031715.404.json
+
+###
+
+GET http://localhost:3000/bill/1001
+Accept: */*
+Content-Type: application/json
+
+{"billId": "1002","userId":"5daf6fe6fa565d4e247ac26f", "starter" : "duck wings" , "main" : "chicken goujons" , "desert": "cheesecake" , "drink" : "coke" , "price" : 25.50}
+
+<> 2019-10-31T031709.404.html
+
+###
+
+GET http://localhost:3000/bill/all
+Accept: */*
+Content-Type: application/json
+
+{"billId": "1002","userId":"5daf6fe6fa565d4e247ac26f", "starter" : "duck wings" , "main" : "chicken goujons" , "desert": "cheesecake" , "drink" : "coke" , "price" : 25.50}
+
+<> 2019-10-31T031652.404.html
+
+###
+
 GET http://localhost:3000/order/all
 Accept: */*
 Content-Type: application/json
@@ -333,102 +443,6 @@ Accept: */*
 Cache-Control: no-cache
 
 <> 2019-10-27T124350.500.json
-
-###
-
-GET http://localhost:3000/user/5db1fd86f7b46c3ac05d7632/order
-Accept: */*
-Cache-Control: no-cache
-
-<> 2019-10-27T124349.500.json
-
-###
-
-GET http://localhost:3000/user/5db1fd86f7b46c3ac05d7632/order
-Accept: */*
-Cache-Control: no-cache
-
-<> 2019-10-27T124314.500.json
-
-###
-
-GET http://localhost:3000/user/5db1fd86f7b46c3ac05d7632/order
-Accept: */*
-Cache-Control: no-cache
-
-<> 2019-10-27T124215.200.json
-
-###
-
-GET http://localhost:3000/user/5db1fd86f7b46c3ac05d7632/order
-Accept: */*
-Cache-Control: no-cache
-
-<> 2019-10-27T124152.200.json
-
-###
-
-GET http://localhost:3000/order/all
-Accept: */*
-Cache-Control: no-cache
-
-<> 2019-10-27T124125.200.json
-
-###
-
-GET http://localhost:3000/order/all
-Accept: */*
-Cache-Control: no-cache
-
-<> 2019-10-25T090848.200.json
-
-###
-
-GET http://localhost:3000/order
-Accept: */*
-Cache-Control: no-cache
-
-<> 2019-10-25T090842.404.html
-
-###
-
-DELETE http://localhost:3000/order/5db353b628859b231c84df81/delete
-Accept: */*
-Cache-Control: no-cache
-
-<> 2019-10-25T090819.500.json
-
-###
-
-DELETE http://localhost:3000/order/5db353b628859b231c84df81/delete
-Accept: */*
-Cache-Control: no-cache
-
-<> 2019-10-25T090808.500.json
-
-###
-
-GET http://localhost:3000/order/5db353b628859b231c84df81/delete
-Accept: */*
-Cache-Control: no-cache
-
-<> 2019-10-25T090805.404.html
-
-###
-
-GET http://localhost:3000/order/all
-Accept: */*
-Cache-Control: no-cache
-
-<> 2019-10-25T090751.200.json
-
-###
-
-GET http://localhost:3000/order/all
-Accept: */*
-Cache-Control: no-cache
-
-<> 2019-10-25T090734.200.json
 
 ###
 

@@ -8,7 +8,7 @@ const mongoose = require("mongoose");
 
 let server;
 let mongod;
-let db, validID;
+let db, validID, validID2;
 
 describe('Orders', () => {
     before(async () => {
@@ -120,7 +120,7 @@ describe('Orders', () => {
                     .then(res => {
                         try {
                             expect(res.body.message).equals("Order Created");
-                            validID = res.body.data._id;
+                            validID2 = res.body.data._id;
                         }catch(err){console.log("fail")}
                     });
             }catch (error) {
@@ -130,7 +130,7 @@ describe('Orders', () => {
         after(() => {
             try {
                 return request(server)
-                    .get(`/order/findOne/${validID}`)
+                    .get(`/order/findOne/${validID2}`)
                     .expect(200)
                     .then(res => { try {
                         expect(res.body[0]).to.have.property("billId", 1432);
@@ -154,36 +154,28 @@ describe('Orders', () => {
 
                         try {
                             request(server)
-                                .delete(`/order/${validID}/delete`)
+                                .delete(`/order/${validID2}/delete`)
                                 .expect(200)
                                 .expect("Content-Type", /json/)
                                 .then(res => {
                                     expect(res.body).to.include({
                                         message: "Order deleted"
                                     });
-                                    expect(res.body.data).to.include({
-                                        id: validID,
-                                        price: 25.99
-                                    });
-                                    console.log("DELETE")
+                                    //console.log("DELETE worked!!!!")
                                     done();
                                 });
-
                         } catch (err) {
                             console.log("delete fail")
                         }
-                        done();
                     });
-
-                    after((done) => {
+                    after(() => {
                         try {
                             request(server)
-                                .get(`/order/findOne/${validID}`)
-                                //.set("Accept", "application/json")
+                                .get(`/order/findOne/${validID2}`)
+                                .set("Accept", "application/json")
                                 .expect("Content-Type", /json/)
                                 .expect(200)
-                            done();
-                            console.log("after delete worked")
+                            //console.log("after delete worked")
                         } catch (err) {
                             console.log("after delete fail")
                         }
@@ -200,10 +192,10 @@ describe('Orders', () => {
                 it("should return the NOT found message", done => {
                     try{
                     request(server)
-                        .delete("/order/findOne/111111111")
+                        .delete(`/order/${validID2}/delete`)
                         .expect(500)
                         .expect({message: "Order Not Deleted!"})
-                    console.log("Fake delete worked")
+                    //console.log("Fake delete worked")
                     done();
                     }catch (err) {
                         console.log(err)
@@ -239,18 +231,12 @@ describe('Orders', () => {
             it("should return the NOT found message", done => {
                 try {
                     request(server)
-                        .get("/order/findOne/adrt43567g")
+                        .get("/order/findOne/5dbaf05dcf750200d89fcbco")
                         //.set("Accept", "application/json")
                         .expect("Content-Type", /json/)
                         .expect(500)
-                        .end((err, res) => {
-                            try {
-                                expect(res.body).to.include({message: "Order NOT Found!"});
-                                done(err);
-                            } catch (err) {
-                                console.log("id invalid fail")
-                            }
-                        });
+                        .expect({message: "Order NOT Found!"});
+                        done();
                 } catch (err) {
                     console.log("id invalid fail")
                 }

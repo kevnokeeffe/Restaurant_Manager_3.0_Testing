@@ -30,12 +30,12 @@ router.findOne = (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     Order.find({ "_id" : req.params.id },function(err, orders) {
         if (err)
-            res.status(500).json({ message: 'Order NOT Found!', errmsg : err } );
+            res.status(500).json({ message: 'Order NOT Found!' } );
         else
-            res.send(JSON.stringify(orders,null,5));
+            res.status(200).send(JSON.stringify(orders,null,5));
     }).catch(err => {
         console.log(err);
-        res.status(500).json({message: 'Order NOT Found!',error:err});
+        res.status(500).json({message: 'Order NOT Found!'});
     });
 };
 
