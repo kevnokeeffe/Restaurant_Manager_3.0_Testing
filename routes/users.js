@@ -35,10 +35,10 @@ router.post('/add',userController.addUser);
 router.findOne = (req, res) => {
   res.setHeader('Content-Type', 'application/json');
   User.find({ "_id" : req.params.id },'fName lName email active').then(id=>{
-    res.send(JSON.stringify(id,null,5));
+      res.status(200).send(JSON.stringify(id,null,5));
   }).catch(err => {
     console.log(err);
-    res.status(500).json({
+    res.status(500).json({message: 'User NOT Found!',
       error:err
   });
   });

@@ -8,7 +8,8 @@ const MongoMemoryServer = require("mongodb-memory-server").MongoMemoryServer;
 const mongoose = require("mongoose");
 let server;
 let mongod;
-let db, validID, validID2;
+let db, validID, validID2,inValidID;
+inValidID = "5db1fd86f7b66c3ac55d7635";
 
 describe("Over Watch User", () =>{
 
@@ -49,9 +50,9 @@ after(async () => {
 beforeEach(async () => {
     try {
         const user = new User({
-            fName: "req.body.fName",
-            lName: "req.body.lName",
-            email: "kevinok@gmail.com",
+            fName: "kevin",
+            lName: "o keeffe",
+            email: "kevokeeffe@gmail.com",
             password: "123456",
             permission: "req.body.permission",
             active: true
@@ -70,36 +71,34 @@ beforeEach(async () => {
         validID = user1._id;
 
 
-    }catch(err){console.log(err)}
-});
-
-describe("GET /user", () => {
-
+    }catch{console.log("error")};
 });
 
 describe("ADD /user", () => {
     describe("POST /user", () => {
         it("should return confirmation message and update datastore", () => {
-            const user = {
-                fName: "req.body.fName",
-                lName: "req.body.lName",
-                email: "kevinok2@gmail.com",
-                password: "12345",
-                permission: "req.body.permiss",
-                active: true
-            };
-            return request(server)
-                .post("/user/add")
-                .send(user)
-                .expect(201)
-                .then(res => {
-                    expect(res.body.message).equals("User Created");
-                    validID2 = res.body.data._id;
+            try {
+                const user = {
+                    fName: "req.body.fName",
+                    lName: "req.body.lName",
+                    email: "kevinok2@gmail.com",
+                    password: "12345",
+                    permission: "req.body.permiss",
+                    active: true
+                };
+                return request(server)
+                    .post("/user/add")
+                    .send(user)
+                    .expect(201)
+                    .then(res => {
+                        expect(res.body.message).equals("User Created");
+                        validID2 = res.body.data._id;
 
-                });
-
+                    });
+            }catch{console.log("error")};
         });
         after(() => {
+            try{
             return request(server)
                 .get(`/user/${validID2}/find`)
                 .expect(200)
@@ -109,9 +108,54 @@ describe("ADD /user", () => {
                     expect(res.body[0]).to.have.property("email", "kevinok2@gmail.com");
                     expect(res.body[0]).to.have.property("active", true);
                 });
+            }catch{console.log("error")};
         });
      });
  });
+
+    describe("GET /user", () => {
+        it("should return the matching order", done => {
+            try {
+                request(server)
+                    .get(`/user/${validID}/find`)
+                    .set("Accept", "application/json")
+                    .expect("Content-Type", /json/)
+                    .expect(200)
+                    .then((res) => {
+                        expect(res.body[0]).to.have.property("fName", "kevin");
+                        expect(res.body[0]).to.have.property("lName", "o keeffe");
+                        expect(res.body[0]).to.have.property("email", "kevokeeffe@gmail.com");
+                        expect(res.body[0]).to.have.property("active", true);
+                        done()
+                    });
+            }catch{console.log("Get User Fail")}
+        });
+        after(()=> {
+            try {
+                return request(server)
+                    .get(`/user/${validID}/find`)
+                    .set("Accept", "application/json")
+                    .expect("Content-Type", /json/)
+                    .expect(200)
+                    .then((res) => {
+                        expect(res.body[0]).to.have.property("fName", "kevin");
+                    });
+            }catch{console.log("error")};
+        });
+        describe("when the id is invalid", () => {
+            it("should return the NOT found message", done => {
+                try {
+                    request(server)
+                        .get(`/user/${inValidID}/find`)
+                        .set("Accept", "application/json")
+                        .expect("Content-Type", /json/)
+                        .expect(500)
+                        .expect({message: "User NOT Found!"});
+                    done();
+                }catch{console.log("error")};
+            });
+        });
+    });
 
 describe("DELETE /user", () => {
 
