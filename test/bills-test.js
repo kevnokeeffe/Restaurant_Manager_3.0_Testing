@@ -87,30 +87,50 @@ describe('Bill', () => {
 
     describe("GET /bill", () => {
         describe("when the id is valid", () => {
-            it("should return the matching bill", done => {
-                request(server)
-                    .get(`/bill/${validID}/get`)
-                    .set("Accept", "application/json")
-                    .expect("Content-Type", /json/)
-                    .expect(200)
-                    .end((err, res) => {
-                        expect(res.body.message).equals("Bill found");
-                        done(err);
-                    });
-            });
+            try {
+                it("should return the matching bill", done => {
+                    try {
+                        request(server)
+                            .get(`/bill/${validID}/get`)
+                            .set("Accept", "application/json")
+                            .expect("Content-Type", /json/)
+                            .expect(200)
+                            .end((err, res) => {
+                                try{
+                                expect(res.body.message).equals("Bill found");
+                                done(err);
+                                }catch (error) {
+                                    console.log(error);
+                                }
+                            });
+                    }catch (error) {
+                        console.log(error);
+                    }
+                });
+            }catch (error) {
+                    console.log(error);
+                }
         });
 
         describe("when the id is invalid", () => {
             it("should return the NOT found message", done => {
+                try{
                 request(server)
                     .get("/bill/9999/get")
                     .set("Accept", "application/json")
                     .expect("Content-Type", /json/)
                     .expect(404)
                     .end((err, res) => {
+                        try{
                         expect(res.body.message).equals("Bill not found!");
                         done(err);
+                        }catch (error) {
+                            console.log(error);
+                        }
                     });
+                }catch (error) {
+                    console.log(error);
+                }
             });
         });
     });
@@ -124,15 +144,19 @@ describe('Bill', () => {
                     .expect(200)
                     .expect("Content-Type", /json/)
                     .then(res => {
-                        expect(res.body).to.be.a("array");
-                        expect(res.body).to.include({
-                            message: "Bill Successfully Deleted!"
-                        });
+                        try {
+                            expect(res.body).to.be.a("array");
+                            expect(res.body).to.include({
+                                message: "Bill Successfully Deleted!"
+                            });
 
-                        expect(res.body.data).to.include({
-                            id: validID
-                        });
-                        console.log("DELETE")
+                            expect(res.body.data).to.include({
+                                id: validID
+                            });
+                            console.log("DELETE")
+                         }catch (error) {
+                    console.log(error);
+                }
                     });
 
             } catch (err) {
@@ -141,31 +165,48 @@ describe('Bill', () => {
             done();
         });
         after(() => {
+            try{
             return request(server)
                 .get(`/bill/${validID}/get`)
                 .expect(404)
+            }catch (error) {
+                console.log(error);
+            }
         });
     });
 
     describe("GET_TOTAL /bill", () => {
         it('should get the total price for a bill', done => {
-
+        try{
             request(server)
                 .get(`/bill/${validID}/total`)
                 .expect(200)
                 .expect("Content-Type", /json/)
                 .then(res => {
-                    expect(res.body).to.include({
+                    try{
+                    expect(res.body.data).to.include({
                         price: 25.99
                     });
+                    }catch (error) {
+                        console.log(error);
+                    }
                 });
             done();
+        }catch (error) {
+        console.log(error);
+        }
         });
+
         after(() => {
+            try{
             return request(server)
                 .get(`/bill/${validID}/get`)
                 .expect(200)
+            }catch (error) {
+                console.log(error);
+            }
         });
+
 
     });
 
@@ -177,20 +218,32 @@ describe('Bill', () => {
     describe("PAY BILL OF ORDERS /bill", () => {
         describe("when the id is valid", () => {
             it('should return a message and paid true', () => {
-                return request(server)
+                try {
+                    return request(server)
                     .put(`/bill/${validID}/payBill`)
                     .expect(200)
                     .then(resp => {
+                        try{
                         expect(resp.body).to.include({
                             message: "Bill Successfully Payed!"
                         });
+                        }catch (error) {
+                            console.log(error);
+                        }
                         //expect(resp.body.data).to.have.deep.property('[0].payed', 'true');
                     });
+                }catch (error) {
+                    console.log(error);
+                }
             });
             after(() => {
+                try{
                 return request(server)
                     .get(`/bill/${validID}/find`)
                     .expect(404)
+                }catch (error) {
+                    console.log(error);
+                }
             });
         });
     });
@@ -198,20 +251,32 @@ describe('Bill', () => {
     describe("UNPAY BILL OF ORDERS /bill", () => {
         describe("when the id is valid", () => {
             it('should return a message and paid false', () => {
+                try{
                 return request(server)
                     .put(`/bill/${validID}/unPayBill`)
                     .expect(200)
                     .then(resp => {
+                        try{
                         expect(resp.body).to.include({
                             message: "Bill Set to unpaid!"
                         });
+                        }catch (error) {
+                            console.log(error);
+                        }
 
                     });
+                }catch (error) {
+                    console.log(error);
+                }
             });
             after(() => {
+                try{
                 return request(server)
                     .get(`/bill/${validID}/find`)
                     .expect(404)
+                }catch (error) {
+                    console.log(error);
+                }
             });
         });
     });

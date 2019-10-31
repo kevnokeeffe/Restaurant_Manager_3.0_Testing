@@ -198,12 +198,16 @@ describe('Orders', () => {
 
             describe("when the id is invalid", () => {
                 it("should return the NOT found message", done => {
+                    try{
                     request(server)
                         .delete("/order/findOne/111111111")
                         .expect(500)
                         .expect({message: "Order Not Deleted!"})
                     console.log("Fake delete worked")
                     done();
+                    }catch (err) {
+                        console.log(err)
+                    }
                 });
             });
         }catch (err) {
@@ -233,17 +237,21 @@ describe('Orders', () => {
             });
         describe("when the id is invalid", () => {
             it("should return the NOT found message", done => {
-                try{
-                request(server)
-                    .get("/order/findOne/9999")
-                    //.set("Accept", "application/json")
-                    .expect("Content-Type", /json/)
-                    .expect(500)
-                    .end((err, res) => {
-                        expect(res.body.message).equals("Order NOT Found!");
-                        done(err);
-                    });
-                }catch (err) {
+                try {
+                    request(server)
+                        .get("/order/findOne/adrt43567g")
+                        //.set("Accept", "application/json")
+                        .expect("Content-Type", /json/)
+                        .expect(500)
+                        .end((err, res) => {
+                            try {
+                                expect(res.body).to.include({message: "Order NOT Found!"});
+                                done(err);
+                            } catch (err) {
+                                console.log("id invalid fail")
+                            }
+                        });
+                } catch (err) {
                     console.log("id invalid fail")
                 }
             });

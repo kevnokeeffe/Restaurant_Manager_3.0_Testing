@@ -57,6 +57,15 @@ beforeEach(async () => {
             active: true
         });
         await user.save();
+        const user2 = new User({
+            fName: "req.body",
+            lName: "req.body",
+            email: "kevinokssffe@gmail.com",
+            password: "123456",
+            permission: "req.body",
+            active: true
+        });
+        await user2.save();
         const user1 = await User.findOne({ permission: "req.body.permission" });
         validID = user1._id;
 
@@ -75,7 +84,7 @@ describe("ADD /user", () => {
                 lName: "req.body.lName",
                 email: "kevinok2@gmail.com",
                 password: "12345",
-                permission: "req.body.permission",
+                permission: "req.body.permiss",
                 active: true
             };
             return request(server)
@@ -87,7 +96,7 @@ describe("ADD /user", () => {
                     validID = res.body.data._id;
 
                 });
-            done();
+
         });
         after(() => {
             return request(server)
