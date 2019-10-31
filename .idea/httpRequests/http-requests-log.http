@@ -1,3 +1,33 @@
+POST http://localhost:3000/user/add
+Accept: */*
+Content-Type: application/json
+
+{                      "fName": "Kevin",           "lName": "O Keeffe",           "email": "kevaokeeffe",           "password": "123456",           "permission" : "admin",           "active" : true      }
+
+<> 2019-10-31T080153.500.json
+
+###
+
+POST http://localhost:3000/user/add
+Accept: */*
+Content-Type: application/json
+
+{                      "fName": "Kevin",           "lName": "O Keeffe",           "email": "kevaokeeffe@gmail.com",           "password": "123456",           "permission" : "admin",           "active" : true      }
+
+<> 2019-10-31T080118.409.json
+
+###
+
+POST http://localhost:3000/user/add
+Accept: */*
+Content-Type: application/json
+
+{                      "fName": "Kevin",           "lName": "O Keeffe",           "email": "kevaokeeffe@gmail.com",           "password": "123456",           "permission" : "admin",           "active" : true      }
+
+<> 2019-10-31T080116.201.json
+
+###
+
 GET http://localhost:3000/order/findOne/5dbaf05dcf750200d89fcbco
 Accept: */*
 Cache-Control: no-cache
@@ -419,30 +449,6 @@ Accept: */*
 Cache-Control: no-cache
 
 <> 2019-10-27T124430.500.json
-
-###
-
-GET http://localhost:3000/user/5db1fd86f7b46c3ac05d7632/order
-Accept: */*
-Cache-Control: no-cache
-
-<> 2019-10-27T124429.500.json
-
-###
-
-GET http://localhost:3000/user/5db1fd86f7b46c3ac05d7632/order
-Accept: */*
-Cache-Control: no-cache
-
-<> 2019-10-27T124351.500.json
-
-###
-
-GET http://localhost:3000/user/5db1fd86f7b46c3ac05d7632/order
-Accept: */*
-Cache-Control: no-cache
-
-<> 2019-10-27T124350.500.json
 
 ###
 

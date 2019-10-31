@@ -111,6 +111,57 @@ describe("ADD /user", () => {
             }catch{console.log("error")};
         });
      });
+
+    describe("Add an email that already belongs to an existing user", () => {
+        it("should return an invalid email message", () => {
+            try {
+                const user = {
+                    fName: "req.body.fName",
+                    lName: "req.body.lName",
+                    email: "kevinok2@gmail.com",
+                    password: "12345",
+                    permission: "req.body.permiss",
+                    active: true
+                };
+                return request(server)
+                    .post("/user/add")
+                    .send(user)
+                    .expect(409)
+                    .then(res => {
+                        try {
+                            expect(res.body.message).equals("Sorry, email already exists!");
+                        } catch {
+                            console.log("error")
+                        }
+                    });
+            } catch {
+                console.log("error")
+            }
+
+        });
+    });
+
+    // describe("when the email is of an invalid type",()=>{
+    //     it("should not create new user", ()=>{
+    //         try {
+    //             const user = {
+    //                 fName: "different",
+    //                 lName: "different",
+    //                 email: "kevinok2",
+    //                 password: "12345",
+    //                 permission: "different",
+    //                 active: true
+    //             };
+    //             return request(server)
+    //                 .post("/user/add")
+    //                 .send(user)
+    //                 .expect(500)
+    //         } catch {
+    //             console.log("error2")
+    //         }
+    //     });
+    // });
+
  });
 
     describe("GET /user", () => {
