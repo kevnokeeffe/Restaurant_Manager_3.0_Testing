@@ -8,9 +8,9 @@ const MongoMemoryServer = require("mongodb-memory-server").MongoMemoryServer;
 const mongoose = require("mongoose");
 let server;
 let mongod;
-let db, validID;
+let db, validID, validID2;
 
-describe("Over Watch", () =>{
+describe("Over Watch User", () =>{
 
 before(async () => {
     try {
@@ -69,6 +69,7 @@ beforeEach(async () => {
         const user1 = await User.findOne({ permission: "req.body.permission" });
         validID = user1._id;
 
+
     }catch(err){console.log(err)}
 });
 
@@ -93,14 +94,14 @@ describe("ADD /user", () => {
                 .expect(201)
                 .then(res => {
                     expect(res.body.message).equals("User Created");
-                    validID = res.body.data._id;
+                    validID2 = res.body.data._id;
 
                 });
 
         });
         after(() => {
             return request(server)
-                .get(`/user/${validID}/find`)
+                .get(`/user/${validID2}/find`)
                 .expect(200)
                 .then(res => {
                     expect(res.body[0]).to.have.property("fName", "req.body.fName");

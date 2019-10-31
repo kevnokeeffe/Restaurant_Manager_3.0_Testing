@@ -8,7 +8,7 @@ const mongoose = require("mongoose");
 
 let server;
 let mongod;
-let db, validID, validID2;
+let db, validID, validID2, validID3;
 
 describe('Orders', () => {
     before(async () => {
@@ -65,12 +65,13 @@ describe('Orders', () => {
         }catch(err){console.log(err)}
         });
 
+
     describe("GET /order", () => {
         it("should return all the orders", done => {
             try {
                 request(server)
                     .get("/order/all")
-                    //.set("Accept", "application/json")
+                    .set("Accept", "application/json")
                     .expect("Content-Type", /json/)
                     .expect(200)
                     .end((err, res) => {
@@ -131,11 +132,19 @@ describe('Orders', () => {
             try {
                 return request(server)
                     .get(`/order/findOne/${validID2}`)
+                    .expect("Content-Type", /json/)
                     .expect(200)
                     .then(res => { try {
                         expect(res.body[0]).to.have.property("billId", 1432);
                         expect(res.body[0]).to.have.property("userId", "5db208ff6b6aaf09d8a9b361");
+                        expect(res.body[0]).to.have.property("starter", "cake");
+                        expect(res.body[0]).to.have.property("main", "food");
+                        expect(res.body[0]).to.have.property("desert", "cheesecake");
+                        expect(res.body[0]).to.have.property("drink", "water");
                         expect(res.body[0]).to.have.property("price", 23.99);
+                        expect(res.body[0]).to.have.property("payed", false);
+                        expect(res.body[0]).to.have.property("message", "String");
+
                     }catch(err){console.log("fail")}
                     });
 
@@ -214,12 +223,18 @@ describe('Orders', () => {
                     try{
                     request(server)
                         .get(`/order/findOne/${validID}`)
-                        //.set("Accept", "application/json")
+                        .set("Accept", "application/json")
                         .expect("Content-Type", /json/)
                         .expect(200)
                         .end((err, res) => {
                             expect(res.body[0]).to.have.property("main", "ice-cream");
                             expect(res.body[0]).to.have.property("desert", "cheesecake");
+                            expect(res.body[0]).to.have.property("drink", "coke");
+                            expect(res.body[0]).to.have.property("price", 25.99);
+                            expect(res.body[0]).to.have.property("payed", false);
+                            expect(res.body[0]).to.have.property("userId", "5db1fd86f7b46c3ac05d7632");
+                            expect(res.body[0]).to.have.property("starter", "cake");
+                            expect(res.body[0]).to.have.property("message", "1217adce66bfa9e9e445c423643420af");
                             done(err);
                         });
                     }catch (err) {
@@ -248,28 +263,45 @@ describe('Orders', () => {
 
     });
 
-    describe("PUT /order/payed/:id", () => {
+    describe("START PUT PAYED /order/payed/:id", () => {
         describe("when the id is valid", () => {
             it("should return a message and the order set to payed: true", () => {
-                try{
-                return request(server)
-                    .put(`/order/payed/${validID}`)
-                    .set("Accept", "application/json")
-                    .expect("Content-Type", /json/)
-                    .expect(200)
-                    .then(resp => {
-                        expect(resp.body).to.include({
-                            message: "Order Successfully Payed!"
+                try {
+                    return request(server)
+                        .put(`/order/payed/${validID}`)
+                        .set("Accept", "application/json")
+                        .expect("Content-Type", /json/)
+                        .expect(200)
+                        .then(resp => {
+                            expect(resp.body).to.include({
+                                message: "Order Successfully Payed!"
+                            });
+                            console.log({message: "it worked"})
                         });
-
-                    });
-                }catch (err) {
+                } catch (err) {
                     console.log("valid id fail")
                 }
             });
+            after(() => {
+                try {
+                    return request(server)
+                        .get(`/order/findOne/${validID}`)
+                        .set("Accept", "application/json")
+                        .expect("Content-Type", /json/)
+                        .expect(200)
+                        .then(resp => {
+                            expect(resp.body[0]).to.have.property("payed", true);
+                        });
+                    console.log({message: "worked!"})
+                } catch (err) {
+                    console.log("after valid id fail")
+                }
+            });
         });
+    });
 
-        describe("when the id is invalid", () => {
+    describe("START PUT UNPAYED /order/payed/:id", () => {
+        describe("when the id is valid", () => {
             it("should return a message and the order set to payed: false", () => {
                 try{
                 return request(server)
@@ -281,10 +313,25 @@ describe('Orders', () => {
                         expect(resp.body).to.include({
                             message: "Order Set to Unpaid!"
                         });
+                        console.log({message:"it worked"})
                     });
                 }catch (err) {
                     console.log("invalid id fail")
                 }
+            });
+            after(() => {
+                try {
+                    request(server)
+                        .get(`/order/findOne/${validID}`)
+                        .set("Accept", "application/json")
+                        .expect("Content-Type", /json/)
+                        .expect(200)
+                        //.then((res) => {
+                            //expect(res.body[0]).to.have.property("payed", false);
+                            //console.log({message: "Log False check"})
+                        //});
+
+                } catch (err) {console.log("after valid id fail")}
             });
         });
     });
