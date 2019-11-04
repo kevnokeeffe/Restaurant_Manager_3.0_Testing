@@ -38,7 +38,7 @@ describe('Orders', () => {
     after(async () => {
         try {
             await db.dropDatabase();
-            await mongod.stop()
+            await mongod.stop();
             await  server.close()
         } catch (error) {
             console.log(error);
@@ -65,10 +65,46 @@ describe('Orders', () => {
         }catch(err){console.log(err)}
         });
 
+
+    describe("GET /orders", () => {
+        it("should return all the orders", done => {
+            try {
+                request(server)
+                    .get("/order/all")
+                    .set("Accept", "application/json")
+                    .expect("Content-Type", /json/)
+                    .expect(200)
+                    .end((err, res) => {
+                        try {
+                            expect(res.body).to.be.a("array");
+                            expect(res.body.length).to.be.at.least(1);
+                            expect(res.body.length).to.be.at.most(9999);
+                            let value = _.map(res.body, order => {
+                                return {
+                                    main: order.main,
+                                    desert: order.desert
+                                };
+                            });
+                            expect(value).to.deep.include({
+                                main: "ice-cream",
+                                desert: "cheesecake"
+                            });
+                            done();
+                        }catch (err) {
+                            done(err)
+                        }
+                    });
+            }catch (error) {
+                console.log(error);
+            }
+        });
+    });
+
     describe("GET /order", () => {
         describe("when the id is valid", () => {
             it("should return the matching order", done => {
-                try{
+
+                try {
                     request(server)
                         .get(`/order/findOne/${validID}`)
                         .set("Accept", "application/json")
@@ -85,9 +121,10 @@ describe('Orders', () => {
                             expect(res.body[0]).to.have.property("message", "1217adce66bfa9e9e445c423643420af");
                             done(err);
                         });
-                }catch (err) {
+                } catch (err) {
                     console.log("get order fail")
                 }
+
             });
         });
         describe("when the id is invalid", () => {
@@ -106,7 +143,6 @@ describe('Orders', () => {
             });
         });
     });
-
 
     describe("POST /order", () => {
         it("should return confirmation message and update datastore", () => {
@@ -327,7 +363,7 @@ describe('Orders', () => {
                         expect(resp.body).to.include({
                             message: "Order Set to Unpaid!"
                         });
-                        console.log({message:"it worked"})
+                        //console.log({message:"it worked"})
                     });
                 }catch (err) {
                     console.log("invalid id fail")
@@ -350,39 +386,7 @@ describe('Orders', () => {
         });
     });
 
-    describe("GET /orders", () => {
-        it("should return all the orders", done => {
-            try {
-                request(server)
-                    .get("/order/all")
-                    .set("Accept", "application/json")
-                    .expect("Content-Type", /json/)
-                    .expect(200)
-                    .end((err, res) => {
-                        try {
-                            expect(res.body).to.be.a("array");
-                            expect(res.body.length).to.be.at.least(1);
-                            expect(res.body.length).to.be.at.most(9999);
-                            let value = _.map(res.body, order => {
-                                return {
-                                    main: order.main,
-                                    desert: order.desert
-                                };
-                            });
-                            expect(value).to.deep.include({
-                                main: "ice-cream",
-                                desert: "cheesecake"
-                            });
-                            done();
-                        }catch (err) {
-                            done(err)
-                        }
-                    });
-            }catch (error) {
-                console.log(error);
-            }
-        });
-    });
+
 
 });
 

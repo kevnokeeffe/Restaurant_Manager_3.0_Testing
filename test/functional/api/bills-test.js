@@ -136,7 +136,7 @@ describe('Bill', () => {
     });
 
     describe("DELETE /bill", () => {
-        it("should delete an order", done => {
+        it("should delete a the bill", done => {
 
             try {
                 request(server)
@@ -179,7 +179,7 @@ describe('Bill', () => {
                 .expect("Content-Type", /json/)
                 .then(res => {
                     try{
-                        console.log({message:"what:",validID})
+                        //console.log({message:"what:",validID})
                     expect(res.body).to.include({
                         totalBill: 25.99
                     });
@@ -242,6 +242,23 @@ describe('Bill', () => {
                 }
             });
         });
+        describe("PAY BILL OF ORDERS", () => {
+            it("should try set a bill to payed and fail", done => {
+
+                try {
+                    request(server)
+                        .put(`/bill/5gy5g4654/payBill`)
+                        .expect("Content-Type", /json/)
+                        .expect(404)
+                        .expect({message: "Failed"});
+                    done();
+
+                } catch (err) {
+                    console.log("fail")
+                }
+
+            });
+        });
     });
 
     describe("UNPAY BILL OF ORDERS /bill", () => {
@@ -273,6 +290,24 @@ describe('Bill', () => {
                 }catch (error) {
                     console.log(error);
                 }
+            });
+        });
+
+        describe("UNPAY BILL OF ORDERS /order/:id/unpay", () => {
+            it("should try and unpay a bill and fail", done => {
+
+                try {
+                    request(server)
+                        .put(`/bill/5gy5g4654/unPayBill`)
+                        .expect("Content-Type", /json/)
+                        .expect(404)
+                        .expect({message: "Failed"});
+                    done();
+
+                } catch (err) {
+                    console.log("fail")
+                }
+
             });
         });
     });

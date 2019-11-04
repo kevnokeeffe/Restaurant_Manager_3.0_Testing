@@ -37,7 +37,7 @@ router.findOne = (req, res) => {
   User.find({ "_id" : req.params.id },'fName lName email active').then(id=>{
       res.status(200).send(JSON.stringify(id,null,5));
   }).catch(err => {
-    console.log(err);
+    //console.log(err);
     res.status(500).json({message: 'User NOT Found!',
       error:err
   });
@@ -47,10 +47,10 @@ router.findOne = (req, res) => {
 router.userOrders = (req,res) => {
   res.setHeader('Content-Type', 'application/json');
   Order.find({"userId":res.body.userId}).then(orders=> {
-    console.log(orders);
+    //console.log(orders);
     res.status(200).send(JSON.stringify(result, null, 5));;
   }).catch(error => {
-    console.log(error)
+    //console.log(error)
   });
 };
 
@@ -60,7 +60,7 @@ router.findAll = (req, res) => {
   User.find({},'fName lName email password active').then(id=>{
     res.send(JSON.stringify(id,null,5));
   }).catch(err => {
-    console.log(err);
+    //console.log(err);
     res.status(500).json({
       error:err
   });
@@ -75,7 +75,7 @@ router.deleteUser = (req,res,next) => {
     res.status(200).json({message:"User deleted",promis:promis})
 
   }).catch(err => {
-    console.log(err);
+    //console.log(err);
     res.status(500).json({message:"Error no such user", error:err});
   });
 };
@@ -87,7 +87,7 @@ router.setUserToActive = (req,res) => {
   User.updateOne({"_id": req.params.id}, {$set: {active: true}}).then(promis => {
     res.json({message: "Status changed to active", promis: promis})
   }).catch(err => {
-    console.log(err);
+    //console.log(err);
     res.status(500).json({
       message: "Error no such user"});
   });
@@ -99,7 +99,7 @@ router.setUserToInactive = (req,res) => {
   User.updateOne({"_id":req.params.id},{$set:{active:false}}).then(promis=>{
     res.json({message: "Status changed to inactive",promis:promis})
   }).catch(err => {
-    console.log(err);
+    //console.log(err);
     res.status(500).json({
       error:err
   });
@@ -112,7 +112,7 @@ router.deleteInactiveUsers = (req,res) => {
  User.deleteMany({ active:{$in:[false]}}).then( promis =>{
    res.json({messege: "Inactive users deleted",promis:promis})
  }).catch(err => {
-   console.log(err);
+   //console.log(err);
    res.status(500).json({
      error:err
  });
