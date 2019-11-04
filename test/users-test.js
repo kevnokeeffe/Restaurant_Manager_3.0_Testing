@@ -141,26 +141,6 @@ describe("ADD /user", () => {
         });
     });
 
-    // describe("when the email is of an invalid type",()=>{
-    //     it("should not create new user", ()=>{
-    //         try {
-    //             const user = {
-    //                 fName: "different",
-    //                 lName: "different",
-    //                 email: "kevinok2",
-    //                 password: "12345",
-    //                 permission: "different",
-    //                 active: true
-    //             };
-    //             return request(server)
-    //                 .post("/user/add")
-    //                 .send(user)
-    //                 .expect(500)
-    //         } catch {
-    //             console.log("error2")
-    //         }
-    //     });
-    // });
 
  });
 

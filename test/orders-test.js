@@ -228,7 +228,19 @@ describe('Orders', () => {
     });
 
     describe("UPDATE /order", () => {
-
+describe("when the id is valid", ()=>{
+    it("should return a message and update the order",()=>{
+        try{
+            return request(server)
+                .put(`/order/${validID}/update`)
+                .set("Accept","application/json")
+                .expect("Content-Type",/json/)
+                .expect(200)
+                .send()
+//TODO UPDATE
+        }catch{console.log("valid id fail")}
+    });
+});
     });
 
     describe("START PUT PAYED /order/payed/:id", () => {
