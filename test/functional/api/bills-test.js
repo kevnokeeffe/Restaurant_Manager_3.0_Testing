@@ -148,7 +148,7 @@ describe('Bill', () => {
                             expect(res.body).to.include({
                                 message: "Bill Deleted!"
                             });
-                            console.log("DELETE")
+                            //console.log("DELETE")
                          }catch (error) {
                     console.log(error);
                 }

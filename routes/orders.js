@@ -128,7 +128,7 @@ router.addOrder = ((req, res,next) => {
     order
         .save()
         .then(result => {
-            console.log(result);
+            //console.log(result);
             res.status(201).json({
                 message: "Order Created",
                 data: order

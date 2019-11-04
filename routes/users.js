@@ -71,12 +71,12 @@ router.findAll = (req, res) => {
 router.deleteUser = (req,res,next) => {
   res.setHeader('Content-Type', 'application/json');
   User.deleteOne({"_id": req.params.id}).exec().then( promis =>{
-    console.log(promis);
-    res.status(200).json({messege:"User deleted",promis:promis})
+    //console.log(promis);
+    res.status(200).json({message:"User deleted",promis:promis})
 
   }).catch(err => {
     console.log(err);
-    res.status(500).json({error:err});
+    res.status(500).json({message:"Error no such user", error:err});
   });
 };
 
@@ -85,12 +85,11 @@ router.deleteUser = (req,res,next) => {
 router.setUserToActive = (req,res) => {
   res.setHeader('Content-Type', 'application/json');
   User.updateOne({"_id": req.params.id}, {$set: {active: true}}).then(promis => {
-    res.json({messege: "Status changed to active", promis: promis})
+    res.json({message: "Status changed to active", promis: promis})
   }).catch(err => {
     console.log(err);
     res.status(500).json({
-      error: err
-    });
+      message: "Error no such user"});
   });
 };
 
@@ -98,7 +97,7 @@ router.setUserToActive = (req,res) => {
 router.setUserToInactive = (req,res) => {
   res.setHeader('Content-Type', 'application/json');
   User.updateOne({"_id":req.params.id},{$set:{active:false}}).then(promis=>{
-    res.json({messege: "Status changed to inactive",promis:promis})
+    res.json({message: "Status changed to inactive",promis:promis})
   }).catch(err => {
     console.log(err);
     res.status(500).json({

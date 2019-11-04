@@ -120,7 +120,7 @@ describe("ADD /user", () => {
                     lName: "req.body.lName",
                     email: "kevinok2@gmail.com",
                     password: "12345",
-                    permission: "req.body.permiss",
+                    permission: "active",
                     active: true
                 };
                 return request(server)
@@ -145,7 +145,7 @@ describe("ADD /user", () => {
  });
 
     describe("GET /user", () => {
-        it("should return the matching order", done => {
+        it("should return the matching user", done => {
             try {
                 request(server)
                     .get(`/user/${validID}/find`)
@@ -188,16 +188,164 @@ describe("ADD /user", () => {
         });
     });
 
-describe("DELETE /user", () => {
+    describe("DELETE /user", () => {
+        describe("DELETE_A_USER /user", () => {
+            it("should delete a user", done => {
 
-});
+                try {
+                    request(server)
+                        .delete(`/user/${validID2}/delete`)
+                        .expect(200)
+                        .expect("Content-Type", /json/)
+                        .then(res => {
+                            try {
+                                expect(res.body.message).equals("User deleted");
+                                //console.log("DELETE")
+                            } catch {
+                                console.log("error");
+                            }
+                        });
+
+                } catch (err) {
+                    console.log("fail")
+                }
+                done();
+            });
+            after(() => {
+                try {
+                    return request(server)
+                        .get(`/user/${validID2}/find`)
+                        .expect(200)
+                } catch {
+                    console.log("error 2");
+                }
+            });
+        });
+
+        describe("GET_INVALID_DELETE /users", () => {
+            it("should try delete a user and fail", done => {
+
+                try {
+                    request(server)
+                        .get("/user/5dbaf05dcf89fcbco/find")
+                        .expect("Content-Type", /json/)
+                        .expect(500)
+                        .expect({message: "Error no such user"});
+                    done();
+
+                } catch (err) {
+                    console.log("fail")
+                }
+
+            });
+        });
+    });
 
 describe("GET_ALL /users", () => {
-
+    describe("GET /all", () => {
+        it("should return all the users", done => {
+            try {
+                request(server)
+                    .get("/user/all")
+                    .set("Accept", "application/json")
+                    .expect("Content-Type", /json/)
+                    .expect(200)
+                    .end((err, res) => {
+                        try {
+                            expect(res.body).to.be.a("array");
+                            expect(res.body.length).to.be.at.least(1);
+                            expect(res.body.length).to.be.at.most(9999);
+                            done();
+                        }catch (err) {
+                            done(err)
+                        }
+                    });
+            }catch (error) {
+                console.log(error);
+            }
+        });
+    });
 });
 
 describe("UPDATE /user", () => {
 
-});
+        describe("when the id is valid", () => {
+            it("should return a message and the user set to active", () => {
+                try {
+                    return request(server)
+                        .put(`/user/${validID}/active`)
+                        .set("Accept", "application/json")
+                        .expect("Content-Type", /json/)
+                        .expect(200)
+                        .then(resp => {
+                            expect(resp.body).to.include({
+                                message: "Status changed to active"
+                            });
+                            //console.log({message: "it worked"})
+                        });
+                } catch (err) {
+                    console.log("valid id fail")
+                }
+            });
+            after(() => {
+                try {
+                    request(server)
+                        .get(`/user/${validID}/find`)
+                        .set("Accept", "application/json")
+                        .expect("Content-Type", /json/)
+                        .expect(200)
+
+                } catch (err) {
+                    console.log("after valid id fail")
+                }
+            });
+        });
+
+    describe("when the id is valid", () => {
+        it("should return a message and the user set to inactive", () => {
+            try {
+                return request(server)
+                    .put(`/user/${validID}/inactive`)
+                    .set("Accept", "application/json")
+                    .expect("Content-Type", /json/)
+                    .expect(200)
+                    .then(resp => {
+                        expect(resp.body).to.include({
+                            message: "Status changed to inactive"
+                        });
+                        //console.log({message: "it worked"})
+                    });
+            } catch (err) {
+                console.log("valid id fail")
+            }
+        });
+        after(() => {
+            try {
+                request(server)
+                    .get(`/user/${validID}/find`)
+                    .set("Accept", "application/json")
+                    .expect("Content-Type", /json/)
+                    .expect(200)
+
+            } catch (err) {
+                console.log("after valid id fail")
+            }
+        });
+    });
+
+    describe("when the id is invalid", () => {
+        it("should return a error message", () => {
+            try {
+                request(server)
+                    .put(`/user/hrddrbrby6564/active`)
+                    .expect(500)
+                    .expect({message: "Error no such user"});
+            } catch (err) {
+                console.log("valid id fail")
+            }
+        });
+    });
+    });
+
 
 });

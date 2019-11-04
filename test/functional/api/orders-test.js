@@ -152,7 +152,7 @@ describe('Orders', () => {
                         expect(res.body[0]).to.have.property("price", 23.99);
                         expect(res.body[0]).to.have.property("payed", false);
                         expect(res.body[0]).to.have.property("message", "String");
-                        console.log("not Fail")
+                        //console.log("not Fail")
                     }catch(err){console.log("fail")}
                     });
 
@@ -289,7 +289,7 @@ describe('Orders', () => {
                             expect(resp.body).to.include({
                                 message: "Order Successfully Payed!"
                             });
-                            console.log({message: "it worked"})
+                            //console.log({message: "it worked"})
                         });
                 } catch (err) {
                     console.log("valid id fail")
@@ -304,7 +304,7 @@ describe('Orders', () => {
                         .expect(200)
                         .then(resp => {
                             expect(resp.body[0]).to.have.property("payed", true);
-                            console.log({message: "worked!"})
+                            //console.log({message: "worked!"})
                         });
 
                 } catch (err) {

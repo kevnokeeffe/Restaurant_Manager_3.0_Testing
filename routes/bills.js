@@ -87,7 +87,7 @@ router.paidBills = (req,res) => {
 router.billOfOrders = (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     Order.find({$and: [{"billId":req.params.billId},{"payed":false}]}).then(orders=> {
-        console.log(orders);
+        //console.log(orders);
         res.json({orders: orders, totalBill: getTotalBill(orders)});
     }).catch(err => {
         //console.log(err);
