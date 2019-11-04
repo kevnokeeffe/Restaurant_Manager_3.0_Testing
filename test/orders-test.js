@@ -66,39 +66,7 @@ describe('Orders', () => {
         });
 
 
-    describe("GET /order", () => {
-        it("should return all the orders", done => {
-            try {
-                request(server)
-                    .get("/order/all")
-                    .set("Accept", "application/json")
-                    .expect("Content-Type", /json/)
-                    .expect(200)
-                    .end((err, res) => {
-                        try {
-                            expect(res.body).to.be.a("array");
-                            expect(res.body.length).to.be.at.least(1);
-                            expect(res.body.length).to.be.at.most(9999);
-                            let value = _.map(res.body, order => {
-                                return {
-                                    main: order.main,
-                                    desert: order.desert
-                                };
-                            });
-                            expect(value).to.deep.include({
-                                main: "ice-cream",
-                                desert: "cheesecake"
-                            });
-                            done();
-                        }catch (err) {
-                            done(err)
-                        }
-                    });
-            }catch (error) {
-                console.log(error);
-            }
-        });
-    });
+
 
     describe("POST /order", () => {
         it("should return confirmation message and update datastore", () => {
@@ -333,6 +301,40 @@ describe('Orders', () => {
 
                 } catch (err) {console.log("after valid id fail")}
             });
+        });
+    });
+
+    describe("GET /orders", () => {
+        it("should return all the orders", done => {
+            try {
+                request(server)
+                    .get("/order/all")
+                    .set("Accept", "application/json")
+                    .expect("Content-Type", /json/)
+                    .expect(200)
+                    .end((err, res) => {
+                        try {
+                            expect(res.body).to.be.a("array");
+                            expect(res.body.length).to.be.at.least(1);
+                            expect(res.body.length).to.be.at.most(9999);
+                            let value = _.map(res.body, order => {
+                                return {
+                                    main: order.main,
+                                    desert: order.desert
+                                };
+                            });
+                            expect(value).to.deep.include({
+                                main: "ice-cream",
+                                desert: "cheesecake"
+                            });
+                            done();
+                        }catch (err) {
+                            done(err)
+                        }
+                    });
+            }catch (error) {
+                console.log(error);
+            }
         });
     });
 
