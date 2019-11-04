@@ -159,7 +159,7 @@ Order.findOneAndUpdate({'_id': req.params.id},{$set: {
                 price: req.body.price,
                 payed: req.body.payed,
                 message: req.body.message
-            }}).then (order => {res.json({order: order, message: 'Update Successfully'})})
+            }}).then (order => {res.status(200).json({order: order, message: 'Update Successfully'})})
 
     .catch(err => {
         console.log(err);

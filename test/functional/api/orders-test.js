@@ -1,6 +1,6 @@
 const expect = require('chai').expect;
 //const server = require("../bin/www");
-const Order = require("../models/orders");
+const Order = require("../../../models/orders");
 const request = require("supertest");
 const _ = require("lodash");
 const MongoMemoryServer = require("mongodb-memory-server").MongoMemoryServer;
@@ -28,7 +28,7 @@ describe('Orders', () => {
                 useNewUrlParser: true,
                 useUnifiedTopology: true
             });
-            server = require("../bin/www");
+            server = require("../../../bin/www");
             db = mongoose.connection;
         } catch (error) {
             console.log(error);
@@ -65,7 +65,47 @@ describe('Orders', () => {
         }catch(err){console.log(err)}
         });
 
-
+    describe("GET /order", () => {
+        describe("when the id is valid", () => {
+            it("should return the matching order", done => {
+                try{
+                    request(server)
+                        .get(`/order/findOne/${validID}`)
+                        .set("Accept", "application/json")
+                        .expect("Content-Type", /json/)
+                        .expect(200)
+                        .end((err, res) => {
+                            expect(res.body[0]).to.have.property("main", "ice-cream");
+                            expect(res.body[0]).to.have.property("desert", "cheesecake");
+                            expect(res.body[0]).to.have.property("drink", "coke");
+                            expect(res.body[0]).to.have.property("price", 25.99);
+                            expect(res.body[0]).to.have.property("payed", false);
+                            expect(res.body[0]).to.have.property("userId", "5db1fd86f7b46c3ac05d7632");
+                            expect(res.body[0]).to.have.property("starter", "cake");
+                            expect(res.body[0]).to.have.property("message", "1217adce66bfa9e9e445c423643420af");
+                            done(err);
+                        });
+                }catch (err) {
+                    console.log("get order fail")
+                }
+            });
+        });
+        describe("when the id is invalid", () => {
+            it("should return the NOT found message", done => {
+                try {
+                    request(server)
+                        .get("/order/findOne/5dbaf05dcf750200d89fcbco")
+                        //.set("Accept", "application/json")
+                        .expect("Content-Type", /json/)
+                        .expect(500)
+                        .expect({message: "Order NOT Found!"});
+                    done();
+                } catch (err) {
+                    console.log("id invalid fail")
+                }
+            });
+        });
+    });
 
 
     describe("POST /order", () => {
@@ -74,7 +114,7 @@ describe('Orders', () => {
                 const order = {
                     billId: 1432,
                     userId: "5db208ff6b6aaf09d8a9b361",
-                    starter: "Cake",
+                    starter: "cake",
                     main: "food",
                     desert: "cheesecake",
                     drink: "water",
@@ -112,7 +152,7 @@ describe('Orders', () => {
                         expect(res.body[0]).to.have.property("price", 23.99);
                         expect(res.body[0]).to.have.property("payed", false);
                         expect(res.body[0]).to.have.property("message", "String");
-
+                        console.log("not Fail")
                     }catch(err){console.log("fail")}
                     });
 
@@ -185,63 +225,56 @@ describe('Orders', () => {
     });
 
 
-    describe("GET /order", () => {
-            describe("when the id is valid", () => {
-                it("should return the matching order", done => {
-                    try{
-                    request(server)
-                        .get(`/order/findOne/${validID}`)
-                        .set("Accept", "application/json")
-                        .expect("Content-Type", /json/)
-                        .expect(200)
-                        .end((err, res) => {
-                            expect(res.body[0]).to.have.property("main", "ice-cream");
-                            expect(res.body[0]).to.have.property("desert", "cheesecake");
-                            expect(res.body[0]).to.have.property("drink", "coke");
-                            expect(res.body[0]).to.have.property("price", 25.99);
-                            expect(res.body[0]).to.have.property("payed", false);
-                            expect(res.body[0]).to.have.property("userId", "5db1fd86f7b46c3ac05d7632");
-                            expect(res.body[0]).to.have.property("starter", "cake");
-                            expect(res.body[0]).to.have.property("message", "1217adce66bfa9e9e445c423643420af");
-                            done(err);
-                        });
-                    }catch (err) {
-                        console.log("get order fail")
-                    }
-                });
-            });
-        describe("when the id is invalid", () => {
-            it("should return the NOT found message", done => {
-                try {
-                    request(server)
-                        .get("/order/findOne/5dbaf05dcf750200d89fcbco")
-                        //.set("Accept", "application/json")
-                        .expect("Content-Type", /json/)
-                        .expect(500)
-                        .expect({message: "Order NOT Found!"});
-                        done();
-                } catch (err) {
-                    console.log("id invalid fail")
-                }
-            });
-        });
-    });
-
-    describe("UPDATE /order", () => {
-describe("when the id is valid", ()=>{
-    it("should return a message and update the order",()=>{
-        try{
-            return request(server)
-                .put(`/order/${validID}/update`)
-                .set("Accept","application/json")
-                .expect("Content-Type",/json/)
-                .expect(200)
-                .send()
-//TODO UPDATE
-        }catch{console.log("valid id fail")}
-    });
-});
-    });
+//     describe("UPDATE /order", () => {
+// describe("when the id is valid", () =>{
+//     it("should return a message and update the order",done=>{
+//         try{
+//             request(server)
+//             .get(`/order/all`)
+//                 .end(function(err,res){
+//                     try{
+//                         return request(server)
+//                         .put(`/order/${validID2}/update`)
+//                             .send({
+//                                 'billId': 1234,
+//                                 'userId': "5db208ff6b6aaf09d8a9b361",
+//                                 'starter': "Cake",
+//                                 'main': "food",
+//                                 'desert': "cheesecake",
+//                                 'drink': "water",
+//                                 'price': 23.99,
+//                                 'payed': true,
+//                                 'message': "String"
+//                             })
+//                         .set("Accept","application/json")
+//                      .expect("Content-Type",/json/)
+//                     .expect(200)
+//
+//
+//                         console.log("works upper");
+//                     }catch{console.log("valid id fail upper")}
+//                 });
+//         }catch{console.log("valid id fail top")}
+//         done();
+//     });
+//     });
+//         describe("when the id is valid", () => {
+//             it("should check if the changes took place",()=>{
+//                 try {
+//                     request(server)
+//                         .get(`/order/findOne/${validID2}`)
+//                         .expect("Content-Type",/json/)
+//                         .expect(200)
+//                         .then(res => { try {
+//                             expect(res.body.billId).equals(1234);
+//                             // expect(res.body[0]).to.have.property("userId", "5db208ff6b6aaf09d8a9b361");
+//                             //expect(res.body[0]).to.have.property("starter", "cake");
+//                         }catch{console.log("fail deep")}
+//                         });
+//                 }catch{console.log("fail up one")}
+//             });
+//         });
+//     });
 
     describe("START PUT PAYED /order/payed/:id", () => {
         describe("when the id is valid", () => {
@@ -271,8 +304,9 @@ describe("when the id is valid", ()=>{
                         .expect(200)
                         .then(resp => {
                             expect(resp.body[0]).to.have.property("payed", true);
+                            console.log({message: "worked!"})
                         });
-                    console.log({message: "worked!"})
+
                 } catch (err) {
                     console.log("after valid id fail")
                 }

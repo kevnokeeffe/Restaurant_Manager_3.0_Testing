@@ -1,9 +1,9 @@
 const expect = require('chai').expect;
-const Order = require("../models/orders");
+const Order = require("../../../models/orders");
 const request = require("supertest");
 const _ = require("lodash");
-const UserTest = require("../controllers/user-control");
-const User = require ("../models/users");
+const UserTest = require("../../../controllers/user-control");
+const User = require ("../../../models/users");
 const MongoMemoryServer = require("mongodb-memory-server").MongoMemoryServer;
 const mongoose = require("mongoose");
 let server;
@@ -30,7 +30,7 @@ before(async () => {
             useNewUrlParser: true,
             useUnifiedTopology: true
         });
-        server = require("../bin/www");
+        server = require("../../../bin/www");
         db = mongoose.connection;
     } catch (error) {
         console.log(error);

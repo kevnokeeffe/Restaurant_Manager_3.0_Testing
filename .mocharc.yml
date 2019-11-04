@@ -1,3 +1,5 @@
 file:
-    - test/orders-test.js
+    - test/functional/api/orders-test.js
+    - test/functional/api/bills-test.js
+    - test/functional/api/users-test.js
 timeout: 6000
