@@ -18,7 +18,7 @@ exports.addUser = (req, res, next) => {
             bcrypt.hash(req.body.password, 10, (err, hash) => {
                 if (err) {
                     return res.status(500).json({
-                        error: err
+                        message: "Error Invalid Inputs",error: err
                     });
                 } else {
                     const user = new User({
@@ -39,8 +39,9 @@ exports.addUser = (req, res, next) => {
                                 data: user
                             });
                         }).catch(err => {
-                        console.log(err);
-                        res.status(500).json({
+
+                        //console.log(err);
+                        res.status(500).json({message:"Error Invalid Inputs",
                             error: err
                         });
                     });

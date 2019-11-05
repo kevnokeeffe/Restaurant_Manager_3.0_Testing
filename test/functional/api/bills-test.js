@@ -50,7 +50,7 @@ describe('Bill', () => {
     beforeEach(async () => {
         try {
             const order = new Order({
-                billId: 1223,
+                billId: 1224,
                 userId: "5db1fd86f7b46c3ac05d7632",
                 starter: "cake",
                 main: "ice-cream",
@@ -136,6 +136,7 @@ describe('Bill', () => {
     });
 
     describe("DELETE /bill", () => {
+        describe("when the id is valid", ()=>{
         it("should delete a the bill", done => {
 
             try {
@@ -169,45 +170,67 @@ describe('Bill', () => {
             }
         });
     });
-
-    describe("GET_TOTAL /bill", () => {
-        it('should get the total price for a bill', done => {
-        try{
-            request(server)
-                .get(`/bill/${validID}/total`)
-                .expect(200)
-                .expect("Content-Type", /json/)
-                .then(res => {
-                    try{
-                        //console.log({message:"what:",validID})
-                    expect(res.body).to.include({
-                        totalBill: 25.99
-                    });
-                    }catch (error) {
-                        console.log(error);
-                    }
-                });
-            done();
-        }catch (error) {
-        console.log(error);
-        }
+    describe("when the id is invalid", () => {
+        it("should return the NOT found message", done => {
+            try {
+                request(server)
+                    .delete(`/bill/8798jj7/delete`)
+                    .set("Accept", "application/json")
+                    .expect("Content-Type", /json/)
+                    .expect(404)
+                    .expect({message: "Failed"});
+                done();
+            }catch{console.log("error")};
         });
-
-        after(() => {
-            try{
-            return request(server)
-                .get(`/bill/${validID}/get`)
-                .expect(200)
-            }catch (error) {
-                console.log(error);
-            }
-        });
-
-
     });
+    });
+    describe("GET_TOTAL /bill/billId/total", () => {
+        describe("Total Bill",()=> {
+            it('should get the total price for a bill', done => {
+                try {
+                    request(server)
+                        .get(`/bill/${validID}/total`)
+                        .expect(200)
+                        .expect("Content-Type", /json/)
+                        .then(res => {
+                            try {
+                                //console.log({message:"what:",validID})
+                                expect(res.body).to.include({
+                                    totalBill: 103.96
+                                });
+                            } catch (error) {
+                                console.log(error);
+                            }
+                        });
+                    done();
+                } catch (error) {
+                    console.log(error);
+                }
+            });
 
-
-    describe("UPDATE /bill", () => {
+            after(() => {
+                try {
+                    return request(server)
+                        .get(`/bill/${validID}/get`)
+                        .expect(200)
+                } catch (error) {
+                    console.log(error);
+                }
+            });
+        });
+        describe("when the id is invalid", () => {
+            it("should return a Failed message", done => {
+                try {
+                    request(server)
+                        .get(`/bill/8798jj7/total`)
+                        .set("Accept", "application/json")
+                        .expect("Content-Type", /json/)
+                        .expect(404)
+                        .expect({message: "Failed"});
+                    done();
+                }catch{console.log("error")};
+            });
+        });
 
     });
 
