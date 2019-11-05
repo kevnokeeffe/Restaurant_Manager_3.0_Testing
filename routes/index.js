@@ -1,7 +1,7 @@
 let express = require('express');
 let router = express.Router();
 
-let message
+let message;
 
 message = "";
 
