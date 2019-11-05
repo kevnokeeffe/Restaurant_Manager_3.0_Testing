@@ -79,41 +79,47 @@ User:
 ## Sample Test execution.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Orders
-    GET /orders
+ Orders    
+Successfully Connected to [ restaurantManager ] on users route
+Successfully Connected to [ restaurantManager ] on orders route
+Successfully Connected to [ restaurantManager ] on bills route
 
-Successfully Connected to [ heroku_q1g0hzrw ] on users route
-Successfully Connected to [ heroku_q1g0hzrw ] on orders route
-Successfully Connected to [ heroku_q1g0hzrw ] on bills route
-
-GET /order/all 200 943.195 ms - 85874
-      √ should return all the orders (995ms)
+GET /orders
+GET /order/all 200 17.310 ms - 385
+      √ should return all the orders (68ms)
     GET /order
       when the id is valid
-GET /order/findOne/5dc0c11911368f096c96850d 200 6.588 ms - 385
+GET /order/findOne/5dc182dc7c72ce3b70355655 200 6.124 ms - 385
         √ should return the matching order
       when the id is invalid
         √ should return the NOT found message
     POST /order
-POST /order/add 201 35.404 ms - 243
-      √ should return confirmation message and update datastore (42ms)
-GET /order/findOne/5dc0c11a11368f096c968510 200 9.400 ms - 355
+POST /order/add 201 39.052 ms - 243
+      √ should return confirmation message and update datastore (47ms)
+GET /order/findOne/5dc182e07c72ce3b70355659 200 4.600 ms - 355
     DELETE /order/:id/delete
       When the id is valid
-DELETE /order/5dc0c11a11368f096c968510/delete 200 4.967 ms - 68
+DELETE /order/5dc182e07c72ce3b70355659/delete 200 4.778 ms - 68
         √ should delete an order
       when the id is invalid
         √ should return the NOT found message
+    UPDATE /order
+      when the id is valid
+PUT /order/update/5dc182e07c72ce3b70355659 200 12.517 ms - 46
+        √ should return a message and update the order
+      when the id is invalid
+PUT /order/update/984yn4q89yn8473yn 500 3.767 ms - 32
+        √ should return a not updated message
     START PUT PAYED /order/payed/:id
       when the id is valid
-PUT /order/payed/5dc0c11911368f096c96850d 200 14.926 ms - 39
+PUT /order/payed/5dc182dc7c72ce3b70355655 200 13.480 ms - 39
         √ should return a message and the order set to payed: true
-GET /order/findOne/5dc0c11911368f096c96850d 200 4.785 ms - 384
+GET /order/findOne/5dc182dc7c72ce3b70355655 200 4.073 ms - 384
       when the id is invalid
         √ should return a Failed message
     START PUT UNPAYED /order/payed/:id
       when the id is valid
-PUT /order/unpaid/5dc0c11911368f096c96850d 200 12.098 ms - 34
+PUT /order/unpaid/5dc182dc7c72ce3b70355655 200 8.402 ms - 34
         √ should return a message and the order set to payed: false
       when the id is invalid
         √ should return a Failed message
@@ -121,91 +127,92 @@ PUT /order/unpaid/5dc0c11911368f096c96850d 200 12.098 ms - 34
   Bill
     GET /bill
       when the id is valid
-GET /bill/1224/get 200 7.045 ms - 485
+GET /bill/1224/get 200 6.375 ms - 485
         √ should return the matching bill
       when the id is invalid
-GET /bill/9999/get 404 2.985 ms - 40
+GET /bill/9999/get 404 2.935 ms - 40
         √ should return the NOT found message
     DELETE /bill
       when the id is valid
         √ should delete a the bill
-DELETE /bill/1224/delete 200 9.320 ms - 68
-GET /bill/1224/get 404 4.868 ms - 40
+DELETE /bill/1224/delete 200 9.285 ms - 68
+GET /bill/1224/get 404 5.428 ms - 40
       when the id is invalid
         √ should return the NOT found message
     GET_TOTAL /bill/billId/total
       Total Bill
         √ should get the total price for a bill
-GET /bill/1224/total 200 8.249 ms - 931
-GET /bill/1224/get 200 7.466 ms - 935
+GET /bill/1224/total 200 8.733 ms - 931
+GET /bill/1224/get 200 11.328 ms - 935
       when the id is invalid
         √ should return a Failed message
     PAY BILL OF ORDERS /bill
       when the id is valid
-PUT /bill/1224/payBill 200 13.777 ms - 76
+PUT /bill/1224/payBill 200 6.431 ms - 76
         √ should return a message and paid true
-GET /bill/1224/find 404 25.637 ms - 4059
+GET /bill/1224/find 404 25.264 ms - 4059
       PAY BILL OF ORDERS
         √ should try set a bill to payed and fail
     UNPAY BILL OF ORDERS /bill
       when the id is valid
-PUT /bill/1224/unPayBill 200 4.102 ms - 71
+PUT /bill/1224/unPayBill 200 3.634 ms - 71
         √ should return a message and paid false
-GET /bill/1224/find 404 3.101 ms - 4059
+GET /bill/1224/find 404 2.756 ms - 4059
       UNPAY BILL OF ORDERS /order/:id/unpay
         √ should try and unpay a bill and fail
 
   Over Watch User
     ADD /user
       POST /user
-POST /user/add 201 147.830 ms - 287
+POST /user/add 201 148.291 ms - 287
         √ should return confirmation message and update datastore (155ms)
-GET /user/5dc0c11f11368f096c96852d/find 200 5.180 ms - 202
+GET /user/5dc182e47c72ce3b70355678/find 200 5.022 ms - 202
       Add an email that already belongs to an existing user
-POST /user/add 409 3.038 ms - 42
+POST /user/add 409 3.833 ms - 42
         √ should return an invalid email message
       POST FAKE /user
-POST /user/add 500 3.139 ms - 45
+POST /user/add 500 3.349 ms - 45
         √ should return an error message
     GET /user
-GET /user/5dc0c11e11368f096c96852b/find 200 3.626 ms - 189
+GET /user/5dc182e47c72ce3b70355676/find 200 4.353 ms - 189
       √ should return the matching user
       when the id is invalid
         √ should return the NOT found message
-GET /user/5dc0c11e11368f096c96852b/find 200 4.908 ms - 189
+GET /user/5dc182e47c72ce3b70355676/find 200 5.641 ms - 189
     DELETE /user
       DELETE_A_USER /user
         √ should delete a user
-DELETE /user/5dc0c11f11368f096c96852d/delete 200 4.686 ms - 67
-GET /user/5dc0c11f11368f096c96852d/find 200 4.865 ms - 2
+DELETE /user/5dc182e47c72ce3b70355678/delete 200 4.504 ms - 67
+GET /user/5dc182e47c72ce3b70355678/find 200 6.475 ms - 2
       GET_INVALID_DELETE /users
         √ should try delete a user and fail
     GET_ALL /users
       GET /all
-GET /user/all 200 9.330 ms - 3546
+GET /user/all 200 9.032 ms - 3546
         √ should return all the users
     UPDATE_USER_ACTIVE //user/:id/active
       when the id is valid
-PUT /user/5dc0c11e11368f096c96852b/active 200 4.501 ms - 76
+PUT /user/5dc182e47c72ce3b70355676/active 200 5.611 ms - 76
         √ should return a message and the user set to active
       when the id is invalid
         √ should return a error message
     UPDATE_USER_INACTIVE /user/:id/inactive
       when the id is valid
-PUT /user/5dc0c11e11368f096c96852b/inactive 200 3.305 ms - 78
+PUT /user/5dc182e47c72ce3b70355676/inactive 200 3.428 ms - 78
         √ should return a message and the user set to inactive
       when the id is invalid
         √ should return a error message
 
 
-  32 passing (9s)
+  34 passing (10s)
+
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 ## Extra features.
 
-The added feature i would like to highlight would be the checking of a valid email. If one trys to create a user that has an email of an existing user the user creation will not take place. Also if one trys to create a user with an invalid email it will not alow it. Also hashing of the users password takes place using bcrypt. 
+The added feature i would like to highlight would be the checking of a valid email. If one trys to create a user that has an email of an existing user the user creation will not take place. Also if one trys to create a user with an invalid email it will not alow it. Also hashing of the users password takes place using bcrypt. In esLint added the "no-template-curly-in-string": true, setting. It will warn when it finds a string containing the template literal placeholder (${something}) that uses either " or ' for the quotes. I did this due to the fact i use the literal placeholder a lot.
 
 
 [datamodel]: ./img/sample_data_model.gif
