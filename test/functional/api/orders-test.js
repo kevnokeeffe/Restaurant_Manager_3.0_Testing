@@ -264,10 +264,6 @@ describe('Orders', () => {
 //     describe("UPDATE /order", () => {
 // describe("when the id is valid", () =>{
 //     it("should return a message and update the order",done=>{
-//         try{
-//             request(server)
-//             .get(`/order/all`)
-//                 .end(function(err,res){
 //                     try{
 //                         return request(server)
 //                         .put(`/order/${validID2}/update`)
@@ -289,28 +285,28 @@ describe('Orders', () => {
 //
 //                         console.log("works upper");
 //                     }catch{console.log("valid id fail upper")}
+//                     done();
 //                 });
-//         }catch{console.log("valid id fail top")}
-//         done();
+//
 //     });
-//     });
-//         describe("when the id is valid", () => {
-//             it("should check if the changes took place",()=>{
-//                 try {
-//                     request(server)
-//                         .get(`/order/findOne/${validID2}`)
-//                         .expect("Content-Type",/json/)
-//                         .expect(200)
-//                         .then(res => { try {
-//                             expect(res.body.billId).equals(1234);
-//                             // expect(res.body[0]).to.have.property("userId", "5db208ff6b6aaf09d8a9b361");
-//                             //expect(res.body[0]).to.have.property("starter", "cake");
-//                         }catch{console.log("fail deep")}
-//                         });
-//                 }catch{console.log("fail up one")}
-//             });
-//         });
-//     });
+    //     describe("when the id is valid", () => {
+    //         it("should check if the changes took place",()=>{
+    //             try {
+    //                 request(server)
+    //                     .get(`/order/findOne/${validID2}`)
+    //                     .expect("Content-Type",/json/)
+    //                     .expect(200)
+    //                     .then(res => { try {
+    //                         expect(res.body.billId).equals(1234);
+    //                         // expect(res.body[0]).to.have.property("userId", "5db208ff6b6aaf09d8a9b361");
+    //                         //expect(res.body[0]).to.have.property("starter", "cake");
+    //                     }catch{console.log("fail deep")}
+    //                     });
+    //             }catch{console.log("fail up one")}
+    //         });
+    //     });
+    //  });
+
 
     describe("START PUT PAYED /order/payed/:id", () => {
         describe("when the id is valid", () => {
@@ -348,6 +344,20 @@ describe('Orders', () => {
                 }
             });
         });
+        describe("when the id is invalid", () => {
+            it("should return a Failed message", done => {
+                try {
+                    request(server)
+                        .put(`/order/payed/8798jj7/`)
+                        .set("Accept", "application/json")
+                        .expect("Content-Type", /json/)
+                        .expect(404)
+                        .expect({message: "orderPayed Error"});
+                    done();
+                }catch{console.log("error")};
+            });
+        });
+
     });
 
     describe("START PUT UNPAYED /order/payed/:id", () => {
@@ -382,6 +392,20 @@ describe('Orders', () => {
                         //});
 
                 } catch (err) {console.log("after valid id fail")}
+            });
+
+        });
+        describe("when the id is invalid", () => {
+            it("should return a Failed message", done => {
+                try {
+                    request(server)
+                        .put(`/order/unpayed/8798tjj7/`)
+                        .set("Accept", "application/json")
+                        .expect("Content-Type", /json/)
+                        .expect(404)
+                        .expect({message: "orderNotPayed Error"});
+                    done();
+                }catch{console.log("error")};
             });
         });
     });

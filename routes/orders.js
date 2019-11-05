@@ -71,7 +71,7 @@ router.orderPayed = (req,res)=>{
         Order.findById({"_id" : req.params.id}, function(err,order){
             if(err)
                 res.send(err),
-                res.json({message: "orderPayed Error"});
+                res.status(404).json({message: "orderPayed Error"});
             else{
                 order.payed = true;
                 order.save(function(err){
@@ -83,7 +83,7 @@ router.orderPayed = (req,res)=>{
             }
         }).catch(err => {
             //console.log(err);
-            res.status(500).json({error:err});
+            res.status(500).json({message:"Invalid Input Error"});
         });
 };
 
@@ -93,7 +93,7 @@ router.orderNotPayed = (req,res)=>{
     Order.findById({"_id" : req.params.id}, function(err,order){
         if(err)
             res.send(err),
-                res.json({message: "orderNotPayed Error"});
+                res.status(404).json({message: "orderNotPayed Error"});
         else{
             order.payed = false;
             order.save(function(err){
