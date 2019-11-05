@@ -47,7 +47,7 @@ describe('Orders', () => {
 
     beforeEach(async () => {
         try {
-            const order = new Order({
+           const order = new Order({
                 billId: 1223,
                 userId: "5db1fd86f7b46c3ac05d7632",
                 starter: "cake",
@@ -60,7 +60,7 @@ describe('Orders', () => {
             });
             await order.save();
             const order1 = await Order.findOne({ message: "1217adce66bfa9e9e445c423643420af" });
-            validID = order1._id;
+            validID = await order1._id;
 
         }catch(err){console.log(err)}
         });
@@ -261,34 +261,37 @@ describe('Orders', () => {
     });
 
 
-//     describe("UPDATE /order", () => {
-// describe("when the id is valid", () =>{
-//     it("should return a message and update the order",done=>{
-//                     try{
-//                         return request(server)
-//                         .put(`/order/${validID2}/update`)
-//                             .send({
-//                                 'billId': 1234,
-//                                 'userId': "5db208ff6b6aaf09d8a9b361",
-//                                 'starter': "Cake",
-//                                 'main': "food",
-//                                 'desert': "cheesecake",
-//                                 'drink': "water",
-//                                 'price': 23.99,
-//                                 'payed': true,
-//                                 'message': "String"
-//                             })
-//                         .set("Accept","application/json")
-//                      .expect("Content-Type",/json/)
-//                     .expect(200)
-//
-//
-//                         console.log("works upper");
-//                     }catch{console.log("valid id fail upper")}
-//                     done();
-//                 });
-//
-//     });
+    // describe("UPDATE /order", () => {
+    //     describe("when the id is valid", () => {
+    //         it("should return a message and update the order", done => {
+    //             try {
+    //                 return request(server)
+    //                     .put(`/order/${validID2}/update`)
+    //                     .send({
+    //                         'billId': 1234,
+    //                         'userId': "5db208ff6b6aaf09d8a9b361",
+    //                         'starter': "Cake",
+    //                         'main': "food",
+    //                         'desert': "cheesecake",
+    //                         'drink': "water",
+    //                         'price': 23.99,
+    //                         'payed': true,
+    //                         'message': "String"
+    //                     })
+    //                     .set("Accept", "application/json")
+    //                     .expect("Content-Type", /json/)
+    //                     .expect(200)
+    //
+    //
+    //                 console.log("works upper");
+    //             } catch {
+    //                 console.log("valid id fail upper")
+    //             }
+    //             done();
+    //         });
+    //
+    //     });
+    // });
     //     describe("when the id is valid", () => {
     //         it("should check if the changes took place",()=>{
     //             try {

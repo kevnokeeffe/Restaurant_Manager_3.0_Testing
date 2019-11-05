@@ -64,7 +64,7 @@ describe('Bill', () => {
             const order1 = await Order.findOne({message: "5db1fd86f7c"});
             validID = order1.billId;
 
-            const orders = new Order({
+            const order2 = new Order({
                 billId: 1224,
                 userId: "5db1fd86f7b46c3ac05d7632",
                 starter: "cake",
@@ -75,7 +75,7 @@ describe('Bill', () => {
                 payed: false,
                 message: "5db1fd86f7b46c3ac05d7632a"
             });
-            await orders.save();
+            await order2.save();
             const orders2 = await Order.findOne({message: "5db1fd86f7b46c3ac05d7632a"});
             validID2 = orders2._id;
             //console.log(order1);
