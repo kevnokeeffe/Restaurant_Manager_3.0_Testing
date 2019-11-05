@@ -26,7 +26,8 @@ describe('Orders', () => {
 
             mongoose.connect("mongodb://localhost:27017/restaurantManager", {
                 useNewUrlParser: true,
-                useUnifiedTopology: true
+                useUnifiedTopology: true,
+                useFindAndModify: false
             });
             server = require("../../../bin/www");
             db = mongoose.connection;
@@ -261,54 +262,55 @@ describe('Orders', () => {
     });
 
 
-    // describe("UPDATE /order", () => {
-    //     describe("when the id is valid", () => {
-    //         it("should return a message and update the order", done => {
-    //             try {
-    //                 return request(server)
-    //                     .put(`/order/${validID2}/update`)
-    //                     .send({
-    //                         'billId': 1234,
-    //                         'userId': "5db208ff6b6aaf09d8a9b361",
-    //                         'starter': "Cake",
-    //                         'main': "food",
-    //                         'desert': "cheesecake",
-    //                         'drink': "water",
-    //                         'price': 23.99,
-    //                         'payed': true,
-    //                         'message': "String"
-    //                     })
-    //                     .set("Accept", "application/json")
-    //                     .expect("Content-Type", /json/)
-    //                     .expect(200)
-    //
-    //
-    //                 console.log("works upper");
-    //             } catch {
-    //                 console.log("valid id fail upper")
-    //             }
-    //             done();
-    //         });
-    //
-    //     });
-    // });
-    //     describe("when the id is valid", () => {
-    //         it("should check if the changes took place",()=>{
-    //             try {
-    //                 request(server)
-    //                     .get(`/order/findOne/${validID2}`)
-    //                     .expect("Content-Type",/json/)
-    //                     .expect(200)
-    //                     .then(res => { try {
-    //                         expect(res.body.billId).equals(1234);
-    //                         // expect(res.body[0]).to.have.property("userId", "5db208ff6b6aaf09d8a9b361");
-    //                         //expect(res.body[0]).to.have.property("starter", "cake");
-    //                     }catch{console.log("fail deep")}
-    //                     });
-    //             }catch{console.log("fail up one")}
-    //         });
-    //     });
-    //  });
+    describe("UPDATE /order", () => {
+        describe("when the id is valid", () => {
+            it("should return a message and update the order", () => {
+                try {
+                    return request(server)
+                        .put(`/order/update/${validID2}`)
+                        .set("Accept", "application/json")
+                        .expect("Content-Type", /json/)
+                        .expect(200)
+                        .send({
+                            'message': "updated"
+                        })
+                        .then( res =>{
+                            expect(res.body).to.include({
+                                message: "Update Successfully"
+                            });
+                        //console.log("works upper");
+                        });
+                } catch {
+                    console.log("valid id fail upper")
+                }
+
+            });
+
+        });
+
+        describe("when the id is invalid", () => {
+            it("should return a not updated message",()=>{
+                try {
+                    return request(server)
+                        .put(`/order/update/984yn4q89yn8473yn`)
+                        .set("Accept", "application/json")
+                        .expect("Content-Type", /json/)
+                        .expect(500)
+                        .send({
+                            'message': "updated"
+                        })
+                        .then( res =>{
+                            expect(res.body).to.include({
+                                message: "Order not updated!"
+                            });
+                            //console.log("works upper");
+                        });
+                } catch {
+                    console.log("valid id fail upper")
+                }
+            });
+        });
+    });
 
 
     describe("START PUT PAYED /order/payed/:id", () => {

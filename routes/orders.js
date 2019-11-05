@@ -160,12 +160,10 @@ Order.findOneAndUpdate({'_id': req.params.id},{$set: {
                 payed: req.body.payed,
                 message: req.body.message
             }}).then (order => {res.status(200).json({order: order, message: 'Update Successfully'})})
-
     .catch(err => {
         //console.log(err);
         res.status(500).json({
-            message: "Order not updated!",
-            error: err
+            message: "Order not updated!"
         });
     });
 };
