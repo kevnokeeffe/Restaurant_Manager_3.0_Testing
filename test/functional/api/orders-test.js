@@ -354,7 +354,7 @@ describe('Orders', () => {
                         .expect(404)
                         .expect({message: "orderPayed Error"});
                     done();
-                }catch{console.log("error")};
+                }catch{console.log("error")}
             });
         });
 

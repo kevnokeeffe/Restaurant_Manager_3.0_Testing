@@ -4,6 +4,8 @@
         "commonjs": true,
         "es6": true
     },
+    "dot-location": "object",
+    "no-template-curly-in-string": true,
     "extends": "eslint:recommended",
     "globals": {
         "Atomics": "readonly",

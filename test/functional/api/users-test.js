@@ -40,7 +40,7 @@ before(async () => {
 after(async () => {
     try {
         await db.dropDatabase();
-        await mongod.stop()
+        await mongod.stop();
         await  server.close()
     } catch (error) {
         console.log(error);
@@ -71,7 +71,7 @@ beforeEach(async () => {
         validID = user1._id;
 
 
-    }catch{console.log("error")};
+    }catch{console.log("error")}
 });
 
 describe("ADD /user", () => {

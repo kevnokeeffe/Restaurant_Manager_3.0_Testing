@@ -180,7 +180,7 @@ describe('Bill', () => {
                     .expect(404)
                     .expect({message: "Failed"});
                 done();
-            }catch{console.log("error")};
+            }catch{console.log("error")}
         });
     });
     });
