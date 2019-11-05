@@ -1,6 +1,7 @@
 # Assignment 1 - Agile Software Practice.
 
 Name: Kevin O'Keeffe (20074809)
+Git repo: https://github.com/kevnokeeffe/Restaurant_Manager_3.0_Testing
 
 ## Overview.
 
@@ -8,7 +9,7 @@ The API of this project is for a Restaurant POS system. The objectives of this A
 
 ## API endpoints.
 
-Order Endpoints:
+### Order Endpoints:
 ~~~
  + GET /order/all - Get all orders.
  + GET /order/findOne/:id - Get one individual order.
@@ -18,7 +19,7 @@ Order Endpoints:
  + PUT order/unpaid/:id - sets an order to unpaid.
  + PUT order/update/:id - update an order.
 ~~~
-User Endpoints:
+### User Endpoints:
 ~~~
 + GET /user/:id/find - finds all the users.
 + GET /user/all - gets all the users.
@@ -27,7 +28,7 @@ User Endpoints:
 + PUT /user/add - adds a user to the database.
 + DELETE /user/:id/delete - deletes a user.
 ~~~
-Bill Endpoints:
+### Bill Endpoints:
 ~~~
 + GET /bill/:billId/get - gets the orders attached to a certain bill.
 + GET /bill/:billId/total - gets the total cost of a bill.
@@ -45,7 +46,7 @@ The database contains two models. One for User and one for Order. Each User can 
 Each user needs to have a unique email. The password is hashed using bcrypt and cannot be viewed. There is a boolean value assoicated with each user. Active is either true or false.
 Each order is assiocated with a user and a bill. Orders can be grouped together by bills and their values minipulated as a bill. Such as delete all payed bills. An order has a boolean value called payed. 
 
-User:
+### User:
 ~~~
 [
     {
@@ -59,7 +60,7 @@ User:
     }
  ]
  ~~~
- Order:
+ ### Order:
  ~~~
  [
     {
@@ -212,7 +213,7 @@ PUT /user/5dc182e47c72ce3b70355676/inactive 200 3.428 ms - 78
 
 ## Extra features.
 
-The added feature i would like to highlight would be the checking of a valid email. If one trys to create a user that has an email of an existing user the user creation will not take place. Also if one trys to create a user with an invalid email it will not alow it. Also hashing of the users password takes place using bcrypt. In esLint added the "no-template-curly-in-string": true, setting. It will warn when it finds a string containing the template literal placeholder (${something}) that uses either " or ' for the quotes. I did this due to the fact i use the literal placeholder a lot.
+The added feature i would like to highlight would be the checking of a valid email. If one trys to create a user that has an email of an existing user the user creation will not take place. Also if one trys to create a user with an invalid email it will not alow it. Also hashing of the users password takes place using bcrypt. In esLint added the "no-template-curly-in-string": true, setting. It will warn when it finds a string containing the template literal placeholder (${something}) that uses either " or ' for the quotes. I did this due to the fact i use the literal placeholder a lot. Also "dot-location": "object" which makes the dot in a member expression on the same line as the property portion.
 
 
 [datamodel]: ./img/sample_data_model.gif

@@ -40,7 +40,7 @@ describe('Orders', () => {
         try {
             await db.dropDatabase();
             await mongod.stop();
-            await  server.close()
+            await server.close()
         } catch (error) {
             console.log(error);
         }
@@ -48,7 +48,7 @@ describe('Orders', () => {
 
     beforeEach(async () => {
         try {
-           const order = new Order({
+            const order = new Order({
                 billId: 1223,
                 userId: "5db1fd86f7b46c3ac05d7632",
                 starter: "cake",
@@ -63,8 +63,8 @@ describe('Orders', () => {
             const order1 = await Order.findOne({ message: "1217adce66bfa9e9e445c423643420af" });
             validID = await order1._id;
 
-        }catch(err){console.log(err)}
-        });
+        } catch (err) { console.log(err) }
+    });
 
 
     describe("GET /orders", () => {
@@ -91,11 +91,11 @@ describe('Orders', () => {
                                 desert: "cheesecake"
                             });
                             done();
-                        }catch (err) {
+                        } catch (err) {
                             done(err)
                         }
                     });
-            }catch (error) {
+            } catch (error) {
                 console.log(error);
             }
         });
@@ -136,7 +136,7 @@ describe('Orders', () => {
                         //.set("Accept", "application/json")
                         .expect("Content-Type", /json/)
                         .expect(500)
-                        .expect({message: "Order NOT Found!"});
+                        .expect({ message: "Order NOT Found!" });
                     done();
                 } catch (err) {
                     console.log("id invalid fail")
@@ -167,9 +167,9 @@ describe('Orders', () => {
                         try {
                             expect(res.body.message).equals("Order Created");
                             validID2 = res.body.data._id;
-                        }catch(err){console.log("fail")}
+                        } catch (err) { console.log("fail") }
                     });
-            }catch (error) {
+            } catch (error) {
                 console.log(error);
             }
         });
@@ -179,21 +179,22 @@ describe('Orders', () => {
                     .get(`/order/findOne/${validID2}`)
                     .expect("Content-Type", /json/)
                     .expect(200)
-                    .then(res => { try {
-                        expect(res.body[0]).to.have.property("billId", 1432);
-                        expect(res.body[0]).to.have.property("userId", "5db208ff6b6aaf09d8a9b361");
-                        expect(res.body[0]).to.have.property("starter", "cake");
-                        expect(res.body[0]).to.have.property("main", "food");
-                        expect(res.body[0]).to.have.property("desert", "cheesecake");
-                        expect(res.body[0]).to.have.property("drink", "water");
-                        expect(res.body[0]).to.have.property("price", 23.99);
-                        expect(res.body[0]).to.have.property("payed", false);
-                        expect(res.body[0]).to.have.property("message", "String");
-                        //console.log("not Fail")
-                    }catch(err){console.log("fail")}
+                    .then(res => {
+                        try {
+                            expect(res.body[0]).to.have.property("billId", 1432);
+                            expect(res.body[0]).to.have.property("userId", "5db208ff6b6aaf09d8a9b361");
+                            expect(res.body[0]).to.have.property("starter", "cake");
+                            expect(res.body[0]).to.have.property("main", "food");
+                            expect(res.body[0]).to.have.property("desert", "cheesecake");
+                            expect(res.body[0]).to.have.property("drink", "water");
+                            expect(res.body[0]).to.have.property("price", 23.99);
+                            expect(res.body[0]).to.have.property("payed", false);
+                            expect(res.body[0]).to.have.property("message", "String");
+                            //console.log("not Fail")
+                        } catch (err) { console.log("fail") }
                     });
 
-            }catch (error) {
+            } catch (error) {
                 console.log(error);
             }
         });
@@ -244,19 +245,19 @@ describe('Orders', () => {
 
             describe("when the id is invalid", () => {
                 it("should return the NOT found message", done => {
-                    try{
-                    request(server)
-                        .delete(`/order/${validID2}/delete`)
-                        .expect(500)
-                        .expect({message: "Order Not Deleted!"})
-                    //console.log("Fake delete worked")
-                    done();
-                    }catch (err) {
+                    try {
+                        request(server)
+                            .delete(`/order/${validID2}/delete`)
+                            .expect(500)
+                            .expect({ message: "Order Not Deleted!" })
+                        //console.log("Fake delete worked")
+                        done();
+                    } catch (err) {
                         console.log(err)
                     }
                 });
             });
-        }catch (err) {
+        } catch (err) {
             console.log("delete block fail")
         }
     });
@@ -274,11 +275,11 @@ describe('Orders', () => {
                         .send({
                             'message': "updated"
                         })
-                        .then( res =>{
+                        .then(res => {
                             expect(res.body).to.include({
                                 message: "Update Successfully"
                             });
-                        //console.log("works upper");
+                            //console.log("works upper");
                         });
                 } catch {
                     console.log("valid id fail upper")
@@ -289,7 +290,7 @@ describe('Orders', () => {
         });
 
         describe("when the id is invalid", () => {
-            it("should return a not updated message",()=>{
+            it("should return a not updated message", () => {
                 try {
                     return request(server)
                         .put(`/order/update/984yn4q89yn8473yn`)
@@ -299,7 +300,7 @@ describe('Orders', () => {
                         .send({
                             'message': "updated"
                         })
-                        .then( res =>{
+                        .then(res => {
                             expect(res.body).to.include({
                                 message: "Order not updated!"
                             });
@@ -357,9 +358,9 @@ describe('Orders', () => {
                         .set("Accept", "application/json")
                         .expect("Content-Type", /json/)
                         .expect(404)
-                        .expect({message: "orderPayed Error"});
+                        .expect({ message: "orderPayed Error" });
                     done();
-                }catch{console.log("error")}
+                } catch{ console.log("error") }
             });
         });
 
@@ -368,19 +369,19 @@ describe('Orders', () => {
     describe("START PUT UNPAYED /order/payed/:id", () => {
         describe("when the id is valid", () => {
             it("should return a message and the order set to payed: false", () => {
-                try{
-                return request(server)
-                    .put(`/order/unpaid/${validID}`)
-                    .set("Accept", "application/json")
-                    .expect("Content-Type", /json/)
-                    .expect(200)
-                    .then(resp => {
-                        expect(resp.body).to.include({
-                            message: "Order Set to Unpaid!"
+                try {
+                    return request(server)
+                        .put(`/order/unpaid/${validID}`)
+                        .set("Accept", "application/json")
+                        .expect("Content-Type", /json/)
+                        .expect(200)
+                        .then(resp => {
+                            expect(resp.body).to.include({
+                                message: "Order Set to Unpaid!"
+                            });
+                            //console.log({message:"it worked"})
                         });
-                        //console.log({message:"it worked"})
-                    });
-                }catch (err) {
+                } catch (err) {
                     console.log("invalid id fail")
                 }
             });
@@ -391,12 +392,12 @@ describe('Orders', () => {
                         .set("Accept", "application/json")
                         .expect("Content-Type", /json/)
                         .expect(200)
-                        //.then((res) => {
-                            //expect(res.body[0]).to.have.property("payed", false);
-                            //console.log({message: "Log False check"})
-                        //});
+                    //.then((res) => {
+                    //expect(res.body[0]).to.have.property("payed", false);
+                    //console.log({message: "Log False check"})
+                    //});
 
-                } catch (err) {console.log("after valid id fail")}
+                } catch (err) { console.log("after valid id fail") }
             });
 
         });
@@ -408,9 +409,9 @@ describe('Orders', () => {
                         .set("Accept", "application/json")
                         .expect("Content-Type", /json/)
                         .expect(404)
-                        .expect({message: "orderNotPayed Error"});
+                        .expect({ message: "orderNotPayed Error" });
                     done();
-                }catch{console.log("error")};
+                } catch{ console.log("error") };
             });
         });
     });

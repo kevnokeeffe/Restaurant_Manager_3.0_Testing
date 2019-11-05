@@ -7,10 +7,11 @@ message = "";
 
 try {
   router.get('/', function (req, res, next) {
-    res.render('index', {title: 'Restaurant Manager 3.0'});
+    res.render('index', { title: 'Restaurant Manager 3.0' });
 
   });
-}catch(err){ message = "Input is " + err;}
+} catch (err) { message = "Input is " + err; }
 
-finally{
-  module.exports = router;}
+finally {
+  module.exports = router;
+}

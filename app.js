@@ -30,8 +30,8 @@ app.use('/users', usersRouter);
 app.use(authRoutes);
 
 //Orders calls
-app.get('/order/all',orders.findAll);
-app.get('/order/findOne/:id',orders.findOne);
+app.get('/order/all', orders.findAll);
+app.get('/order/findOne/:id', orders.findOne);
 app.delete('/order/:id/delete', orders.deleteOrder);
 app.post('/order/add', orders.addOrder);
 app.put('/order/payed/:id', orders.orderPayed);
@@ -40,34 +40,34 @@ app.put('/order/update/:id', orders.updateOrder);
 
 
 //Users calls
-app.get('/user/:id/find',users.findOne);
+app.get('/user/:id/find', users.findOne);
 //app.get('/user/userId/order',users.userOrders);
 app.delete('/user/:id/delete', users.deleteUser);
-app.post('/user/add',userController.addUser);
+app.post('/user/add', userController.addUser);
 //app.post('/user/add', users.addUser);
 app.get('/user/all', users.findAll);
-app.put('/user/:id/inactive',users.setUserToInactive);
+app.put('/user/:id/inactive', users.setUserToInactive);
 app.put('/user/:id/active', users.setUserToActive);
-app.put('/user/:id/addOrder',users.addUsersOrders);
-app.delete('/user/delete',users.deleteInactiveUsers);
+app.put('/user/:id/addOrder', users.addUsersOrders);
+app.delete('/user/delete', users.deleteInactiveUsers);
 
 //Bills calls
-app.get('/bill/:billId/get',bills.getBill);
+app.get('/bill/:billId/get', bills.getBill);
 app.get('/bill/:billId/total', bills.billOfOrders);
-app.put('/bill/:billId/payBill',bills.payBillOfOrders);
-app.get('/bill/unpaidBills/',bills.unPaidBills);
-app.put('/bill/:billId/unPayBill',bills.unPayBillOfOrders);
-app.get('/bill/totalRead',bills.totalRead);
+app.put('/bill/:billId/payBill', bills.payBillOfOrders);
+app.get('/bill/unpaidBills/', bills.unPaidBills);
+app.put('/bill/:billId/unPayBill', bills.unPayBillOfOrders);
+app.get('/bill/totalRead', bills.totalRead);
 app.get('/bill/paidBills', bills.paidBills);
-app.delete('/bill/:billId/delete',bills.deleteBill);
+app.delete('/bill/:billId/delete', bills.deleteBill);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
