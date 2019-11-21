@@ -15,6 +15,10 @@ const backup = require("./routes/backup");
 const mongoose = require('./db/mongoose');
 let app = express();
 
+// Authentication:
+const AuthController = require('./auth/AuthController');
+app.use('/api/auth', AuthController);
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -26,7 +30,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+//app.use('/users', usersRouter);
 app.use(authRoutes);
 
 //Orders calls
@@ -76,6 +80,7 @@ app.use(function (err, req, res, next) {
   res.render('error');
 });
 app.use(errorController.get404);
+
 
 
 module.exports = app;
