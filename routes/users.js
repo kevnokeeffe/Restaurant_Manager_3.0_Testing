@@ -58,7 +58,7 @@ router.findOne = (req, res) => {
 //This method prints out all the users
 router.findAll = (req, res) => {
   res.setHeader('Content-Type', 'application/json');
-  User.find({}, 'fName lName email password active').then(id => {
+  User.find({}, 'fName lName email active').then(id => {
     res.send(JSON.stringify(id, null, 5));
   }).catch(err => {
     //console.log(err);
