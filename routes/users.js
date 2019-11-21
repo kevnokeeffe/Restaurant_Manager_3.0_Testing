@@ -56,6 +56,14 @@ router.deleteUser = (req, res, next) => {
   });
 };
 
+// Updates A Single User in the Database
+router.updateUser = (req, res, next) => {
+  User.findByIdAndUpdate(req.params.id, req.body, {new: true}, function (err, user) {
+    if (err) return res.status(500).send("There was a problem updating the user.");
+    res.status(200).send(user);
+  });
+};
+
 
 //Sets one user to active
 router.setUserToActive = (req, res) => {

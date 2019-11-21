@@ -44,7 +44,7 @@ app.get('/user/:id/find', users.findOne);
 //app.get('/user/userId/order',users.userOrders);
 app.delete('/user/:id/delete', users.deleteUser);
 app.post('/user/add', userController.addUser);
-//app.post('/user/add', users.addUser);
+app.put('/user/:id/update', users.updateUser);
 app.get('/user/all', users.findAll);
 app.put('/user/:id/inactive', users.setUserToInactive);
 app.put('/user/:id/active', users.setUserToActive);
