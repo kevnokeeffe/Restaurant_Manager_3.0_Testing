@@ -1,32 +1,7 @@
-let Order = require('../models/orders');
 let express = require('express');
 let router = express.Router();
-let mongoose = require('mongoose');
 const userController = require('../controllers/user-control');
 let User = require('../models/users');
-const bcrypt = require('bcrypt');
-
-
-//Local connection
-mongoose.connect('mongodb://localhost:27017/restaurantManager', { useNewUrlParser: true });
-
-//mLab Connection
-//const mongodbUri = "mongodb://dbKevin:akakok1984@ds241097.mlab.com:41097/heroku_q1g0hzrw";
-
-//mongodb Atlas connection
-//const mongodbUri = "mongodb+srv://dbKevin:KEV1984me@kevinscluster-cvmeg.mongodb.net/restaurantManager";
-
-//mongoose.connect(mongodbUri,{ useNewUrlParser: true });
-
-let db = mongoose.connection;
-
-db.on('error', function (err) {
-  console.log('Unable to Connect to [ ' + db.name + ' ]' + ' on users route', err);
-});
-
-db.once('open', function () {
-  console.log('Successfully Connected to [ ' + db.name + ' ]' + ' on users route');
-});
 
 //This method adds a user
 router.post('/add', userController.addUser);

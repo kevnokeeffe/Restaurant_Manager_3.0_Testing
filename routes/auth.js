@@ -1,7 +1,6 @@
 let Order = require('../models/orders');
 let express = require('express');
 let router = express.Router();
-let mongoose = require('mongoose');
 let message;
 let User = require('../models/users');
 const bcrypt = require('bcrypt');

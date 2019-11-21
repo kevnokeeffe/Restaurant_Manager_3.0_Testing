@@ -12,7 +12,7 @@ const orders = require("./routes/orders");
 const users = require("./routes/users");
 const bills = require("./routes/bills");
 const backup = require("./routes/backup");
-
+const mongoose = require('./db/mongoose');
 let app = express();
 
 // view engine setup
@@ -76,4 +76,6 @@ app.use(function (err, req, res, next) {
   res.render('error');
 });
 app.use(errorController.get404);
+
+
 module.exports = app;
