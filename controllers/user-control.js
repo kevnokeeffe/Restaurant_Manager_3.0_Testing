@@ -5,9 +5,13 @@ let mongoose = require('mongoose');
 let message;
 let User = require ('../models/users');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const config = require('../config');
+
 
 exports.addUser = (req, res, next) => {
     res.setHeader('Content-Type', 'application/json');
+
     // checks to see if the email already exists
     User.find({email: req.body.email}).exec().then(user => {
         if (user.length >= 1) {
@@ -22,7 +26,6 @@ exports.addUser = (req, res, next) => {
                     });
                 } else {
                     const user = new User({
-                        //_id: mongoose.Schema.Types.ObjectID(),
                         fName: req.body.fName,
                         lName: req.body.lName,
                         email: req.body.email,
@@ -34,13 +37,13 @@ exports.addUser = (req, res, next) => {
                         .save()
                         .then(result => {
                             //console.log(result);
-                            res.status(201).json({
-                                message: "User Created",
-                                data: user
+                            // This is where i added the token code
+                            const token = jwt.sign({ id: user._id }, config.secret, {
+                                expiresIn: 86400 // expires in 24 hours
                             });
+                            res.status(200).send({ auth: true, token: token, message: "User Created" });
                         }).catch(err => {
 
-                        //console.log(err);
                         res.status(500).json({message:"Error Invalid Inputs",
                             error: err
                         });

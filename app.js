@@ -6,12 +6,11 @@ let logger = require('morgan');
 const userController = require('./controllers/user-control');
 const errorController = require('./controllers/error');
 const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
 const authRoutes = require('./routes/auth')
 const orders = require("./routes/orders");
 const users = require("./routes/users");
 const bills = require("./routes/bills");
-const backup = require("./routes/backup");
+//const backup = require("./routes/backup");
 const mongoose = require('./db/mongoose');
 let app = express();
 
