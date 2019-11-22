@@ -5,11 +5,10 @@ let cookieParser = require('cookie-parser');
 let logger = require('morgan');
 const errorController = require('./controllers/error');
 const indexRouter = require('./routes/index');
-const authRoutes = require('./routes/auth')
-const orders = require("./routes/orders");
-const users = require("./routes/users");
-const bills = require("./routes/bills");
-//const backup = require("./routes/backup");
+const authRoutes = require('./routes/auth');
+const orders = require('./routes/orders');
+const users = require('./routes/users');
+const bills = require('./routes/bills');
 const mongoose = require('./db/mongoose');
 const cors = require('cors');
 let app = express();
@@ -43,9 +42,6 @@ app.put('/order/payed/:id', orders.orderPayed);
 app.put('/order/unpaid/:id', orders.orderNotPayed);
 app.put('/order/update/:id', orders.updateOrder);
 
-
-//Users calls
-
 //Bills calls
 app.get('/bill/:billId/get', bills.getBill);
 app.get('/bill/:billId/total', bills.billOfOrders);
@@ -58,20 +54,19 @@ app.delete('/bill/:billId/delete', bills.deleteBill);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
-  next(createError(404));
+	next(createError(404));
 });
 
 // error handler
 app.use(function (err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
+	// set locals, only providing error in development
+	res.locals.message = err.message;
+	res.locals.error = req.app.get('env') === 'development' ? err : {};
+	// render the error page
+	res.status(err.status || 500);
+	res.render('error');
 });
 app.use(errorController.get404);
-
 
 
 module.exports = app;
