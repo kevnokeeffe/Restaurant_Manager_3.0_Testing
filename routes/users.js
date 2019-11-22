@@ -5,8 +5,12 @@ const userController = require('../controllers/user-control');
 
 // This method registers a user
 router.post('/register', userController.register);
+// Login
+router.post('/login', userController.login);
+//LogOut
+router.get('/logout', userController.verify, userController.logout);
 // Access Area
-router.get('/secret-route', userController.verify, (req, res, next) => {res.send('This is the secret content. Only logged in users can see that!');});
+router.get('/secret-route', userController.verify, (req, res) => {res.send('This is the secret content. Only logged in users can see that!');});
 // Finds a user by their id
 router.get('/:id/find', userController.verify, userController.findOne);
 // This method prints out all the users

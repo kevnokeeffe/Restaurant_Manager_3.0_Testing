@@ -5,7 +5,6 @@ let cookieParser = require('cookie-parser');
 let logger = require('morgan');
 const errorController = require('./controllers/error');
 const indexRouter = require('./routes/index');
-const authRoutes = require('./routes/auth');
 const orders = require('./routes/orders');
 const users = require('./routes/users');
 const bills = require('./routes/bills');
@@ -14,9 +13,6 @@ const cors = require('cors');
 let app = express();
 app.use(cors());
 
-// Authentication:
-const AuthController = require('./auth/AuthController');
-app.use('/api/auth', AuthController);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -27,8 +23,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
+
+// User routes:
 app.use('/user', users);
-app.use(authRoutes);
 
 //Orders calls
 app.get('/order/all', orders.findAll);
