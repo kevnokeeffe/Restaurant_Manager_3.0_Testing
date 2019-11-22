@@ -2,4 +2,5 @@ file:
     - test/functional/api/orders-test.js
     - test/functional/api/bills-test.js
     - test/functional/api/users-test.js
+require: '@babel/register'
 timeout: 6000
