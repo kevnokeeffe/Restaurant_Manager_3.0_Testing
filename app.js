@@ -12,7 +12,10 @@ const users = require("./routes/users");
 const bills = require("./routes/bills");
 //const backup = require("./routes/backup");
 const mongoose = require('./db/mongoose');
+const cors = require('cors');
 let app = express();
+
+app.use(cors());
 
 // Authentication:
 const AuthController = require('./auth/AuthController');
@@ -29,7 +32,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-//app.use('/users', usersRouter);
+app.use('/user', users);
 app.use(authRoutes);
 
 //Orders calls
@@ -43,10 +46,10 @@ app.put('/order/update/:id', orders.updateOrder);
 
 
 //Users calls
-app.get('/user/:id/find', users.findOne);
+//app.get('/user/:id/find', users.findOne);
 //app.get('/user/userId/order',users.userOrders);
 app.delete('/user/:id/delete', users.deleteUser);
-app.post('/user/add', userController.addUser);
+//app.post('/user/register', userController.register);
 app.put('/user/:id/update', users.updateUser);
 app.get('/user/all', users.findAll);
 app.put('/user/:id/inactive', users.setUserToInactive);

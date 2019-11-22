@@ -1,15 +1,13 @@
-let Order = require ('../models/orders');
 let express = require('express');
 let router = express.Router();
-let mongoose = require('mongoose');
-let message;
 let User = require ('../models/users');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const config = require('../config');
+const VerifyToken = require('../auth/VerifyToken');
 
-
-exports.addUser = (req, res, next) => {
+// Register the User
+router.register = (req, res, next) => {
     res.setHeader('Content-Type', 'application/json');
 
     // checks to see if the email already exists
@@ -53,3 +51,34 @@ exports.addUser = (req, res, next) => {
         }
     });
 };
+
+router.findOne = (VerifyToken,(req, res, next) => {
+    const token = req.headers['x-access-token'];
+    if (!token) return res.status(401).send({auth: false, message: 'No token provided.'});
+
+    jwt.verify(token, config.secret, function (err, decoded) {
+        if (err) return res.status(500).send({auth: false, message: 'Failed to authenticate token.'});
+
+        User.findById(decoded.id,
+            {password: 0}, // projection, does not return the user password
+            function (err, user) {
+                if (err) return res.status(500).send("There was a problem finding the user.");
+                if (!user) return res.status(404).send("No user found.");
+
+                res.status(200).send(user);
+
+            })
+        // User.find({ "_id": req.params.id }, 'fName lName email active').then(id => {
+        //   res.status(200).send(JSON.stringify(id, null, 5));
+        // })
+            .catch(err => {
+                //console.log(err);
+                res.status(500).json({
+                    message: 'User NOT Found!',
+                    error: err
+                });
+            });
+    });
+});
+
+module.exports = router;

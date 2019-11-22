@@ -5,38 +5,18 @@ const config = require('../config');
 const userController = require('../controllers/user-control');
 let User = require('../models/users');
 const VerifyToken = require('../auth/VerifyToken');
-//This method adds a user
-router.post('/add', userController.addUser);
 
-//Finds a user by their id, just returns their name and email.
-router.findOne = (VerifyToken,(req, res, next) => {
-  const token = req.headers['x-access-token'];
-  if (!token) return res.status(401).send({auth: false, message: 'No token provided.'});
+//This method registers a user
+router.post('/register', userController.register);
 
-  jwt.verify(token, config.secret, function (err, decoded) {
-    if (err) return res.status(500).send({auth: false, message: 'Failed to authenticate token.'});
-
-    User.findById(decoded.id,
-        {password: 0}, // projection, does not return the user password
-        function (err, user) {
-          if (err) return res.status(500).send("There was a problem finding the user.");
-          if (!user) return res.status(404).send("No user found.");
-
-          res.status(200).send(user);
-
-        })
-    // User.find({ "_id": req.params.id }, 'fName lName email active').then(id => {
-    //   res.status(200).send(JSON.stringify(id, null, 5));
-    // })
-        .catch(err => {
-          //console.log(err);
-          res.status(500).json({
-            message: 'User NOT Found!',
-            error: err
-          });
-        });
-  });
+router.get('/secret-route', (req, res, next) => {
+  res.send('This is the secret content. Only logged in users can see that!');
 });
+
+//Finds a user by their id
+router.get('/:id/find', userController.findOne);
+
+
 // router.userOrders = (req, res) => {
 //   res.setHeader('Content-Type', 'application/json');
 //   Order.find({ "userId": res.body.userId }).then(orders => {
@@ -61,7 +41,7 @@ router.findAll = (req, res) => {
 };
 
 //Deletes a single user of given id
-router.deleteUser = (req, res, next) => {
+router.deleteUser = ('/:id/delete',(req, res, next) => {
   res.setHeader('Content-Type', 'application/json');
   User.deleteOne({ "_id": req.params.id }).exec().then(promis => {
     //console.log(promis);
@@ -71,7 +51,7 @@ router.deleteUser = (req, res, next) => {
     //console.log(err);
     res.status(500).json({ message: "Error no such user", error: err });
   });
-};
+});
 
 // Updates A Single User in the Database
 router.updateUser = (req, res, next) => {

@@ -11,6 +11,8 @@ let UsersSchema = new Schema({
         password: {type: String, required: true},
         permission: {type: String},
         active: {type: Boolean},
+        registered: {type: String},
+        last_login: {type: String},
         orders: {type: Array, default:[]}
     },
 
