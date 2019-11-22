@@ -3,9 +3,13 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "clean": "rimraf ./dist && mkdir dist",
     "test": "cross-env NODE_ENV=test mocha ",
     "compile": "babel ./ --out-dir dist/ --ignore ./node_modules,./test --copy-files",
-    "start": "node ./bin/www",
+    "start": "cross-env NODE_ENV=dev PORT=3001 node dist/bin/www",
+    "build": "npm run compile",
+    "postbuild": "npm start",
+    "prebuild": "npm-run-all test clean",
     "start-ser": "node app.js"
   },
   "dependencies": {
@@ -37,7 +41,9 @@
     "cross-env": "^6.0.3",
     "mocha": "^6.2.2",
     "mongodb-memory-server": "^6.0.1",
+    "npm-run-all": "^4.1.5",
     "nyc": "^14.1.1",
+    "rimraf": "^3.0.0",
     "supertest": "^4.0.2"
   }
 }
