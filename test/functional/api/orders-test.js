@@ -265,8 +265,8 @@ describe('Orders', () => {
 							});
 							//console.log("works upper");
 						});
-				} catch {
-					console.log('valid id fail upper');
+				} catch (error) {
+					console.log(error);
 				}
 
 			});
@@ -290,8 +290,8 @@ describe('Orders', () => {
 							});
 							//console.log("works upper");
 						});
-				} catch {
-					console.log('valid id fail upper');
+				} catch (error) {
+					console.log(error);
 				}
 			});
 		});
@@ -313,8 +313,8 @@ describe('Orders', () => {
 							});
 							//console.log({message: "it worked"})
 						});
-				} catch (err) {
-					console.log('valid id fail');
+				} catch (error) {
+					console.log(error);
 				}
 			});
 			after(() => {
@@ -329,8 +329,8 @@ describe('Orders', () => {
 							//console.log({message: "worked!"})
 						});
 
-				} catch (err) {
-					console.log('after valid id fail');
+				} catch (error) {
+					console.log(error);
 				}
 			});
 		});
@@ -344,7 +344,9 @@ describe('Orders', () => {
 						.expect(404)
 						.expect({ message: 'orderPayed Error' });
 					done();
-				} catch { console.log('error'); }
+				} catch (error) {
+					console.log(error);
+				}
 			});
 		});
 
@@ -365,8 +367,8 @@ describe('Orders', () => {
 							});
 							//console.log({message:"it worked"})
 						});
-				} catch (err) {
-					console.log('invalid id fail');
+				} catch (error) {
+					console.log(error);
 				}
 			});
 			after(() => {
@@ -381,7 +383,9 @@ describe('Orders', () => {
 					//console.log({message: "Log False check"})
 					//});
 
-				} catch (err) { console.log('after valid id fail'); }
+				} catch (error) {
+					console.log(error);
+				}
 			});
 
 		});
@@ -395,7 +399,9 @@ describe('Orders', () => {
 						.expect(404)
 						.expect({ message: 'orderNotPayed Error' });
 					done();
-				} catch { console.log('error'); }
+				} catch (error) {
+					console.log(error);
+				}
 			});
 		});
 	});

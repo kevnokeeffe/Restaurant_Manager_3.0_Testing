@@ -1,5 +1,6 @@
 let express = require('express');
 let router = express.Router();
+let message = ' ';
 
 try {
 	router.get('/', function (req, res) {

@@ -46,7 +46,7 @@ describe('Bill', () => {
 				message: '5db1fd86f7c'
 			});
 			await order.save();
-			const order1 = await Order.findOne({ message: '5db1fd86f7c' });
+			const order1 = await Order.findOne({message: '5db1fd86f7c'});
 			validID = order1.billId;
 
 			const order2 = new Order({
@@ -61,7 +61,7 @@ describe('Bill', () => {
 				message: '5db1fd86f7b46c3ac05d7632a'
 			});
 			await order2.save();
-			const orders2 = await Order.findOne({ message: '5db1fd86f7b46c3ac05d7632a' });
+			const orders2 = await Order.findOne({message: '5db1fd86f7b46c3ac05d7632a'});
 			validID2 = orders2._id;
 			//console.log(order1);
 		} catch (err) {
@@ -150,7 +150,7 @@ describe('Bill', () => {
 					return request(server)
 						.get(`/bill/${validID}/get`)
 						.expect(404)
-						.expect({ message: 'Bill not found!',error: {} });
+						.expect({message: 'Bill not found!', error: {}});
 				} catch (error) {
 					console.log(error);
 				}
@@ -164,9 +164,11 @@ describe('Bill', () => {
 						.set('Accept', 'application/json')
 						.expect('Content-Type', /json/)
 						.expect(404)
-						.expect({ message: 'Failed' });
+						.expect({message: 'Failed'});
 					done();
-				} catch { console.log('error'); }
+				} catch (error) {
+					console.log(error);
+				}
 			});
 		});
 	});
@@ -212,9 +214,11 @@ describe('Bill', () => {
 						.set('Accept', 'application/json')
 						.expect('Content-Type', /json/)
 						.expect(404)
-						.expect({ message: 'Failed' });
+						.expect({message: 'Failed'});
 					done();
-				} catch { console.log('error'); }
+				} catch (error) {
+					console.log(error);
+				}
 			});
 		});
 
@@ -259,11 +263,11 @@ describe('Bill', () => {
 						.put('/bill/5gy5g4654/payBill')
 						.expect('Content-Type', /json/)
 						.expect(404)
-						.expect({ message: 'Failed' });
+						.expect({message: 'Failed'});
 					done();
 
-				} catch (err) {
-					console.log('fail');
+				} catch (error) {
+					console.log(error);
 				}
 
 			});
@@ -310,11 +314,11 @@ describe('Bill', () => {
 						.put('/bill/5gy5g4654/unPayBill')
 						.expect('Content-Type', /json/)
 						.expect(404)
-						.expect({ message: 'Failed' });
+						.expect({message: 'Failed'});
 					done();
 
-				} catch (err) {
-					console.log('fail');
+				} catch (error) {
+					console.log(error);
 				}
 
 			});
