@@ -8,115 +8,21 @@ const VerifyToken = require('../auth/VerifyToken');
 
 //This method registers a user
 router.post('/register', userController.register);
-
-router.get('/secret-route', (req, res, next) => {
-  res.send('This is the secret content. Only logged in users can see that!');
-});
-
+//Access Area
+router.get('/secret-route', (req, res, next) => {res.send('This is the secret content. Only logged in users can see that!');});
 //Finds a user by their id
 router.get('/:id/find', userController.findOne);
-
-
-// router.userOrders = (req, res) => {
-//   res.setHeader('Content-Type', 'application/json');
-//   Order.find({ "userId": res.body.userId }).then(orders => {
-//     //console.log(orders);
-//     res.status(200).send(JSON.stringify(result, null, 5));;
-//   }).catch(error => {
-//     //console.log(error)
-//   });
-// };
-
 //This method prints out all the users
-router.findAll = (req, res) => {
-  res.setHeader('Content-Type', 'application/json');
-  User.find({}, 'fName lName email active').then(id => {
-    res.send(JSON.stringify(id, null, 5));
-  }).catch(err => {
-    //console.log(err);
-    res.status(500).json({
-      error: err
-    });
-  });
-};
-
+router.get('/all', userController.findAll);
 //Deletes a single user of given id
-router.deleteUser = ('/:id/delete',(req, res, next) => {
-  res.setHeader('Content-Type', 'application/json');
-  User.deleteOne({ "_id": req.params.id }).exec().then(promis => {
-    //console.log(promis);
-    res.status(200).json({ message: "User deleted", promis: promis })
-
-  }).catch(err => {
-    //console.log(err);
-    res.status(500).json({ message: "Error no such user", error: err });
-  });
-});
-
+router.delete('/:id/delete', userController.deleteUser);
 // Updates A Single User in the Database
-router.updateUser = (req, res, next) => {
-  User.findByIdAndUpdate(req.params.id, req.body, {new: true}, function (err, user) {
-    if (err) return res.status(500).send("There was a problem updating the user.");
-    res.status(200).send(user);
-  });
-};
-
-
+router.put('/:id/update', userController.updateUser);
 //Sets one user to active
-router.setUserToActive = (req, res) => {
-  res.setHeader('Content-Type', 'application/json');
-  User.updateOne({ "_id": req.params.id }, { $set: { active: true } }).then(promis => {
-    res.json({ message: "Status changed to active", promis: promis })
-  }).catch(err => {
-    //console.log(err);
-    res.status(500).json({
-      message: "Error no such user"
-    });
-  });
-};
-
+router.put('/:id/active', userController.setUserToActive);
 //Sets one user to inactive
-router.setUserToInactive = (req, res) => {
-  res.setHeader('Content-Type', 'application/json');
-  User.updateOne({ "_id": req.params.id }, { $set: { active: false } }).then(promis => {
-    res.json({ message: "Status changed to inactive", promis: promis })
-  }).catch(err => {
-    //console.log(err);
-    res.status(500).json({
-      error: err
-    });
-  });
-};
-
+router.put('/:id/inactive', userController.setUserToInactive);
 //Deletes all inactive users
-router.deleteInactiveUsers = (req, res) => {
-  res.setHeader('Content-Type', 'application/json');
-  User.deleteMany({ active: { $in: [false] } }).then(promis => {
-    res.json({ messege: "Inactive users deleted", promis: promis })
-  }).catch(err => {
-    //console.log(err);
-    res.status(500).json({
-      error: err
-    });
-  });
-};
-
-//Lists all orders of usersId
-// router.usersOrders = (req,res,next) => {
-//   res.setHeader('Content-Type', 'application/json');
-//   Order.find({"userId": req.body.userId}).then(result => {
-//     res.status(200).send(JSON.stringify(result, null, 5));
-//   }).catch(err => {
-//     console.log(err);
-//     res.status(500).json({
-//       error: err,
-//       data: id
-//     });
-//   });
-// };
-
-router.addUsersOrders = ((req, res, next) => {
-  //future method
-});
+router.delete('/delete', userController.deleteInactiveUsers);
 
 module.exports = router;

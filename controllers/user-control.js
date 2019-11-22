@@ -81,4 +81,81 @@ router.findOne = (VerifyToken,(req, res, next) => {
     });
 });
 
+//This method prints out all the users
+router.findAll = (req, res) => {
+    res.setHeader('Content-Type', 'application/json');
+    User.find({}, 'fName lName email active').then(id => {
+        res.send(JSON.stringify(id, null, 5));
+    }).catch(err => {
+        //console.log(err);
+        res.status(500).json({
+            error: err
+        });
+    });
+};
+
+//Deletes a single user of given id
+router.deleteUser = (req, res) => {
+    res.setHeader('Content-Type', 'application/json');
+    User.deleteOne({ "_id": req.params.id }).exec().then(promis => {
+        //console.log(promis);
+        res.status(200).json({ message: "User deleted", promis: promis })
+
+    }).catch(err => {
+        //console.log(err);
+        res.status(500).json({ message: "Error no such user", error: err });
+    });
+};
+
+// Updates A Single User in the Database
+router.updateUser = (req, res, next) => {
+    User.findByIdAndUpdate(req.params.id, req.body, {new: true}, function (err, user) {
+        if (err) return res.status(500).send("There was a problem updating the user.");
+        res.status(200).send(user);
+    });
+};
+
+//Sets one user to active
+router.setUserToActive = (req, res) => {
+    res.setHeader('Content-Type', 'application/json');
+    User.updateOne({ "_id": req.params.id }, { $set: { active: true } }).then(promis => {
+        res.json({ message: "Status changed to active", promis: promis })
+    }).catch(err => {
+        //console.log(err);
+        res.status(500).json({
+            message: "Error no such user"
+        });
+    });
+};
+
+//Sets one user to inactive
+router.setUserToInactive = (req, res) => {
+    res.setHeader('Content-Type', 'application/json');
+    User.updateOne({ "_id": req.params.id }, { $set: { active: false } }).then(promis => {
+        res.json({ message: "Status changed to inactive", promis: promis })
+    }).catch(err => {
+        //console.log(err);
+        res.status(500).json({
+            error: err
+        });
+    });
+};
+
+//Deletes all inactive users
+router.deleteInactiveUsers = (req, res) => {
+    res.setHeader('Content-Type', 'application/json');
+    User.deleteMany({ active: { $in: [false] } }).then(promis => {
+        res.json({ messege: "Inactive users deleted", promis: promis })
+    }).catch(err => {
+        //console.log(err);
+        res.status(500).json({
+            error: err
+        });
+    });
+};
+
+router.addUsersOrders = ((req, res, next) => {
+    //future method
+});
+
 module.exports = router;

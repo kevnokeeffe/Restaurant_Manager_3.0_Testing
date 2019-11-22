@@ -3,7 +3,6 @@ let express = require('express');
 let path = require('path');
 let cookieParser = require('cookie-parser');
 let logger = require('morgan');
-const userController = require('./controllers/user-control');
 const errorController = require('./controllers/error');
 const indexRouter = require('./routes/index');
 const authRoutes = require('./routes/auth')
@@ -46,16 +45,6 @@ app.put('/order/update/:id', orders.updateOrder);
 
 
 //Users calls
-//app.get('/user/:id/find', users.findOne);
-//app.get('/user/userId/order',users.userOrders);
-app.delete('/user/:id/delete', users.deleteUser);
-//app.post('/user/register', userController.register);
-app.put('/user/:id/update', users.updateUser);
-app.get('/user/all', users.findAll);
-app.put('/user/:id/inactive', users.setUserToInactive);
-app.put('/user/:id/active', users.setUserToActive);
-app.put('/user/:id/addOrder', users.addUsersOrders);
-app.delete('/user/delete', users.deleteInactiveUsers);
 
 //Bills calls
 app.get('/bill/:billId/get', bills.getBill);

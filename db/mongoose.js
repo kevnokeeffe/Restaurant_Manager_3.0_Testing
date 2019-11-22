@@ -11,7 +11,7 @@ mongoose.Promise = global.Promise;
 mongoose
   .connect(
     `mongodb+srv://${databaseUsername}:${databasePassword}@cluster0-r3fv1.mongodb.net/restaurantManager?retryWrites=true&w=majority`
-    ,{ useUnifiedTopology: true, useNewUrlParser: true })
+    ,{ useUnifiedTopology: true, useNewUrlParser: true , useCreateIndex:true })
   .then(() => console.log('Successfully Connected to [ ' + db.name + ' ]'))
   .catch(err => console.log('Unable to Connect to [ ' + db.name + ' ]' + ' on orders route', err));
   let db = mongoose.connection;
