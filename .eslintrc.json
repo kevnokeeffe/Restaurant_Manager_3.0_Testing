@@ -21,6 +21,8 @@
         "no-template-curly-in-string": "error",
         "no-whitespace-before-property": "error",
         "no-undef": "error",
+        "key-spacing": ["error", { "beforeColon": false, "afterColon": true }],
+        "keyword-spacing": ["error", { "before": true, "after": true }],
         "no-undef-init": "error",
         "no-unused-vars": ["error", { "vars": "all", "args": "none", "ignoreRestSiblings": true }],
         "indent": [

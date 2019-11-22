@@ -36,7 +36,7 @@ router.unPaidBills = (req, res) => {
 	res.setHeader('Content-Type', 'application/json');
 	Order.find({ 'payed': false }).then(orders => {
 		//console.log(orders);
-		res.status(200).json({ message:'found', orders: orders });
+		res.status(200).json({ message: 'found', orders: orders });
 	}).catch(err => {
 		//console.log(err);
 		res.status(404).json({
@@ -51,7 +51,7 @@ router.paidBills = (req, res) => {
 	res.setHeader('Content-Type', 'application/json');
 	Order.find({ 'payed': true }).then(orders => {
 		//console.log(orders);
-		res.status(200).json({ message:'found', orders: orders });
+		res.status(200).json({ message: 'found', orders: orders });
 	}).catch(err => {
 		//console.log(err);
 		res.status(404).json({
@@ -113,7 +113,7 @@ router.totalRead = (req, res) => {
 	res.setHeader('Content-Type', 'application/json');
 	Order.find({ 'payed': true }).then(orders => {
 		//console.log(orders);
-		res.status(200).json({message:'worked', orders: orders, totalBill: getTotalBill(orders) });
+		res.status(200).json({message: 'worked', orders: orders, totalBill: getTotalBill(orders) });
 	}).catch(err => {
 		//console.log(err);
 		res.status(404).json({

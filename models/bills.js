@@ -7,7 +7,7 @@ let OrderSchema = new Schema({
 	userId: {type: String,required: true},
 	payed: {type: Boolean},
 	message: {type: String},
-	orders: {type: Array, default:[]}
+	orders: {type: Array, default: []}
 },
 { collection: 'bills' });
 

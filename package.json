@@ -3,18 +3,20 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start:watch": "cross-env NODE_ENV=dev nodemon --exec babel-node bin/www",
     "clean": "rimraf ./dist && mkdir dist",
-    "test": "cross-env NODE_ENV=test mocha ",
-    "compile": "babel ./ --out-dir dist/ --ignore ./node_modules,./test --copy-files",
-    "start": "cross-env NODE_ENV=dev PORT=3001 node dist/bin/www",
-    "build": "npm run compile",
-    "postbuild": "npm start",
-    "prebuild": "npm-run-all test clean",
     "lint": "esw  ./test ./routes ./models/ app.js bin/www ",
     "lint:fix": "npm run lint -- --fix",
     "lint:watch": "npm run lint -- --watch",
-    "start-ser": "node app.js"
+    "test": "cross-env NODE_ENV=test mocha",
+    "test:report": "nyc mocha",
+    "compile": "babel ./ --out-dir dist/ --ignore ./node_modules,./test --copy-files ",
+    "start:prod": "cross-env NODE_ENV=dev node dist/bin/www",
+    "start:watch": "cross-env NODE_ENV=dev nodemon --exec babel-node bin/www",
+    "prebuild:dev": "npm-run-all test clean",
+    "build:dev": "npm run compile",
+    "postbuild:dev": "npm run start:prod",
+    "build:release": "npm-run-all  test clean compile ",
+    "postbuild:release": "rimraf dist/.git dist/test dist/nodemon.json"
   },
   "dependencies": {
     "@babel/runtime": "^7.6.3",
