@@ -1,12 +1,8 @@
 let express = require('express');
 let router = express.Router();
 
-let message;
-
-message = '';
-
 try {
-	router.get('/', function (req, res, next) {
+	router.get('/', function (req, res) {
 		res.render('index', { title: 'Restaurant Manager 3.0' });
 
 	});

@@ -1,5 +1,4 @@
 let Order = require('../models/orders');
-let Backup = require('../models/backup');
 let express = require('express');
 let router = express.Router();
 
@@ -13,17 +12,14 @@ function getTotalBill(array) {
 router.getBill = (req, res) => {
 	res.setHeader('Content-Type', 'application/json');
 	Order.find({ 'billId': req.params.billId }).then(orders => {
-		//console.log(orders);
 		if (orders.length >= 1) {
 			res.status(200).json({ message: 'Bill found', orders: orders });
 		} else {
 			res.status(500).json({
-				message: 'Bill not found!',
-				error: err
+				message: 'Bill not found!'
 			});
 		}
 	}).catch(err => {
-		//console.log(err);
 		res.status(404).json({
 			message: 'Bill not found!',
 			error: err
@@ -35,10 +31,8 @@ router.getBill = (req, res) => {
 router.unPaidBills = (req, res) => {
 	res.setHeader('Content-Type', 'application/json');
 	Order.find({ 'payed': false }).then(orders => {
-		//console.log(orders);
 		res.status(200).json({ message: 'found', orders: orders });
 	}).catch(err => {
-		//console.log(err);
 		res.status(404).json({
 			message: 'Failed',
 			error: err
@@ -50,10 +44,8 @@ router.unPaidBills = (req, res) => {
 router.paidBills = (req, res) => {
 	res.setHeader('Content-Type', 'application/json');
 	Order.find({ 'payed': true }).then(orders => {
-		//console.log(orders);
 		res.status(200).json({ message: 'found', orders: orders });
 	}).catch(err => {
-		//console.log(err);
 		res.status(404).json({
 			message: 'Failed',
 			error: err
@@ -65,10 +57,8 @@ router.paidBills = (req, res) => {
 router.billOfOrders = (req, res) => {
 	res.setHeader('Content-Type', 'application/json');
 	Order.find({ $and: [{ 'billId': req.params.billId }, { 'payed': false }] }).then(orders => {
-		//console.log(orders);
 		res.json({ orders: orders, totalBill: getTotalBill(orders) });
 	}).catch(err => {
-		//console.log(err);
 		res.status(404).json({
 			message: 'Failed',
 			error: err
@@ -79,12 +69,10 @@ router.billOfOrders = (req, res) => {
 //Sets all orders of a certain bill to paid.
 router.payBillOfOrders = (req, res) => {
 	res.setHeader('Content-Type', 'application/json');
-	//console.log("HERE")
 	Order.updateMany({ $and: [{ 'billId': req.params.billId }, { 'payed': false }] }, { $set: { payed: true } }).then(orders => {
 		res.status(200).json({ orders: orders, message: 'Bill Successfully Payed!' });
 	})
 		.catch(err => {
-			//console.log(err);
 			res.status(404).json({
 				message: 'Failed',
 				error: err
@@ -95,12 +83,10 @@ router.payBillOfOrders = (req, res) => {
 //Sets all orders of a certain bill to unpaid
 router.unPayBillOfOrders = (req, res) => {
 	res.setHeader('Content-Type', 'application/json');
-	//console.log("HERE")
 	Order.updateMany({ $and: [{ 'billId': req.params.billId }, { 'payed': true }] }, { $set: { payed: false } }).then(orders => {
 		res.json({ orders: orders, message: 'Bill Set to unpaid!' });
 	})
 		.catch(err => {
-			//console.log(err);
 			res.status(404).json({
 				message: 'Failed',
 				error: err
@@ -112,10 +98,8 @@ router.unPayBillOfOrders = (req, res) => {
 router.totalRead = (req, res) => {
 	res.setHeader('Content-Type', 'application/json');
 	Order.find({ 'payed': true }).then(orders => {
-		//console.log(orders);
 		res.status(200).json({message: 'worked', orders: orders, totalBill: getTotalBill(orders) });
 	}).catch(err => {
-		//console.log(err);
 		res.status(404).json({
 			message: 'Failed',
 			error: err
@@ -130,11 +114,9 @@ router.totalRead = (req, res) => {
 router.deleteBill = (req, res) => {
 	res.setHeader('Content-Type', 'application/json');
 	Order.deleteMany({ 'billId': req.params.billId }).then(promis => {
-		//console.log(promis);
 		res.json({ message: 'Bill Deleted!', promis: promis });
 
 	}).catch(err => {
-		//console.log(err);
 		res.status(404).json({
 			message: 'Failed',
 			error: err

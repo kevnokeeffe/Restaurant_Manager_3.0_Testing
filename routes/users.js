@@ -1,10 +1,7 @@
 let express = require('express');
 let router = express.Router();
-const jwt = require('jsonwebtoken');
-const config = require('../config');
 const userController = require('../controllers/user-control');
-let User = require('../models/users');
-const VerifyToken = require('../auth/VerifyToken');
+
 
 // This method registers a user
 router.post('/register', userController.register);
