@@ -25,7 +25,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 
 // User routes:
-app.use('/user', users);
+app.use('/api/user', users);
 
 //Orders calls
 app.get('/order/all', orders.findAll);

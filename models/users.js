@@ -1,5 +1,6 @@
 let mongoose = require('mongoose');
 let Schema = mongoose.Schema;
+const bcrypt = require('bcrypt');
 
 let UsersSchema = new Schema({
 	//_id: mongoose.Schema.Types.ObjectId,
@@ -13,9 +14,12 @@ let UsersSchema = new Schema({
 	active: {type: Boolean},
 	registered: {type: String},
 	last_login: {type: String},
-	orders: {type: Array, default: []}
+	//orders: {type: Array, default: []}
 },
-
 { collection: 'users' });
+
+	UsersSchema.statics.passwordMatches = function (password,hash){
+	return bcrypt.compareSync(password,hash);
+	}
 
 module.exports = mongoose.model('User', UsersSchema);

@@ -10,7 +10,9 @@ router.findOne = (req, res) => {
 			res.status(500).json({ message: 'Order NOT Found!' });
 		else
 			res.status(200).send(JSON.stringify(orders, null, 5));
-	}).catch(err => {
+	})
+		//.populate('fName',' ','lName')
+		.catch(err => {
 		//console.log(err);
 		res.status(500).json({ message: 'Order NOT Found!' });
 	});
@@ -36,7 +38,9 @@ router.findAll = (req, res) => {
 		if (err)
 			res.send(err);
 		res.send(JSON.stringify(orders, null, 5));
-	}).catch(err => {
+	})
+		//.populate('fName',' ','lName')
+		.catch(err => {
 		//console.log(err);
 		res.status(500).json({ error: err });
 	});
@@ -88,6 +92,12 @@ router.orderNotPayed = (req, res) => {
 
 //Adds an order
 router.addOrder = ((req, res, next) => {
+
+	//Checking the user
+	//const id = 10;
+// User.findOne ({_id:id},(error,user)=>{
+// 	if (error&& !user){return res.status(500).json();}
+// })
 
 	res.setHeader('Content-Type', 'application/json');
 	const order = new Order({

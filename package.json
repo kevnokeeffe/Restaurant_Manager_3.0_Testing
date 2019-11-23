@@ -35,6 +35,7 @@
     "http-errors": "~1.6.3",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.15",
+    "moment": "^2.24.0",
     "mongodb": "^3.3.3",
     "mongodb-uri": "^0.9.7",
     "mongoose": "^5.7.6",

@@ -27,5 +27,7 @@ router.put('/:id/inactive', userController.verify, userController.setUserToInact
 router.delete('/delete', userController.verify, userController.deleteInactiveUsers);
 // Verify's that the user is logged in
 //router.get('/verify', userController.verify);
+// Connection test
+router.get('/test', (req, res) => {res.send( {message: 'This is a connection test!'});});
 
 module.exports = router;

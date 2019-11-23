@@ -9,7 +9,6 @@ const VerifyToken = require('../auth/VerifyToken');
 // Register the User
 router.register = (req, res, next) => {
     res.setHeader('Content-Type', 'application/json');
-
     // checks to see if the email already exists
     User.find({email: req.body.email}).exec().then(user => {
         if (user.length >= 1) {
@@ -54,20 +53,25 @@ router.register = (req, res, next) => {
 
 // Login a user
 router.login = (req, res) => {
+    const { email} = req.body;
+    User.findOne({ email })
+        .then(user => {
+            if (!user) {
+                return res.status(400).send({message: "User not found"});
+            }
+            bcrypt
+                .compare(req.body.password, user.password)
+                .then(match => {
+                    if (!match) {
+                        return res.status(401).send({ auth: false, token: null });
+                    }
+                    const token = jwt.sign({ id: user._id }, config.secret, {
+                                expiresIn: 86400 // expires in 24 hours
+                            });
+                    res.status(200).send({ auth: true, token: token });
+                })
 
-    User.findOne({ email: req.body.email }, function (err, user) {
-        if (err) return res.status(500).send('Error on the server.');
-        if (!user) return res.status(404).send('No user found.');
-
-        const passwordIsValid = bcrypt.compareSync(req.body.password, user.password);
-        if (!passwordIsValid) return res.status(401).send({ auth: false, token: null });
-
-        var token = jwt.sign({ id: user._id }, config.secret, {
-            expiresIn: 86400 // expires in 24 hours
-        });
-
-        res.status(200).send({ auth: true, token: token });
-    });
+     });
 
 };
 
@@ -77,6 +81,17 @@ router.logout = (req, res) => {
 };
 
 // Find one user via ID
+
+// router.findOne = (req, res) => {
+//     res.setHeader('Content-Type', 'application/json');
+//     User.find({"_id": req.params.id}, function (err, user) {
+//         if (err)
+//             res.send("err");
+//         else
+//             res.status(200).send(user);
+//     });
+// };
+
 router.findOne = (VerifyToken,(req, res, next) => {
     const token = req.headers['x-access-token'];
     if (!token) return res.status(401).send({auth: false, message: 'No token provided.'});
