@@ -5,6 +5,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const config = require('../config');
 const VerifyToken = require('../auth/VerifyToken');
+import * as auth from '../auth/auth-service';
 
 // Register the User
 router.register = (req, res, next) => {

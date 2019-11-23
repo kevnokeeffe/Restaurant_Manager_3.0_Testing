@@ -21,7 +21,7 @@ export function decodeToken(req){
     }
 }
 
-export function getUsername(req) {
+export function getEmail(req) {
     const token = decodeToken(req);
     if(!token){
         return null;
@@ -36,3 +36,4 @@ export function getUserId(req) {
     }
     return token.user.id;
 }
+

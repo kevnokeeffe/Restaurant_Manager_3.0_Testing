@@ -1,7 +1,7 @@
 let Order = require('../models/orders');
 let express = require('express');
 let router = express.Router();
-
+import * as auth from '../auth/auth-service';
 //Finds an order by its id
 router.findOne = (req, res) => {
 	res.setHeader('Content-Type', 'application/json');
@@ -93,40 +93,46 @@ router.orderNotPayed = (req, res) => {
 //Adds an order
 router.addOrder = ((req, res, next) => {
 
-	//Checking the user
-	//const id = 10;
-// User.findOne ({_id:id},(error,user)=>{
-// 	if (error&& !user){return res.status(500).json();}
-// })
+	//This is new might not work
+	//if it does work add it to update
+	const id = auth.getUserId(req);
+ 	User.findOne ({_id:id},(error,user)=> {
+		if (error && !user) {
+			return res.status(500).json();
+		}
 
-	res.setHeader('Content-Type', 'application/json');
-	const order = new Order({
-		//_id: mongoose.Schema.Types.ObjectID(),
-		billId: req.body.billId,
-		userId: req.body.userId,
-		starter: req.body.starter,
-		main: req.body.main,
-		desert: req.body.desert,
-		drink: req.body.drink,
-		price: req.body.price,
-		payed: false,
-		message: req.body.message
-	});
-	order
-		.save()
-		.then(result => {
-			//console.log(result);
-			res.status(201).json({
-				message: 'Order Created',
-				data: order
-			});
-		}).catch(err => {
+
+		res.setHeader('Content-Type', 'application/json');
+		const order = new Order({
+			//_id: mongoose.Schema.Types.ObjectID(),
+			billId: req.body.billId,
+			//this user has been changed
+			userId: user.id,
+			starter: req.body.starter,
+			main: req.body.main,
+			desert: req.body.desert,
+			drink: req.body.drink,
+			price: req.body.price,
+			payed: false,
+			message: req.body.message
+		});
+		order
+			.save()
+			.then(result => {
+				//console.log(result);
+				res.status(201).json({
+					message: 'Order Created',
+					data: order
+				});
+			}).catch(err => {
 			//console.log(err);
 			res.status(500).json({
 				message: 'Order not created!',
 				error: err
 			});
+			//one of these is new !!
 		});
+	});
 	// Future update
 	// const backup = order.find
 	// Users.findOneAndUpdate(_id: req.user._id}, {$push: {orders: order}});
