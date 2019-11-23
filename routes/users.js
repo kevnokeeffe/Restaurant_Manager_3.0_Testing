@@ -1,7 +1,7 @@
 let express = require('express');
 let router = express.Router();
 const userController = require('../controllers/user-control');
-
+//import * as contoller from '../auth/VerifyToken';
 
 // This method registers a user
 router.post('/register', userController.register);
