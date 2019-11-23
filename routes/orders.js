@@ -1,8 +1,8 @@
 let Order = require('../models/orders');
 let express = require('express');
 let router = express.Router();
-import * as auth from '../auth/auth-service';
-//Finds an order by its id
+let auth = require('../auth/auth-service')
+
 router.findOne = (req, res) => {
 	res.setHeader('Content-Type', 'application/json');
 	Order.find({ '_id': req.params.id }, function (err, orders) {

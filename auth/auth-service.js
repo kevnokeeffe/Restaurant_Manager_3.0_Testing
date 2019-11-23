@@ -1,6 +1,9 @@
+let express = require('express');
+let router = express.Router();
+
 // Authentication methods
 
-export function requireLogin(req, res, next){
+router.requireLogin = (req, res, next) => {
     const token= decodeToken(req);
     if(!token){
         return res.status(401).json({message: 'You must be logged in.'});
@@ -8,7 +11,7 @@ export function requireLogin(req, res, next){
     next();
 }
 
-export function decodeToken(req){
+router.decodeToken = (req) => {
     const token = req.headers.authorization || req.headers
         ['authenticate'];
     if (!token){
@@ -21,7 +24,7 @@ export function decodeToken(req){
     }
 }
 
-export function getEmail(req) {
+router.getEmail= (req) => {
     const token = decodeToken(req);
     if(!token){
         return null;
@@ -29,7 +32,7 @@ export function getEmail(req) {
     return token.user.email;
 }
 
-export function getUserId(req) {
+router.getUserId = (req) => {
     const token = decodeToken(req);
     if(!token){
         return null;
@@ -37,3 +40,4 @@ export function getUserId(req) {
     return token.user.id;
 }
 
+module.exports = router
