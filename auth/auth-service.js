@@ -1,6 +1,7 @@
 let express = require('express');
 let router = express.Router();
-
+const jwt = require('jsonwebtoken');
+const config = require('../config');
 // Authentication methods
 
 router.requireLogin = (req, res, next) => {
@@ -9,6 +10,14 @@ router.requireLogin = (req, res, next) => {
         return res.status(401).json({message: 'You must be logged in.'});
     }
     next();
+}
+
+router.generateJWT = (user) => {
+    const tokenData = {fName: user.fName, id: user._id, email: user.email}
+
+    return jwt.sign({ user:tokenData }, config.secret, {
+        expiresIn: 86400 // expires in 24 hours
+    });
 }
 
 router.decodeToken = (req) => {
@@ -32,6 +41,14 @@ router.getEmail= (req) => {
     return token.user.email;
 }
 
+router.getName= (req) => {
+    const token = decodeToken(req);
+    if(!token){
+        return null;
+    }
+    return token.user.fName;
+}
+
 router.getUserId = (req) => {
     const token = decodeToken(req);
     if(!token){
@@ -40,4 +57,4 @@ router.getUserId = (req) => {
     return token.user.id;
 }
 
-module.exports = router
+module.exports = router;

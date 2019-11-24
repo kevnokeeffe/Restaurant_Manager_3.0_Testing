@@ -95,11 +95,11 @@ router.addOrder = ((req, res, next) => {
 
 	//This is new might not work
 	//if it does work add it to update
-	const id = auth.getUserId(req);
- 	User.findOne ({_id:id},(error,user)=> {
-		if (error && !user) {
-			return res.status(500).json();
-		}
+	// const id = auth.getUserId(req);
+ 	// User.findOne ({_id:id},(error,user)=> {
+	// 	if (error && !user) {
+	// 		return res.status(500).json();
+	// 	}
 
 
 		res.setHeader('Content-Type', 'application/json');
@@ -107,7 +107,7 @@ router.addOrder = ((req, res, next) => {
 			//_id: mongoose.Schema.Types.ObjectID(),
 			billId: req.body.billId,
 			//this user has been changed
-			userId: user.id,
+			userId: req.body.id,
 			starter: req.body.starter,
 			main: req.body.main,
 			desert: req.body.desert,
@@ -132,7 +132,7 @@ router.addOrder = ((req, res, next) => {
 			});
 			//one of these is new !!
 		});
-	});
+
 	// Future update
 	// const backup = order.find
 	// Users.findOneAndUpdate(_id: req.user._id}, {$push: {orders: order}});

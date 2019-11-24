@@ -1,9 +1,10 @@
 const jwt = require('jsonwebtoken');
 const config = require('../config');
-
+let express = require('express');
+let router = express.Router();
 
 //Token verification
-function verifyToken(req, res, next) {
+router.verifyToken = ((req, res, next) => {
     const token = req.headers.authorization || req.headers['authenticate'];
     if (!token)
         return res.status(403).send({ auth: false, message: 'No token provided.' });
@@ -16,7 +17,7 @@ function verifyToken(req, res, next) {
         req.userId = decoded.id;
         next();
     });
-}
+});
 
 
-module.exports = verifyToken;
+module.exports = router;

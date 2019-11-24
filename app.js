@@ -12,7 +12,7 @@ const mongoose = require('./db/mongoose');
 const cors = require('cors');
 let app = express();
 app.use(cors());
-
+const controller = require('./auth/VerifyToken');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -28,10 +28,10 @@ app.use('/', indexRouter);
 app.use('/api/user', users);
 
 //Orders calls
-app.get('/order/all', orders.findAll);
+app.get('/order/all', controller.verifyToken, orders.findAll);
 app.get('/order/findOne/:id', orders.findOne);
 app.delete('/order/:id/delete', orders.deleteOrder);
-app.post('/order/add', orders.addOrder);
+app.post('/order/add', controller.verifyToken, orders.addOrder);
 app.put('/order/payed/:id', orders.orderPayed);
 app.put('/order/unpaid/:id', orders.orderNotPayed);
 app.put('/order/update/:id', orders.updateOrder);

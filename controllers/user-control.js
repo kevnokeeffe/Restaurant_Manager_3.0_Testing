@@ -5,7 +5,8 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const config = require('../config');
 const VerifyToken = require('../auth/VerifyToken');
-//import * as auth from '../auth/auth-service';
+let auth = require('../auth/auth-service');
+
 
 // Register the User
 router.register = (req, res, next) => {
@@ -31,15 +32,14 @@ router.register = (req, res, next) => {
                         permission: req.body.permission,
                         active: true
                     });
+
                     user
                         .save()
                         .then(result => {
-                            //console.log(result);
-                            // This is where i added the token code
-                            const token = jwt.sign({ id: user._id }, config.secret, {
-                                expiresIn: 86400 // expires in 24 hours
-                            });
-                            res.status(200).send({ auth: true, token: token, message: "User Created" });
+
+                            const token = auth.generateJWT(user);
+
+                            res.status(200).send({auth: true, token: token, message: "User Created" });
                         }).catch(err => {
 
                         res.status(500).json({message:"Error Invalid Inputs",
@@ -66,9 +66,15 @@ router.login = (req, res) => {
                     if (!match) {
                         return res.status(401).send({ auth: false, token: null });
                     }
-                    const token = jwt.sign({ id: user._id }, config.secret, {
-                                expiresIn: 86400 // expires in 24 hours
-                            });
+
+                    const tokenData = {fName: user.fName, id: user._id, email: user.email}
+                    const token = jwt.sign({tokenData}, config.secret, {
+                        expiresIn: 86400 // expires in 24 hours
+                    });
+                    //const token = auth.generateJWT();
+                    // const token = jwt.sign({ id: user._id }, config.secret, {
+                    //             expiresIn: 86400 // expires in 24 hours
+                    //         });
                     res.status(200).send({ message: "Login Successful", auth: true, token: token });
                 })
 
