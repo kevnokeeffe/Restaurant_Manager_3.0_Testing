@@ -33,3 +33,12 @@ Build_and_Test:
   script:
     - npm run compile:all
     - npm test
+
+coverage:
+  stage: build
+  script:
+    - npm run test:report
+  coverage: '/All files[^|]*\|[^|]*\s+([\d\.]+)/'
+  artifacts:
+    paths:
+      - coverage/

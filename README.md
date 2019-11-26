@@ -3,6 +3,12 @@
 Name: Kevin O'Keeffe (20074809)
 Git repo: https://github.com/kevnokeeffe/Restaurant_Manager_3.0_Testing
 
+[![pipeline status](https://gitlab.com/kevnok/restaurant-manager-4.0/badges/master/pipeline.svg)](https://gitlab.com/kevnok/restaurant-manager-4.0/commits/master)
+
+[![coverage report](https://gitlab.com/kevnok/restaurant-manager-4.0/badges/master/coverage.svg)](https://gitlab.com/kevnok/restaurant-manager-4.0/badges/master/coverage.svg?job=coverage)
+
+## Donations Web API.
+
 ## Overview.
 
 The API of this project is for a Restaurant POS system. The objectives of this API is to provide the user with a CRUD ability for users, orders and bills. Also expanding on basic CRUD to provide added system capabilities. Such as individual value minipulation in a group of orders or users.
