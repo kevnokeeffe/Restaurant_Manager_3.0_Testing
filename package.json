@@ -15,7 +15,7 @@
     "compile:copy": "cp -r ./node_modules/ dist/node_modules && cp -r bin/ dist/bin && cp -r views/ dist/views",
     "compile:all": "npm-run-all compile:models compile:routes compile:app compile:copy",
     "start:prod": "cross-env NODE_ENV=dev node dist/bin/www",
-    "start": "node app.js",
+    
     "start:watch": "cross-env NODE_ENV=dev nodemon --exec babel-node bin/www",
     "prebuild:dev": "npm-run-all test clean",
     "build:dev": "npm run compile",
