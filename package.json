@@ -8,7 +8,7 @@
     "lint:fix": "npm run lint -- --fix",
     "lint:watch": "npm run lint -- --watch",
     "test": "cross-env NODE_ENV=test mocha --exit",
-    "test:report": "nyc mocha",
+    "test:report": "nyc mocha --exit",
     "compile:models": "babel ./models --out-dir dist/models",
     "compile:routes": "babel ./routes --out-dir dist/routes ",
     "compile:app": "babel app.js --out-dir dist/",
