@@ -170,12 +170,16 @@ const testUser = new User({
     password: '$2b$10$u8JvPqJ3v08S.s9zL6LOy.su65KlcQrY7O2',
     fName: 'Kev',
     lName: 'Door',
+    permission: "admin",
+    active: true
 });
 const testUser2 = new User({
     email: 'test@yahoo.com',
     password: '$2b$10$u8JvPqJ3v08S.s9zL6LOy.su65KlcQrV7O2',
     fName: 'Tom',
     lName: 'Car',
+    permission: "admin",
+    active: true
 });
 
 const newUser = new User({
