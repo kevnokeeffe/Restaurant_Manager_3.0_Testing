@@ -1,14 +1,14 @@
 const _ = require("lodash");
-const chai = require("chai");
-const should = require("chai").should;
+const User = require("../../../models/users");
 const {databasePassword, databaseUsername} = require('../../../config');
 const mongoose = require("mongoose");
 const expect = require('chai').expect;
 const request = require('supertest');
-let server, db;
+let server, db, validID;
+let inValidID = "abcdefghijklmnopqrstuvwxyz0123456789";
 process.env.API_BASE = "/api";
 
-describe("Over Watch User", () => {
+describe("Operation Test Over Watch", () => {
     before(async () => {
         try {
             mongoose.connect(`mongodb+srv://${databaseUsername}:${databasePassword}@cluster0-r3fv1.mongodb.net/restaurantManager?retryWrites=true&w=majority`, {
@@ -48,9 +48,128 @@ describe("Over Watch User", () => {
                 .send(newUser)
                 .expect(200)
                 .then(res => {
-                    expect(res.body.message).equals("User Created");;
+                    expect(res).to.exist;
+                    expect(res.body.message).equals("User Created");
                 });
-
         });
+
+        it("should try create an existing user and fail", () => {
+            return request(server)
+                .post(apiBase + '/user/register')
+                .send(newUser)
+                .expect(409)
+                .then(res => {
+                    try {
+                        expect(res.body.message).equals("Sorry, email already exists!");
+                    } catch {
+                        console.log("error")
+                    }
+                });
+        });
+
+        it("should try create a user and fail", () => {
+                    const user = {
+                        faName: "",
+                    };
+
+                    return request(server)
+                        .post(apiBase + '/user/register')
+                        .send(user)
+                        .expect(500)
+                        .then(res => {
+                                expect(res.body.message).contains("Error Invalid Inputs");
+                    });
+        });
+
+        it("should retrieve the token", () => {
+            return request(server)
+                .post(apiBase + "/user/login")
+                .send({ "email": newUser.email, "password": newUser.password })
+                .expect(200)
+                .then(res=>{
+                    expect(res).to.exist;
+                    expect(res.body.token).to.not.be.empty;
+            });
+        });
+
+        it("should not login with the right user but wrong password", () => {
+            return request(server)
+                .post(apiBase + '/user/login')
+                .send({ "email": newUser.email, "password": "random" })
+                .expect(401);
+        });
+
+        it("should return invalid credentials error", () => {
+            return request(server)
+                .post(apiBase + '/user/login')
+                .send({ "email":  newUser.email, "password": "" })
+                .expect(401)
+                .then(res => {
+                    return request(server)
+                        .post(apiBase + '/user/login')
+                        .send({ "email":  newUser.email, "password": "mypass" })
+                        .expect(401);
+                });
+        });
+
+        it("should return a user", () => {
+            const user = User.findOne({email: "kevokeeffe@gmail.com"});
+            validID = user._id;
+            request(server)
+                .get(apiBase + `/user/${validID}/find`)
+                .set("Accept", "application/json")
+                .expect("Content-Type", /json/)
+                .expect(200)
+                .then((res) => {
+                    expect(res.body[0]).to.have.property("fName", "Kevin");
+                    expect(res.body[0]).to.have.property("lName", "O'Keeffe");
+                    expect(res.body[0]).to.have.property("email", "kevokeeffe@gmail.com");
+                    expect(res.body[0]).to.have.property("permission", "admin");
+                    expect(res.body[0]).to.have.property("active", true);
+                });
+        });
+
+        it("should try find a user with invalid ID and fail", () => {
+                    request(server)
+                        .get(`/user/${inValidID}/find`)
+                        .set("Accept", "application/json")
+                        .expect("Content-Type", /json/)
+                        .expect(500)
+                        .expect({ message: "User NOT Found!" });
+        });
+
+        it("should delete a user", done => {
+
+                try {
+                    request(server)
+                        .delete(`/user/${validID2}/delete`)
+                        .expect(200)
+                        .expect("Content-Type", /json/)
+                        .then(res => {
+                            try {
+                                expect(res.body.message).equals("User deleted");
+                                //console.log("DELETE")
+                            } catch {
+                                console.log("error");
+                            }
+                        });
+
+                } catch (err) {
+                    console.log("fail")
+                }
+                done();
+            });
+            after(() => {
+                try {
+                    return request(server)
+                        .get(`/user/${validID2}/find`)
+                        .expect(200)
+                } catch {
+                    console.log("error 2");
+                }
+            });
+        });
+
+
     });
 });

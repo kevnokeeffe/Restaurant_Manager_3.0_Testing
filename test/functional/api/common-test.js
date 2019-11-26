@@ -1,15 +1,6 @@
 process.env.API_BASE = "/api";
-
-//const expect = require('chai').expect;
-//const Order = require("../../../models/orders");
-//const request = require("supertest");
-//const _ = require("lodash");
-//const UserTest = require("../../../controllers/user-control");
-
 const User = require("../../../models/users");
-const MongoMemoryServer = require("mongodb-memory-server").MongoMemoryServer;
-const mongoose = require("mongoose");
-export const request = require("supertest")(express);
+let request = require('express');
 export const chai = require("chai");
 export const should = chai.should();
 
@@ -42,7 +33,7 @@ inValidID = "5db1fd86f7b66c3ac55d7635";
 
     export const loginWithDefaultUser = async () => {
         let user = await getDefaultUser();
-        return request.post(process.env.API_BASE + "/user/login")
+        return request(server).post(process.env.API_BASE + "/user/login")
             .send({ "email": defaultUser.email, "password": defaultUser.password })
             .expect(200);
     };
