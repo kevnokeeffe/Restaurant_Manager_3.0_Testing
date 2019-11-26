@@ -1,4 +1,5 @@
 file:
     - test/functional/api/users-test.js
 require: '@babel/register'
+exit: true
 timeout: 6000
