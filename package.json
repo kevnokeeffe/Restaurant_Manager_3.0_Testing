@@ -20,7 +20,8 @@
     "build:dev": "npm run compile",
     "postbuild:dev": "npm run start:prod",
     "build:release": "npm-run-all  test clean compile ",
-    "postbuild:release": "rimraf dist/.git dist/test dist/nodemon.json"
+    "postbuild:release": "rimraf dist/.git dist/test dist/nodemon.json",
+    "postinstall": "rimraf ./dist && npm run compile:all"
   },
   "dependencies": {
     "@babel/runtime": "^7.6.3",
