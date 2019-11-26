@@ -1,20 +1,20 @@
 process.env.API_BASE = "/api";
 const User = require("../../../models/users");
-let request = require('express');
+//let request = require('express');
 export const chai = require("chai");
 export const should = chai.should();
-
+const expect = require('chai').expect;
 let server;
-let mongod;
+const request = require('supertest');
 let db, validID, validID2, inValidID;
 inValidID = "5db1fd86f7b66c3ac55d7635";
+const apiBase = process.env.API_BASE = "/api";
 
 
 
 
-
-    const defaultUser = { "fName": "Kevin", "lName": "O'Keeffe", "email":"kevokeeffe@gmail.com", "password":"123456","permission": "admin",
-        "active": true };
+    const defaultUser = new User({ fName: "Kevin", lName: "O'Keeffe", email:"kevnokeeffe@gmail.com", password:"123456",permission: "admin",
+        active: true });
 
     const createUser = async () => {
         const UserModel = new User(defaultUser);
@@ -33,8 +33,9 @@ inValidID = "5db1fd86f7b66c3ac55d7635";
 
     export const loginWithDefaultUser = async () => {
         let user = await getDefaultUser();
-        return request(server).post(process.env.API_BASE + "/user/login")
-            .send({ "email": defaultUser.email, "password": defaultUser.password })
+        request(server)
+            .post(apiBase + "/user/login")
+            .send({ "email": user.email, "password": user.password })
             .expect(200);
     };
 
