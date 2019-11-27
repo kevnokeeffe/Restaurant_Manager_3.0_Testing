@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "postinstall": "rimraf ./dist && npm run compile:all",
     "clean": "rimraf ./dist && mkdir dist",
     "lint": "esw  ./test ./routes ./models/ app.js bin/www ",
     "lint:fix": "npm run lint -- --fix",
