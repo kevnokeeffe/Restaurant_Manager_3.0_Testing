@@ -11,9 +11,7 @@ router.findOne = (req, res) => {
 		else
 			res.status(200).send(JSON.stringify(orders, null, 5));
 	})
-		//.populate('fName',' ','lName')
 		.catch(err => {
-		//console.log(err);
 		res.status(500).json({ message: 'Order NOT Found!' });
 	});
 };
@@ -22,11 +20,9 @@ router.findOne = (req, res) => {
 router.deleteOrder = (req, res, next) => {
 	res.setHeader('Content-Type', 'application/json');
 	Order.deleteOne({ '_id': req.params.id }).exec().then(promis => {
-		//console.log(promis);
 		res.status(200).json({ message: 'Order deleted', promis: promis });
 
 	}).catch(err => {
-		//console.log(err);
 		res.status(500).json({ message: 'Order not deleted', error: err });
 	});
 };
@@ -41,7 +37,6 @@ router.findAll = (req, res) => {
 	})
 		//.populate('fName',' ','lName')
 		.catch(err => {
-		//console.log(err);
 		res.status(500).json({ error: err });
 	});
 };
@@ -63,7 +58,6 @@ router.orderPayed = (req, res) => {
 			});
 		}
 	}).catch(err => {
-		//console.log(err);
 		res.status(500).json({ message: 'Invalid Input Error' });
 	});
 };
@@ -93,20 +87,10 @@ router.orderNotPayed = (req, res) => {
 //Adds an order
 router.addOrder = ((req, res, next) => {
 
-	//This is new might not work
-	//if it does work add it to update
-	// const id = auth.getUserId(req);
- 	// User.findOne ({_id:id},(error,user)=> {
-	// 	if (error && !user) {
-	// 		return res.status(500).json();
-	// 	}
-
-
 		res.setHeader('Content-Type', 'application/json');
 		const order = new Order({
 			//_id: mongoose.Schema.Types.ObjectID(),
 			billId: req.body.billId,
-			//this user has been changed
 			userId: req.body.id,
 			starter: req.body.starter,
 			main: req.body.main,
@@ -119,23 +103,16 @@ router.addOrder = ((req, res, next) => {
 		order
 			.save()
 			.then(result => {
-				//console.log(result);
 				res.status(201).json({
 					message: 'Order Created',
 					data: order
 				});
 			}).catch(err => {
-			//console.log(err);
 			res.status(500).json({
 				message: 'Order not created!',
 				error: err
 			});
-			//one of these is new !!
 		});
-
-	// Future update
-	// const backup = order.find
-	// Users.findOneAndUpdate(_id: req.user._id}, {$push: {orders: order}});
 });
 
 // Updates an order.
@@ -156,7 +133,6 @@ router.updateOrder = (req, res, next) => {
 		}
 	}).then(order => { res.status(200).json({ order: order, message: 'Update Successfully' }); })
 		.catch(err => {
-			//console.log(err);
 			res.status(500).json({
 				message: 'Order not updated!'
 			});
