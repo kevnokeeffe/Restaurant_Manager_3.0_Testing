@@ -14,7 +14,7 @@
     "compile:models": "babel ./models --out-dir dist/models",
     "compile:routes": "babel ./routes --out-dir dist/routes ",
     "compile:app": "babel app.js --out-dir dist/",
-    "compile:copy": "cpy ./node_modules/ ./dist/node_modules && cpy ./bin/ ./dist/bin && cpy ./views/ ./dist/views",
+    "compile:copy": "ncp ./node_modules/ ./dist/node_modules && ncp ./bin/ ./dist/bin && ncp ./views/ ./dist/views",
     "compile:all": "npm-run-all compile:models compile:routes compile:app compile:copy",
     "start:prod": "cross-env NODE_ENV=dev node dist/bin/www",
     "start:watch": "cross-env NODE_ENV=dev nodemon --exec babel-node bin/www",
@@ -38,6 +38,7 @@
     "debug": "^2.6.9",
     "ejs": "~2.6.1",
     "express": "~4.16.1",
+    "fs-extra": "^8.1.0",
     "http-errors": "~1.6.3",
     "is-cygwin": "^2.0.0",
     "jsonwebtoken": "^8.5.1",
@@ -47,6 +48,7 @@
     "mongodb-uri": "^0.9.7",
     "mongoose": "^5.7.6",
     "morgan": "~1.9.1",
+    "ncp": "^2.0.0",
     "vue": "^2.6.10"
   },
   "devDependencies": {
