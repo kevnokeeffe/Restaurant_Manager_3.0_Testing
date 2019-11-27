@@ -13,7 +13,7 @@
     "compile:models": "babel ./models --out-dir dist/models",
     "compile:routes": "babel ./routes --out-dir dist/routes ",
     "compile:app": "babel app.js --out-dir dist/",
-    "compile:copy": "copy -r ./node_modules/ dist/node_modules && copy -r ./bin/ dist/bin && copy -r ./views/ dist/views",
+    "compile:copy": "c -r ./node_modules/ dist/node_modules && c -r ./bin/ dist/bin && c -r ./views/ dist/views",
     "compile:all": "npm-run-all compile:models compile:routes compile:app compile:copy",
     "start:prod": "cross-env NODE_ENV=dev node dist/bin/www",
     "start:watch": "cross-env NODE_ENV=dev nodemon --exec babel-node bin/www",
