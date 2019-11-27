@@ -6,7 +6,7 @@ const expect = require('chai').expect;
 const request = require('supertest');
 import {loginWithDefaultUser} from "./common-test";
 
-let server, db, validID, validID2;
+let server, db,token, validID, validID2;
 let inValidID = "abcdefghijklmnopqrstuvwxyz0123456789";
 const apiBase = process.env.API_BASE = "/api";
 
@@ -93,6 +93,7 @@ describe("Operation Test Over Watch", () => {
                 .then(res => {
                     expect(res).to.exist;
                     expect(res.body.token).to.not.be.empty;
+                    token = res.body.token;
                 });
         });
 
