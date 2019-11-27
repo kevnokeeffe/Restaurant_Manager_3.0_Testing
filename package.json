@@ -12,7 +12,7 @@
     "compile:models": "babel ./models --out-dir dist/models",
     "compile:routes": "babel ./routes --out-dir dist/routes ",
     "compile:app": "babel app.js --out-dir dist/",
-    "compile:copy": "cp -r ./node_modules/ dist/node_modules && cp -r bin/ dist/bin && cp -r views/ dist/views",
+    "compile:copy": "copy -r ./node_modules/ dist/node_modules && copy -r ./bin/ dist/bin && copy -r ./views/ dist/views",
     "compile:all": "npm-run-all compile:models compile:routes compile:app compile:copy",
     "start:prod": "cross-env NODE_ENV=dev node dist/bin/www",
     "start:watch": "cross-env NODE_ENV=dev nodemon --exec babel-node bin/www",
@@ -20,8 +20,7 @@
     "build:dev": "npm run compile",
     "postbuild:dev": "npm run start:prod",
     "build:release": "npm-run-all  test clean compile ",
-    "postbuild:release": "rimraf dist/.git dist/test dist/nodemon.json",
-    "postinstall": "rimraf ./dist && npm run compile:all"
+    "postbuild:release": "rimraf dist/.git dist/test dist/nodemon.json"
   },
   "dependencies": {
     "@babel/runtime": "^7.6.3",
