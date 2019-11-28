@@ -38,6 +38,7 @@
     "debug": "^2.6.9",
     "ejs": "~2.6.1",
     "express": "~4.16.1",
+    "fa-icons": "^0.1.7",
     "fs-extra": "^8.1.0",
     "http-errors": "~1.6.3",
     "is-cygwin": "^2.0.0",
