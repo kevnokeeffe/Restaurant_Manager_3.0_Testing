@@ -5,16 +5,21 @@
  */
 
 let app = require('../app');
-let debug = require('debug')('restaurantmanager-4.0:server');
+let debug = require('debug')('restaurantmanager-3.0:server');
 let http = require('http');
 
 /**
  * Get port from environment and store in Express.
  */
-let port = process.env.PORT || 5000;
-app.set('port', port);
-// let port = normalizePort(process.env.PORT || '3000');
+// let port = app.listen(process.env.PORT || 5000, function() {
+// 	let addr = server.address();
+// 	console.log("Server started.......on PORT:"+ addr.port);
+// 	app.set('port', port);
+// });
+// let port = process.env.PORT || 5000;
 // app.set('port', port);
+let port = normalizePort(process.env.PORT || '3000');
+app.set('port', port);
 
 /**
  * Create HTTP server.
