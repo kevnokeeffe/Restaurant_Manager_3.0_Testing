@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node dist/bin/www",
+    "start": "node ./bin/www",
     "postinstall": "rimraf ./dist && npm run compile:all",
     "clean": "rimraf ./dist && mkdir dist",
     "lint": "esw  ./test ./routes ./models/ app.js bin/www ",
