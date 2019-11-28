@@ -5,7 +5,7 @@
  */
 
 let app = require('../app');
-let debug = require('debug')('restaurantmanager-3.0:server');
+let debug = require('debug')('restaurantmanager-4.0:server');
 let http = require('http');
 
 /**
