@@ -90,6 +90,7 @@ router.logout = (req, res) => {
 // Find one User
 
 router.findOne = (VerifyToken,(req, res, next) => {
+	res.setHeader('Content-Type', 'application/json');
 	const token = req.headers.authorization || req.headers['authenticate'];
 	if (!token) return res.status(401).send({auth: false, message: 'No token provided.'});
 
@@ -122,7 +123,7 @@ router.findOne = (VerifyToken,(req, res, next) => {
 router.findAll = (req, res) => {
 	res.setHeader('Content-Type', 'application/json');
 	User.find({}, 'fName lName email active').then(id => {
-		res.send(JSON.stringify(id, null, 5));
+		res.status(200).send(id);
 	}).catch(err => {
 		//console.log(err);
 		res.status(500).json({
