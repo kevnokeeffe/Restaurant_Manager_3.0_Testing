@@ -33,9 +33,8 @@ router.findAll = (req, res) => {
 	Order.find(function (err, orders) {
 		if (err)
 			res.send(err);
-		res.send(JSON.stringify(orders, null, 5));
+		res.send(orders);
 	})
-		//.populate('fName',' ','lName')
 		.catch(err => {
 		res.status(500).json({ error: err });
 	});

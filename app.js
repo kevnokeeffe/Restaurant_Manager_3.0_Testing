@@ -29,12 +29,12 @@ app.use('/api/user', users);
 
 //Orders calls
 app.get('/order/all', controller.verifyToken, orders.findAll);
-app.get('/order/findOne/:id', orders.findOne);
-app.delete('/order/:id/delete', orders.deleteOrder);
+app.get('/order/findOne/:id', controller.verifyToken,orders.findOne);
+app.delete('/order/:id/delete', controller.verifyToken,orders.deleteOrder);
 app.post('/order/add', controller.verifyToken, orders.addOrder);
-app.put('/order/payed/:id', orders.orderPayed);
-app.put('/order/unpaid/:id', orders.orderNotPayed);
-app.put('/order/update/:id', orders.updateOrder);
+app.put('/order/payed/:id', controller.verifyToken,orders.orderPayed);
+app.put('/order/unpaid/:id', controller.verifyToken,orders.orderNotPayed);
+app.put('/order/update/:id', controller.verifyToken,orders.updateOrder);
 
 //Bills calls
 app.get('/bill/:billId/get', bills.getBill);

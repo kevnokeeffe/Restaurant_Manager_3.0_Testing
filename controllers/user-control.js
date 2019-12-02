@@ -91,7 +91,7 @@ router.logout = (req, res) => {
 
 router.findOne = (VerifyToken,(req, res, next) => {
 	res.setHeader('Content-Type', 'application/json');
-	const token = req.headers.authorization || req.headers['authenticate'];
+	const token = req.headers.authorization || req.headers['Authorization'];
 	if (!token) return res.status(401).send({auth: false, message: 'No token provided.'});
 
 	jwt.verify(token, config.secret, function (err, decoded) {
@@ -194,7 +194,7 @@ router.deleteInactiveUsers = (req, res) => {
 
 // Verify that the user is logged in
 router.verify = (VerifyToken, function(req, res, next) {
-	const token = req.headers.authorization || req.headers['authenticate'];
+	const token = req.headers.authorization || req.headers['Authorization'];
 	if (!token) return res.status(401).send({ auth: false, message: 'No token provided.' });
 
 	jwt.verify(token, config.secret, function(err, decoded) {

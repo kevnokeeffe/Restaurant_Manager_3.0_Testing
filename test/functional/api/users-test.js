@@ -47,7 +47,7 @@ describe("Operation Test Over Watch", () => {
     describe("# Auth APIs", () => {
 
         it("should create user", async () => {
-            request(server)
+            return request(server)
                 .post(apiBase + '/user/register')
                 .set("Accept", "application/json")
                 .send(newUser)
@@ -57,6 +57,10 @@ describe("Operation Test Over Watch", () => {
                     expect(res.body.message).equals("User Created");
                     const user1 = await User.findOne({email: `${email}@gmail.com`});
                     validID = user1._id;
+                    token = res.body.token;
+                    console.log("Token: ",token)
+                    console.log("User ID: ", validID)
+
                 });
         });
 
@@ -98,7 +102,7 @@ describe("Operation Test Over Watch", () => {
                 .then(res => {
                     expect(res).to.exist;
                     expect(res.body.token).to.not.be.empty;
-                    token = res.body.token;
+                    //token = res.body.token;
                 });
         });
 
@@ -124,25 +128,27 @@ describe("Operation Test Over Watch", () => {
         });
     });
 
-    // describe("# User APIs", () => {
-    //     it("should return the matching user", () => {
-    //         try {
-    //            return request(server)
-    //                 .get(apiBase + `/user/${validID}/find`)
-    //                 .set("Accept", "application/json")
-    //                 .set("Authorization", token)
-    //                 .expect("Content-Type", /json/)
-    //                 .expect(200)
-    //                 .then((res) => {
-    //                     expect(res.body[0]).to.have.property("fName", "Kevin");
-    //                     expect(res.body[0]).to.have.property("lName", "O'Keeffe");
-    //                     expect(res.body[0]).to.have.property("email", `${email}@gmail.com`);
-    //                     expect(res.body[0]).to.have.property("active", true);
-    //                 });
-    //         } catch {
-    //             console.log("Get User Fail")
-    //         }
-    //     });
+
+        // it("should return the matching user", () => {
+        //     try {
+        //         return request(server)
+        //             .get(apiBase + `/user/${validID}/find`)
+        //             .set("Accept", "application/json")
+        //             .set("Authorization", token)
+        //             //console.log(token)
+        //             .expect("Content-Type", /json/)
+        //             .expect(200)
+                    // .then((res) => {
+                    //     expect(res.body[0]).to.have.property("fName", "Kevin");
+                    //     expect(res.body[0]).to.have.property("lName", "O'Keeffe");
+                    //     expect(res.body[0]).to.have.property("email", `${email}@gmail.com`);
+                    //     expect(res.body[0]).to.have.property("active", true);
+                    // });
+        //     } catch {
+        //         console.log("Get User Fail")
+        //     }
+        // });
+
     //
     //     it("should delete a user", () => {
     //         try {
