@@ -36,7 +36,6 @@ router.register = (req, res, next) => {
 					user
 						.save()
 						.then(result => {
-
 							const token = auth.generateJWT(user);
 
 							res.status(200).send({auth: true, token: token, message: 'User Created' });
@@ -67,8 +66,8 @@ router.login = (req, res) => {
 						return res.status(401).send({ auth: false, token: null });
 					}
 
-					const tokenData = {fName: user.fName, id: user._id, email: user.email};
-					const token = jwt.sign({tokenData}, config.secret, {
+					const tokenData = {fName:user.fName, id: user._id, email: user.email};
+					const token = jwt.sign({fName:user.fName}, config.secret, {
 						expiresIn: 86400 // expires in 24 hours
 					});
 					//const token = auth.generateJWT();
