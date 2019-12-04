@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 
 let UsersSchema = new Schema({
 	//_id: mongoose.Schema.Types.ObjectId,
+
 	fName: {type: String},
 	lName: {type: String},
 	email: {type: String, required: true, unique: true, match: /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/},

@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "start:dist": "node ./dist/bin/www",
     "start": "node ./bin/www",
     "postinstall": "rimraf ./dist && npm run compile:all",
     "clean": "rimraf ./dist && mkdir dist",
@@ -17,8 +18,9 @@
     "compile:auth": " babel ./auth --out-dir dist/auth",
     "compile:db": " babel ./db --out-dir dist/db",
     "compile:app": "babel app.js --out-dir dist/",
+    "compile:config": "babel config.js --out-dir dist/",
     "compile:copy": "ncp ./node_modules/ ./dist/node_modules && ncp ./bin/ ./dist/bin && ncp ./views/ ./dist/views ncp ./controllers/error.js ./dist/controllers/error.js",
-    "compile:all": "npm-run-all compile:models compile:routes compile:controllers compile:auth compile:db compile:app compile:copy",
+    "compile:all": "npm-run-all compile:models compile:routes compile:controllers compile:auth compile:db compile:app compile:config compile:copy",
     "start:prod": "cross-env NODE_ENV=dev node dist/bin/www",
     "start:watch": "cross-env NODE_ENV=dev nodemon --exec babel-node bin/www",
     "prebuild:dev": "npm-run-all test clean",
