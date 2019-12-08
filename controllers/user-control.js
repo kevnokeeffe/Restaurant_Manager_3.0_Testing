@@ -119,7 +119,7 @@ router.findOne = (VerifyToken,(req, res, next) => {
 });
 
 //This method prints out all the users
-router.findAll = (req, res) => {
+router.findAll = (VerifyToken,(req, res) => {
 	res.setHeader('Content-Type', 'application/json');
 	User.find({}, 'fName lName email active').then(id => {
 		res.status(200).send(id);
@@ -129,7 +129,7 @@ router.findAll = (req, res) => {
 			error: err
 		});
 	});
-};
+});
 
 //Deletes a single user of given id
 router.deleteUser = (req, res) => {
