@@ -1,7 +1,6 @@
 let Order = require('../models/orders');
 let express = require('express');
 let router = express.Router();
-let auth = require('../auth/auth-service')
 
 router.findOne = (req, res) => {
 	res.setHeader('Content-Type', 'application/json');
@@ -30,11 +29,8 @@ router.deleteOrder = (req, res, next) => {
 //Gives a list of all orders on the system
 router.findAll = ((req, res) => {
 	res.setHeader('Content-Type', 'application/json');
-	Order.find(function (err, orders) {
-		if (err)
-			res.send(err);
-		res.send(orders);
-	})
+	Order.find({}).then(orders =>{res.status(200).send(orders);})
+
 		.catch(err => {
 		res.status(500).json({ error: err });
 	});

@@ -13,7 +13,7 @@ router.requireLogin = (req, res, next) => {
 };
 
 router.generateJWT = (user) => {
-	const tokenData = {fName: user.fName, id: user._id, email: user.email};
+	const tokenData = {fName:user.fName,id: user._id,lName:user.lName,email: user.email};
 
 	return jwt.sign({ user: tokenData }, config.secret, {
 		expiresIn: 86400 // expires in 24 hours

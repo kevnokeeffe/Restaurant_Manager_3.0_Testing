@@ -4,7 +4,7 @@ let User = require ('../models/users');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const config = require('../config');
-const VerifyToken = require('../auth/VerifyToken');
+const userController = require('../auth/VerifyToken');
 let auth = require('../auth/auth-service');
 
 
@@ -67,7 +67,7 @@ router.login = (req, res) => {
 					}
 
 					const tokenData = {fName:user.fName, id: user._id, email: user.email};
-					const token = jwt.sign({fName:user.fName,id: user._id,lName:user.lName,email: user.email}, config.secret, {
+					const token = jwt.sign({user: tokenData}, config.secret, {
 						expiresIn: 86400 // expires in 24 hours
 					});
 					//const token = auth.generateJWT();
@@ -82,15 +82,16 @@ router.login = (req, res) => {
 };
 
 // Log Out function. Sets token to null making it invalid.
-router.logout = (req, res) => {
-	res.status(200).send({ auth: false, token: null });
-};
+router.logout = ((req, res) => {
+	res.jwt.destroy(token);
+	res.status(200).send({ message:"token deleted" });
+});
 
 // Find one User
 
-router.findOne = (VerifyToken,(req, res, next) => {
+router.findOne = (userController.verifyToken,(req, res, next) => {
 	res.setHeader('Content-Type', 'application/json');
-	const token = req.headers.authorization || req.headers['Authorization'];
+	const token = req.headers.authorization || req.headers['authenticate'];
 	if (!token) return res.status(401).send({auth: false, message: 'No token provided.'});
 
 	jwt.verify(token, config.secret, function (err, decoded) {
@@ -119,7 +120,7 @@ router.findOne = (VerifyToken,(req, res, next) => {
 });
 
 //This method prints out all the users
-router.findAll = (VerifyToken,(req, res) => {
+router.findAll = (req, res) => {
 	res.setHeader('Content-Type', 'application/json');
 	User.find({}, 'fName lName email active').then(id => {
 		res.status(200).send(id);
@@ -129,7 +130,7 @@ router.findAll = (VerifyToken,(req, res) => {
 			error: err
 		});
 	});
-});
+};
 
 //Deletes a single user of given id
 router.deleteUser = (req, res) => {
@@ -192,8 +193,8 @@ router.deleteInactiveUsers = (req, res) => {
 };
 
 // Verify that the user is logged in
-router.verify = (VerifyToken, function(req, res, next) {
-	const token = req.headers.authorization || req.headers['Authorization'];
+router.verify = (function(req, res, next) {
+	const token = req.headers.authorization || req.headers['authenticate'];
 	if (!token) return res.status(401).send({ auth: false, message: 'No token provided.' });
 
 	jwt.verify(token, config.secret, function(err, decoded) {
