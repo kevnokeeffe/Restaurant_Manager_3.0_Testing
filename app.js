@@ -28,7 +28,7 @@ app.use('/', indexRouter);
 app.use('/api/user', users);
 
 //Orders calls
-app.get('/order/all', orders.findAll);
+app.get('/order/all',controller.verifyToken, orders.findAll);
 app.get('/order/findOne/:id', controller.verifyToken,orders.findOne);
 app.delete('/order/:id/delete', controller.verifyToken,orders.deleteOrder);
 app.post('/order/add', controller.verifyToken, orders.addOrder);

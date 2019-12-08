@@ -28,7 +28,7 @@ router.deleteOrder = (req, res, next) => {
 };
 
 //Gives a list of all orders on the system
-router.findAll = (req, res) => {
+router.findAll = ((req, res) => {
 	res.setHeader('Content-Type', 'application/json');
 	Order.find(function (err, orders) {
 		if (err)
@@ -38,7 +38,7 @@ router.findAll = (req, res) => {
 		.catch(err => {
 		res.status(500).json({ error: err });
 	});
-};
+});
 
 //Sets an order to payed
 router.orderPayed = (req, res) => {
