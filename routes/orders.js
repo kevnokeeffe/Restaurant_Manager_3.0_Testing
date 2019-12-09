@@ -78,14 +78,7 @@ router.orderNotPayed = (req, res) => {
 		res.status(500).json({ error: err });
 	});
 };
-router.findAll = ((req, res) => {
-	res.setHeader('Content-Type', 'application/json');
-	Order.find({}).then(orders =>{res.status(200).send(orders);})
 
-		.catch(err => {
-			res.status(500).json({ error: err });
-		});
-});
 //Adds an order
 router.addOrder = ((req, res, next) => {
 
