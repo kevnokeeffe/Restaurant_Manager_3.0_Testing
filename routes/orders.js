@@ -78,15 +78,22 @@ router.orderNotPayed = (req, res) => {
 		res.status(500).json({ error: err });
 	});
 };
+router.findAll = ((req, res) => {
+	res.setHeader('Content-Type', 'application/json');
+	Order.find({}).then(orders =>{res.status(200).send(orders);})
 
+		.catch(err => {
+			res.status(500).json({ error: err });
+		});
+});
 //Adds an order
 router.addOrder = ((req, res, next) => {
 
 		res.setHeader('Content-Type', 'application/json');
-		const order = new Order({
+		let order = new Order({
 			//_id: mongoose.Schema.Types.ObjectID(),
 			billId: req.body.billId,
-			userId: req.body.id,
+			userId: req.body.userId,
 			starter: req.body.starter,
 			main: req.body.main,
 			desert: req.body.desert,
