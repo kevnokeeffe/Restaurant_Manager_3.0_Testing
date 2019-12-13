@@ -15,7 +15,7 @@ router.requireLogin = (req, res, next) => {
 router.generateJWT = (user) => {
 	const tokenData = {fName:user.fName,id: user._id,lName:user.lName,email: user.email};
 
-	return jwt.sign({ fName:user.fName,id: user._id,lName:user.lName,email: user.email }, config.secret, {
+	return jwt.sign({ fName:user.fName,id: user._id,lName:user.lName,email: user.email }, process.env.SECRET_KEY, {
 		expiresIn: 86400 // expires in 24 hours
 	});
 };
@@ -27,7 +27,7 @@ router.decodeToken = (req) => {
 		return null;
 	}
 	try {
-		return jwt.verify(token, process.env.secret);
+		return jwt.verify(token, process.env.SECRET_KEY);
 	} catch (error){
 		return null;
 	}

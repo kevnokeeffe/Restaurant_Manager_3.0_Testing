@@ -67,7 +67,7 @@ router.login = (req, res) => {
 					}
 
 					const tokenData = {fName:user.fName, id: user._id, email: user.email};
-					const token = jwt.sign({fName:user.fName,id: user._id,lName:user.lName,email: user.email}, config.secret, {
+					const token = jwt.sign({fName:user.fName,id: user._id,lName:user.lName,email: user.email}, process.env.SECRET_KEY, {
 						expiresIn: 86400 // expires in 24 hours
 					});
 					//const token = auth.generateJWT();
@@ -94,7 +94,7 @@ router.findOne = (userController.verifyToken,(req, res, next) => {
 	const token = req.headers.authorization || req.headers['authenticate'];
 	if (!token) return res.status(401).send({auth: false, message: 'No token provided.'});
 
-	jwt.verify(token, config.secret, function (err, decoded) {
+	jwt.verify(token, process.env.SECRET_KEY, function (err, decoded) {
 		if (err) return res.status(500).send({auth: false, message: 'Failed to authenticate token.'});
 
 		User.findById(decoded.id,
@@ -197,7 +197,7 @@ router.verify = (function(req, res, next) {
 	const token = req.headers.authorization || req.headers['authenticate'];
 	if (!token) return res.status(401).send({ auth: false, message: 'No token provided.' });
 
-	jwt.verify(token, config.secret, function(err, decoded) {
+	jwt.verify(token, process.env.SECRET_KEY, function(err, decoded) {
 		if (err) return res.status(500).send({ auth: false, message: 'Failed to authenticate token.' });
 
 		User.findById(decoded.id,
