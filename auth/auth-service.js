@@ -16,7 +16,7 @@ router.generateJWT = (user) => {
 	const tokenData = {fName:user.fName,id: user._id,lName:user.lName,email: user.email};
 
 	return jwt.sign({ fName:user.fName,id: user._id,lName:user.lName,email: user.email }, config.secret, {
-		expiresIn: 300 // expires in 5 minutes
+		expiresIn: 86400 // expires in 24 hours
 	});
 };
 
