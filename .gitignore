@@ -4,3 +4,4 @@
 /.nyc_output
 *.log
 /config.js
+/.env
