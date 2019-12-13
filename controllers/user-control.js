@@ -68,7 +68,7 @@ router.login = (req, res) => {
 
 					const tokenData = {fName:user.fName, id: user._id, email: user.email};
 					const token = jwt.sign({fName:user.fName,id: user._id,lName:user.lName,email: user.email}, config.secret, {
-						expiresIn: 86400 // expires in 24 hours
+						expiresIn: 300 // expires in 5 minutes
 					});
 					//const token = auth.generateJWT();
 					// const token = jwt.sign({ id: user._id }, config.secret, {

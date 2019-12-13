@@ -4,11 +4,11 @@ let router = express.Router();
 
 router.findOne = (req, res) => {
 	res.setHeader('Content-Type', 'application/json');
-	Order.find({ '_id': req.params.id }, function (err, orders) {
+	Order.find({ '_id': req.params.id }, function (err, order) {
 		if (err)
 			res.status(500).json({ message: 'Order NOT Found!' });
 		else
-			res.status(200).send(JSON.stringify(orders, null, 5));
+			res.status(200).send(JSON.stringify(order, null, 5));
 	})
 		.catch(err => {
 		res.status(500).json({ message: 'Order NOT Found!' });
